@@ -47,23 +47,24 @@
 
             <igRibbon:RibbonTabItem Header="Mantenimiento">
                 <igRibbon:RibbonGroup Caption="General">
-                    <igRibbon:ButtonTool Caption="Tesis Nueva"
-                                         Id="NewTesis"
+                    <igRibbon:ButtonTool Name="BtnNuevaTesis"
+                        Caption="Tesis Nueva"
+                                         Id="NewTesis" IsEnabled="False"
                                          LargeImage="Resources/addTesis_128.png"
                                          SmallImage="Resources/addTesis_64.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Caption="Visualizar Tesis"
-                                         Id="ViewTesis"
+                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" Click="ButtonTool_Click" />
+                    <igRibbon:ButtonTool Caption="_Visualizar Tesis" Name="BtnVisualizaTesis" 
+                                         Id="ViewTesis" Click="ButtonTool_Click"
                                          LargeImage="Resources/viewTesis_128.png"
                                          SmallImage="Resources/viewTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Caption="Actualizar Tesis"
-                                         Id="EditTesis"
+                    <igRibbon:ButtonTool Caption="Actualizar Tesis" Name="BtnActualizaTesis"
+                                         Id="EditTesis" Click="ButtonTool_Click"
                                          LargeImage="Resources/editTesis_128.png"
                                          SmallImage="Resources/editTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Caption="Eliminar Tesis"
-                                         Id="DelTesis"
+                    <igRibbon:ButtonTool Caption="Eliminar Tesis" Name="BtnEliminaTesis"
+                                         Id="DelTesis" Click="ButtonTool_Click"
                                          IsEnabled="False"
                                          LargeImage="Resources/delTesis_128.png"
                                          SmallImage="Resources/delTesis_64.png"
@@ -74,27 +75,22 @@
                                          Id="PDF"
                                          LargeImage="Resources/pdf_256.png"
                                          SmallImage="Resources/pdf_128.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
+                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" Click="ExportarGroupClick" />
                     <igRibbon:ButtonTool Caption="Word"
                                          Id="Word"
                                          LargeImage="Resources/word_256.png"
-                                         SmallImage="Resources/word_128.png"
+                                         SmallImage="Resources/word_128.png" Click="ExportarGroupClick"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
                     <igRibbon:ButtonTool Caption="Excel"
                                          Id="Excel"
                                          LargeImage="Resources/excel_256.png"
-                                         SmallImage="Resources/excel_128.png"
+                                         SmallImage="Resources/excel_128.png" Click="ExportarGroupClick"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:MenuTool x:Name="_Materias"
-                                       ButtonType="Segmented"
-                                       Caption="Materias SGA"
-                                       IsEnabled="True"
-                                       SmallImage="Resources/info_256.png">
-                        <igRibbon:ToolMenuItem x:Name="RDetallado" Header="Reporte _Detallado" />
-                        <igRibbon:ToolMenuItem x:Name="RSDetalle" Header="Reporte _Sin Detalle" />
-                        <igRibbon:ToolMenuItem x:Name="RPersonal" Header="Reporte _Personal" />
-                        <igRibbon:ToolMenuItem x:Name="RTabla" Header="Reporte en _Tabla" />
-                    </igRibbon:MenuTool>
+                    <igRibbon:ButtonTool Caption="Materias SGA"
+                                         Id="MatSga"
+                                         LargeImage="Resources/info_256.png"
+                                         SmallImage="Resources/info_128.png" Click="ExportarGroupClick"
+                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
 
                 </igRibbon:RibbonGroup>
 
@@ -250,13 +246,7 @@
                                      Tag="2011" />
                     </Grid>
                 </GroupBox>
-                <Button Width="184"
-                        Height="41"
-                        Margin="48,609,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="Button_Click"
-                        Content="Vista Tesis de Prueba" />
+                <Label Name="TxtRegs" Content="" HorizontalAlignment="Left" Margin="35,612,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
 
             </Grid>
             <Grid Grid.Column="1">
@@ -384,15 +374,16 @@
                           VerticalAlignment="Top"
                           SelectionChanged="CbxMaterias_SelectionChanged" />
 
-                <search:SearchTextBox x:Name="SbxRubroClave"
+                <!--<search:SearchTextBox x:Name="SbxRubroClave"
                                       Grid.Row="0"
                                       Grid.Column="0"
                                       Width="200"
                                       Height="21"
                                       Margin="300,13,0,0"
+                                      LabelText="Buscar por rubro o clave de tesis"
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
-                                      Search="SearchTextBox_Search" />
+                                      Search="SearchTextBox_Search" />-->
 
             </Grid>
         </Grid>

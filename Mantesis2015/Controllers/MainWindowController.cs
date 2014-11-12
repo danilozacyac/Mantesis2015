@@ -4,9 +4,11 @@ using System.Linq;
 using System.Windows;
 using Infragistics.Windows.DataPresenter;
 using Mantesis2015.Model;
+using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
+using MateriasSgaControl;
 using UtilsMantesis;
 
 namespace Mantesis2015.Controllers
@@ -15,13 +17,13 @@ namespace Mantesis2015.Controllers
     {
         readonly MainWindow main;
         private List<AddTesis> listaTesis;
-        private List<AddTesis> listaTesisTemp;
+        //private List<AddTesis> listaTesisTemp;
 
         //Datos de la tesis seleccionada
         private int selectedIus;
         private int selectedRowIndex;
 
-
+        private const string RegLoc = "Registros localizados : ";
 
         public MainWindowController(MainWindow main)
         {
@@ -32,10 +34,8 @@ namespace Mantesis2015.Controllers
         /// Regresa las tesis del Volumen solicitado y posteriormente llama a setGRidResultados
         /// </summary>
         /// <param name="qMateria"></param>
-        public void GetTesisPorEpocaVolumen(int qMateria, object volumenSelect,DatosComp epoca)
+        public void GetTesisPorEpocaVolumen(int qMateria, object volumenSelect, DatosComp epoca)
         {
-            
-
             int permitido = 0;
             ValuesMant.Epoca = epoca.IdDato;
 
@@ -43,31 +43,27 @@ namespace Mantesis2015.Controllers
             {
                 Volumen selectedVolume = volumenSelect as Volumen;
                 ValuesMant.Volumen = selectedVolume.Volumenes;
-                permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                             where n.Volumen == selectedVolume.Volumenes
-                             select n).ToList().Count;
+                //permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
+                //             where n.Volumen == selectedVolume.Volumenes
+                //             select n).ToList().Count;
             }
             else if (volumenSelect is DatosComp)
             {
-                DatosComp  selectedVolume = volumenSelect as DatosComp;
+                DatosComp selectedVolume = volumenSelect as DatosComp;
                 this.SetSelectedApendice();
-                
-                ValuesMant.Parte = Utils.GetParte(selectedVolume.IdDato,ValuesMant.ApendicNom);
-                Utils.GetVolumenesParte(ValuesMant.Parte);
-                
+
+                ValuesMant.Parte = Utils.GetParte(selectedVolume.IdDato, ValuesMant.ApendicNom);
                 ValuesMant.Volumen = selectedVolume.IdDato;
-
-                permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                             where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
-                             select n.Volumen).ToList().Count;
+                //permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
+                //             where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
+                //             select n.Volumen).ToList().Count;
             }
 
-            if (permitido == 0)
-            {
-                MessageBox.Show("No tiene permiso para revisar la información relacionada con este volumen", "  Aviso  ");
-                return;
-            }
-
+            //if (permitido == 0)
+            //{
+            //    MessageBox.Show("No tiene permiso para revisar la información relacionada con este volumen", "  Aviso  ");
+            //    return;
+            //}
 
             ListaTesisModel listaTesisModel = new ListaTesisModel();
             listaTesis = listaTesisModel.CargaTesisMantesisSql(qMateria);
@@ -81,7 +77,7 @@ namespace Mantesis2015.Controllers
             else
             {
                 main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
-                //txtRegs.Text = RegLoc + listaTesis.Count;
+                main.TxtRegs.Content = RegLoc + listaTesis.Count;
             }
 
             this.SetFiltroPorMateriaTomo();
@@ -101,8 +97,28 @@ namespace Mantesis2015.Controllers
             else
             {
                 main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
-                //txtRegs.Text = RegLoc + listaTesis.Count;
+                main.TxtRegs.Content = RegLoc + listaTesis.Count;
             }
+        }
+
+        public void GetTesisFiltradasPorTomo(int volumen)
+        {
+
+            ListaTesisModel listaTesisModel = new ListaTesisModel();
+            listaTesis = listaTesisModel.CargaTesisMantesisSql(volumen);
+
+            main.XamDataGridTesis.DataSource = listaTesis;
+            main.XamDataGridTesis.Focus();
+            if (main.XamDataGridTesis.Records.Count == 0)
+            {
+                MessageBox.Show("No existen registros");
+            }
+            else
+            {
+                main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
+                main.TxtRegs.Content = RegLoc + listaTesis.Count;
+            }
+            
         }
 
         /// <summary>
@@ -127,12 +143,10 @@ namespace Mantesis2015.Controllers
             }
             else
             {
-                main.CbxMaterias.ItemsSource = Utils.GetMateriasForComboBox();
+                main.CbxMaterias.ItemsSource = Utils.GetMateriasForFiltro();
                 main.CbxMaterias.DisplayMemberPath = "Descripcion";
                 main.CbxMaterias.SelectedValuePath = "IdDato";
             }
-
-
         }
 
         /// <summary>
@@ -179,9 +193,9 @@ namespace Mantesis2015.Controllers
             }
 
             main.CbxMaterias.ItemsSource = (from n in VolumenSingleton.Volumenes
-                                     where n.Volumenes == -1 || (n.Volumenes >= volInicial && n.Volumenes <= volFinal)
-                                     orderby n.Orden
-                                     select n).ToArray();
+                                            where n.Volumenes == -1 || (n.Volumenes >= volInicial && n.Volumenes <= volFinal)
+                                            orderby n.Orden
+                                            select n).ToArray();
             main.CbxMaterias.DisplayMemberPath = "VolumenTxt";
             main.CbxMaterias.SelectedValuePath = "Volumenes";
         }
@@ -212,27 +226,25 @@ namespace Mantesis2015.Controllers
             {
                 ValuesMant.ApendicNom = 6;
             }
-
-            
         }
-
         
-        public void GetSearchResult(string search)
-        {
+        //public void GetSearchResult(string search)
+        //{
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                listaTesisTemp = (from n in listaTesis
-                                  where n.Rubro.Contains(search) || n.Tesis.ToUpper().Contains(search)
-                                  select n).ToList();
-                main.XamDataGridTesis.DataSource = listaTesisTemp;
-                
-            }
-            else
-            {
-                main.XamDataGridTesis.DataSource = listaTesis;
-            }
-        }
+        //    if (!String.IsNullOrEmpty(search))
+        //    {
+        //        listaTesisTemp = (from n in listaTesis
+        //                          where n.Rubro.Contains(search) || n.Tesis.ToUpper().Contains(search)
+        //                          select n).ToList();
+        //        main.XamDataGridTesis.DataSource = listaTesisTemp;
+        //        main.TxtRegs.Content = RegLoc + listaTesisTemp.Count;
+        //    }
+        //    else
+        //    {
+        //        main.XamDataGridTesis.DataSource = listaTesis;
+        //        main.TxtRegs.Content = RegLoc + listaTesis.Count;
+        //    }
+        //}
 
         public void MoveGridToIus(long nIus)
         {
@@ -270,6 +282,44 @@ namespace Mantesis2015.Controllers
         {
             UnaTesis unaTesis = new UnaTesis(selectedIus, 1, listaTesis, selectedRowIndex, false);
             unaTesis.ShowDialog();
+        }
+
+        #region AccionesTesis
+
+        /// <summary>
+        /// Permite observar todos los detalles de la tesis, además de sus datos de publicación
+        /// NO permite actulizar ningún dato 
+        /// </summary>
+        /// <param name="materiasEstado">Indica si las materias SGA pueden ser actualizadas o no</param>
+        /// <param name="isTesisUpdatable">Indica si la tesis puede ser actualizada o no</param>
+        public void MostrarTesis(byte materiasEstado, bool isTesisUpdatable)
+        {
+            RequestData.Estado = materiasEstado;
+            ValuesMant.IusActualLstTesis = this.selectedIus;
+            UnaTesis fUnaTesis = new UnaTesis(this.selectedIus, materiasEstado, listaTesis, this.selectedRowIndex, isTesisUpdatable);
+
+            fUnaTesis.ShowDialog();
+
+            MoveGridToIus(ValuesMant.IusActualLstTesis);
+        }
+
+        #endregion 
+
+        public void ExportarOptions(string id)
+        {
+            switch (id)
+            {
+                case "PDF":
+                    break;
+                case "Word":
+                    break;
+                case "Excel":
+                    break;
+                case "MatSga":
+                    TablaSga tabla = new TablaSga();
+                    tabla.GeneraReporte();
+                    break;
+            }
         }
     }
 }

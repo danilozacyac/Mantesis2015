@@ -14,205 +14,12 @@ namespace Mantesis2015.Model
     class ListaTesisModel
     {
         private List<AddTesis> listaTesis;
+
         //private DbConnection connectionEpocas;
 
         public ListaTesisModel()
         {
         }
-
-        ///// <summary>
-        ///// Obtiene la parte a la cual pertenecen las tesis del apéndice y Volumen seleccionados
-        ///// </summary>
-        ///// <param name="nMat">Materia Seleccionada</param>
-        ///// <param name="nApendic">Apéndice seleccionado</param>
-        ///// <returns></returns>
-        //private int GetParte(int nMat, int nApendic)
-        //{
-        //    switch (nApendic)
-        //    {
-        //        case 1: //1997-1995
-        //            switch (nMat)
-        //            {
-        //                case 1:
-        //                    return 124; //constitucional
-        //                case 2:
-        //                    return 125; //penal
-        //                case 3:
-        //                    return 126; //Administrativa
-        //                case 4:
-        //                    return 127; //Civil
-        //                case 5:
-        //                    return 128; //Laboral
-        //                case 6:
-        //                    return 129; //Común
-        //            }
-        //            break;
-        //        case 2: //1954-1988
-        //            switch (nMat)
-        //            {
-        //                case 1:
-        //                    return 132; //constitucional
-        //                case 2:
-        //                    return 133; //penal
-        //                case 3:
-        //                    return 134; //Administrativa
-        //                case 4:
-        //                    return 135; //Civil
-        //                case 5:
-        //                    return 136; //Laboral
-        //                case 6:
-        //                    return 137; //Común
-        //            }
-        //            break;
-        //        case 3: //1917-2000
-        //            switch (nMat)
-        //            {
-        //                case 1:
-        //                    return 116; //constitucional
-        //                case 2:
-        //                    return 117; //penal
-        //                case 3:
-        //                    return 118; //Administrativa
-        //                case 4:
-        //                    return 119; //Civil
-        //                case 5:
-        //                    return 120; //Laboral
-        //                case 6:
-        //                    return 121; //Común
-        //                case 51:
-        //                    return 122; //Conflictos Competenciales
-        //                case 10:
-        //                    return 123; //Electoral
-        //            }
-        //            break;
-        //        case 4: //Act. 2001
-        //            switch (nMat)
-        //            {
-        //                case 1:
-        //                    return 108; //constitucional
-        //                case 2:
-        //                    return 109; //penal
-        //                case 3:
-        //                    return 110; //Administrativa
-        //                case 4:
-        //                    return 111; //Civil
-        //                case 5:
-        //                    return 112; //Laboral
-        //                case 6:
-        //                    return 113; //Común
-        //                case 10:
-        //                    return 115; //Electoral
-        //            }
-        //            break;
-        //        case 5: // Act. 2002
-        //            switch (nMat)
-        //            {
-        //                case 1:
-        //                    return 100; //constitucional
-        //                case 2:
-        //                    return 101; //penal
-        //                case 3:
-        //                    return 102; //Administrativa
-        //                case 4:
-        //                    return 103; //Civil
-        //                case 5:
-        //                    return 104; //Laboral
-        //                case 6:
-        //                    return 105; //Común
-        //                case 51:
-        //                    return 106; //Conflictos Competenciales
-        //                case 10:
-        //                    return 107; //Electoral
-        //            }
-        //            break;
-        //        case 6: //1917-2011
-        //            switch (nMat)
-        //            {
-        //                case 1:
-        //                    return 140; //constitucional
-        //                case 2:
-        //                    return 141; //penal
-        //                case 3:
-        //                    return 142; //Administrativa
-        //                case 4:
-        //                    return 143; //Civil
-        //                case 5:
-        //                    return 144; //Laboral
-        //                case 51:
-        //                    return 146; //Conflictos Competenciales
-        //                case 10:
-        //                    return 147; //Electoral
-        //                case 50:
-        //                    return 145; //Procesal constitucional
-        //            }
-        //            break;
-        //        default:
-        //            return 0;
-        //    }
-        //    return 0;
-        //}
-
-        //public List<AddTesis> CargaTesis(int filtro)
-        //{
-        //    listaTesis = new List<AddTesis>();
-        //    long nId = 1;
-
-        //    string sqlCadena = "";
-
-        //    if (ValuesMant.Epoca == ConstMant.Apendice)
-        //    {
-        //        connectionEpocas = DbConnDac.GetConnectEpocas(ValuesMant.Epoca, ValuesMant.ApendicNom, 1);
-        //        if (ValuesMant.Volumen == 0)
-        //        {
-        //            sqlCadena = "SELECT ius4,tesis,rubro,pagina,estado,[ta/tj],Volumen,Epoca FROM Tesis ORDER BY pagina";
-        //        }
-        //        else
-        //        {
-        //            sqlCadena = "SELECT ius4,tesis,rubro,pagina,estado,[ta/tj],Volumen,Epoca FROM Tesis WHERE Parte =" + GetParte(ValuesMant.Volumen, ValuesMant.ApendicNom) + " ORDER BY pagina";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (ValuesMant.Epoca == ConstMant.Quinta)
-        //        {
-        //            connectionEpocas = DbConnDac.GetConnectEpocas(ValuesMant.Epoca, ValuesMant.Volumen, 1);
-        //        }
-        //        else
-        //        {
-        //            connectionEpocas = DbConnDac.GetConnectEpocas(ValuesMant.Epoca, 0, 1);
-        //        }
-
-        //        if (filtro == 99)
-        //        {
-        //            sqlCadena = "SELECT ius4,tesis,rubro,pagina,estado," +
-        //                        ((ValuesMant.Epoca == ConstMant.Decima) ? "tatj" : "[ta/tj]") + ",Volumen,Epoca FROM Tesis WHERE Volumen = " +
-        //                        ValuesMant.Volumen + " ORDER BY Epoca,Volumen,pagina";
-        //        }
-        //        else
-        //        {
-        //            sqlCadena = "SELECT ius4,tesis,rubro,pagina,estado," +
-        //                        ((ValuesMant.Epoca == ConstMant.Decima) ? "tatj" : "[ta/tj]") + ",Volumen,Epoca FROM Tesis WHERE Volumen = " +
-        //                        ValuesMant.Volumen + " AND (Materia1 = " + filtro + " OR Materia2 = " + filtro + " OR Materia3 = " +
-        //                        filtro + " ) ORDER BY Epoca,Volumen,pagina";
-        //        }
-        //    }
-
-        //    DataTableReader reader = this.GetDatosTabla(sqlCadena, connectionEpocas);
-
-        //    while (reader.Read())
-        //    {
-        //        listaTesis.Add(MiscFunct.GetNewTesis(reader, nId++));
-        //    }
-
-        //    connectionEpocas.Close();
-
-        //    listaTesis.Sort(delegate(AddTesis p1, AddTesis p2)
-        //    {
-        //        return p1.PaginaNum.CompareTo(p2.PaginaNum);
-        //    });
-
-        //    return listaTesis;
-        //}
 
         public List<AddTesis> CargaTesisMantesisSql(int filtro)
         {
@@ -229,16 +36,15 @@ namespace Mantesis2015.Model
             {
                 if (ValuesMant.Epoca == ConstMant.Apendice)
                 {
-                    if (ValuesMant.Volumen == 0)
+                    if (filtro == 99 || filtro == -1)
                     {
-                        sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca FROM Tesis ORDER BY pagina";
+                        sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca FROM Tesis WHERE Parte = " +
+                                    ValuesMant.Parte + " ORDER BY pagina";
                     }
                     else
                     {
-                        //sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca FROM Tesis WHERE Parte =" + 
-                        //  GetParte(ValuesMant.Volumen, ValuesMant.ApendicNom) + " ORDER BY pagina";
                         sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca FROM Tesis WHERE Parte = " +
-                            ValuesMant.Parte + " ORDER BY pagina";
+                                    ValuesMant.Parte + " AND Volumen = " + ValuesMant.Volumen + " ORDER BY pagina";
                     }
                 }
                 else if (filtro == 99)
@@ -246,12 +52,12 @@ namespace Mantesis2015.Model
                     if (ValuesMant.Epoca == 6)
                     {
                         sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca,materia1,materia2,materia3,materia4,materia5 FROM Tesis WHERE Volumen = " +
-                                   ValuesMant.Volumen + " ORDER BY epoca,volumen,pagina";
+                                    ValuesMant.Volumen + " ORDER BY epoca,volumen,pagina";
                     }
                     else
                     {
                         sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca,materia1,materia2,materia3,materia4,materia5 FROM Tesis WHERE Volumen = " +
-                                   ValuesMant.Volumen + " AND Epoca = " + ValuesMant.Epoca + " ORDER BY epoca,volumen,pagina";
+                                    ValuesMant.Volumen + " AND Epoca = " + ValuesMant.Epoca + " ORDER BY epoca,volumen,pagina";
                     }
                 }
                 else
@@ -260,7 +66,7 @@ namespace Mantesis2015.Model
                                 ValuesMant.Volumen + " AND (Materia1 = " + filtro + " OR Materia2 = " + filtro + " OR Materia3 = " +
                                 filtro + " ) ORDER BY epoca,volumen,pagina";
                 }
-
+                
                 connectionMantesisSql.Open();
 
                 cmd = new SqlCommand(sqlCadena, connectionMantesisSql);
@@ -312,7 +118,6 @@ namespace Mantesis2015.Model
 
             return listaTesis;
         }
-
 
         ///// <summary>
         ///// Elimina las tesis en las bases de datos de Access
@@ -561,7 +366,6 @@ namespace Mantesis2015.Model
         //    return nEstado;
         //}
 
-
         private void SalvarTemporal(long ius, int motivoModif, long nRegistro)
         {
             DbConnection connTemp;
@@ -570,7 +374,6 @@ namespace Mantesis2015.Model
 
             try
             {
-
                 connTemp.Open();
 
                 string sqlCadena = "INSERT INTO TesisModificadas(IUS4,TipoMotivo,Motivo,Fecha,Usuario,Hora,Registro)" +
@@ -637,7 +440,6 @@ namespace Mantesis2015.Model
         //    }
         //}
 
-
         /// <summary>
         /// Verifica el estatus del número de IUS en cuestión, puede ser válido, eliminado o no existe
         /// </summary>
@@ -680,31 +482,5 @@ namespace Mantesis2015.Model
 
             return nEsValido;
         }
-
-        //private DataTableReader GetDatosRegistro(string sqlString, DbConnection lConn)
-        //{
-        //    DataTableReader dtr = null;
-        //    try
-        //    {
-        //        DataAdapter query = DbConnDac.GetDataAdapter(sqlString, lConn);
-        //        dtr = DbConnDac.GetDatosReader(query);
-        //    }
-        //    catch (DbException ex)
-        //    {
-        //        string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-        //        MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-        //        MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
-        //    }
-
-        //    return dtr;
-        //}
     }
 }

@@ -2,15 +2,19 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:Mantesis2015.UserControls"
+        xmlns:converter="clr-namespace:Mantesis2015.Classes"
         xmlns:igWindows="http://infragistics.com/Windows"
         xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
         xmlns:sga="clr-namespace:MateriasSgaControl;assembly=MateriasSgaControl"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         Title="UnaTesis"
-        Width="700"
+        Width="1200"
         Height="900"
         Loaded="Window_Loaded"
         WindowState="Maximized">
+    <Window.Resources>
+        <converter:ForegroundConverter x:Key="foreground" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="115" />
@@ -23,7 +27,7 @@
             <my:Ribbon.ApplicationMenu>
                 <my:RibbonApplicationMenu Visibility="Collapsed" />
             </my:Ribbon.ApplicationMenu>
-            <my:RibbonGroup Header="Navegar">
+            <my:RibbonGroup Header="Navegar" Name="Navega">
                 <StackPanel Orientation="Horizontal">
                     <my:RibbonButton Name="RbtnInicio"
                                      Click="RibbonButton_Click"
@@ -41,23 +45,59 @@
                                      Click="RibbonButton_Click"
                                      Label="Final"
                                      LargeImageSource="Resources/last.png" />
-                    <Label x:Name="LblContador" Content="Registro:  1 / 1" />
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="      Registro:   "
+                               FontSize="14"
+                               FontWeight="Bold" />
+                        <Label x:Name="LblContador"
+                               Content="      Registro:   "
+                               FontSize="14"
+                               FontWeight="Bold" />
+                    </StackPanel>
                 </StackPanel>
 
             </my:RibbonGroup>
-            <my:RibbonGroup Header="Herramientas">
+            <my:RibbonGroup Header="Portapapeles">
                 <StackPanel Orientation="Horizontal">
                     <my:RibbonButton Name="RbtnClipboard"
-                                     Label="Portapapeles"
                                      Click="RibbonButton_Click"
-                                     LargeImageSource="Resources/clipboars.png" />
+                                     Label="Tesis completa"
+                                     LargeImageSource="Resources/tesis_256.png"
+                                     SmallImageSource="Resources/tesis_128.png" />
+                    <my:RibbonButton Name="BtnCIus"
+                                     Click="RibbonButton_Click"
+                                     Label="Reg. IUS"
+                                     LargeImageSource="Resources/number_256.png"
+                                     SmallImageSource="Resources/number_128.png" />
+                    <my:RibbonButton Name="BtnCRubro"
+                                     Click="RibbonButton_Click"
+                                     Label="Rubro"
+                                     LargeImageSource="Resources/r_128.png" />
+                    <my:RibbonButton Name="BtnCTexto"
+                                     Click="RibbonButton_Click"
+                                     Label="Texto"
+                                     LargeImageSource="Resources/t_128.png" />
+                    <my:RibbonButton Name="BtnCPrec"
+                                     Click="RibbonButton_Click"
+                                     Label="Precedentes"
+                                     LargeImageSource="Resources/p_128.png" />
+                    <StackPanel Orientation="Vertical">
+                        <my:RibbonButton Label="N. Rubro" />
+                        <my:RibbonButton Label="N.Texto" />
+                        <my:RibbonButton Label="N. Precedentes" />
+                    </StackPanel>
+                </StackPanel>
+            </my:RibbonGroup>
+            <my:RibbonGroup Header="Herramientas">
+                <StackPanel Orientation="Horizontal">
                     <my:RibbonButton Name="RbtnLigas"
-                                     Label="Ver ligas"
                                      Click="RibbonButton_Click"
+                                     Label="Ver ligas"
                                      LargeImageSource="Resources/link_256.png"
                                      SmallImageSource="Resources/link_128.png" />
-                    <my:RibbonButton Name="RbtnBitacora" Label="Bitácora"
+                    <my:RibbonButton Name="RbtnBitacora"
                                      Click="RibbonButton_Click"
+                                     Label="Bitácora"
                                      LargeImageSource="Resources/blog_256.png"
                                      SmallImageSource="Resources/blog_64.png" />
                 </StackPanel>
@@ -74,7 +114,7 @@
             </my:RibbonGroup>
             <my:RibbonGroup Header=" ">
                 <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Label="Salir"
+                    <my:RibbonButton Label="Salir" Name="RBtnSalir" Click="RibbonButton_Click"
                                      LargeImageSource="Resources/exit_256.png"
                                      SmallImageSource="Resources/exit_128.png" />
                     <my:RibbonButton Label="Guardar"
@@ -118,7 +158,9 @@
                                       Margin="35,163,35,0"
                                       HorizontalAlignment="Stretch"
                                       VerticalAlignment="Top"
-                                      Header="Tipo de Tesis">
+                                      Header="Tipo de Tesis"
+                                      IsEnabled="{Binding IsEnable,
+                                                          Mode=TwoWay}">
                                 <Grid>
                                     <RadioButton x:Name="RbtJurisp"
                                                  Width="100"
@@ -175,6 +217,8 @@
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Top"
                                               DisplayMemberPath="Descripcion"
+                                              IsEnabled="{Binding IsEnable,
+                                                                  Mode=TwoWay}"
                                               SelectedValuePath="IdDato" />
                                     <ComboBox x:Name="CbxMat2"
                                               Width="200"
@@ -224,6 +268,10 @@
                                      Margin="80,7,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
                                      Text="{Binding Ius}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtEpoca"
@@ -232,6 +280,10 @@
                                      Margin="80,43,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
                                      Text="{Binding Epoca}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtVolumen"
@@ -240,14 +292,22 @@
                                      Margin="80,78,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
                                      Text="{Binding Volumen}"
-                                     TextWrapping="Wrap" />
+                                     TextWrapping="NoWrap" />
                             <TextBox x:Name="TxtTesis"
                                      Width="101"
                                      Height="23"
                                      Margin="53,121,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
                                      Text="{Binding Tesis}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtPag"
@@ -256,6 +316,10 @@
                                      Margin="216,121,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
                                      Text="{Binding Pagina}"
                                      TextWrapping="Wrap" />
 
@@ -317,7 +381,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Materias SGA">
-                        <!--  <sga:MateriasControl />  -->
+                          <sga:MateriasControl />  
                     </TabItem>
                 </TabControl>
 
@@ -329,67 +393,182 @@
                 <igWindows:XamTabControl Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          VerticalAlignment="Stretch">
-                    <igWindows:TabItemEx x:Name="tabItemEx1" Header="  Rubro  ">
+                    <igWindows:TabItemEx x:Name="tabItemEx10" Header="  Tesis  ">
                         <Grid>
-                            <control:TextControlView LabelHeader="Nota al pie de rubro"
-                                                     MainText="{Binding Rubro,
-                                                                        Mode=TwoWay}"
-                                                     Note="{Binding NotasRubro,
-                                                                    Mode=TwoWay}" />
-                        </Grid>
-                    </igWindows:TabItemEx>
-                    <igWindows:TabItemEx x:Name="tabItemEx2" Header="  Texto  ">
-                        <Grid>
-                            <control:TextControlView LabelHeader="Nota al pie de texto"
-                                                     MainText="{Binding Texto,
-                                                                        Mode=TwoWay}"
-                                                     Note="{Binding NotasTexto,
-                                                                    Mode=TwoWay}" />
-                        </Grid>
-                    </igWindows:TabItemEx>
-                    <igWindows:TabItemEx x:Name="tabItemEx3" Header=" Precedentes ">
-                        <Grid>
-                            <control:TextControlView LabelHeader="Nota al pie de precedente"
-                                                     MainText="{Binding Precedentes,
-                                                                        Mode=TwoWay}"
-                                                     Note="{Binding NotasPrecedentes,
-                                                                    Mode=TwoWay}" />
-                        </Grid>
-                    </igWindows:TabItemEx>
-                    <igWindows:TabItemEx x:Name="tabItemEx4" Header=" Otras Notas ">
-                        <Grid>
-                            <Label Margin="30,33,0,0"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".4*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height=".8*" />
+                            </Grid.RowDefinitions>
+                            <Label Margin="10,10,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
-                                   Content="Leyenda de publicación:" />
-                            <TextBox Name="TxtNotaPublica"
-                                     Height="150"
-                                     Margin="30,55,30,0"
+                                   Content="Rubro:" />
+                            <TextBox Margin="10,31,10,10"
                                      HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Top"
-                                     AcceptsReturn="True"
-                                     FontSize="16"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     FontWeight="Bold"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     Text="{Binding Rubro,
+                                                    Mode=TwoWay}"
+                                     TextAlignment="Justify"
+                                     TextWrapping="Wrap" />
+                            <Label Grid.Row="1"
+                                   Margin="10,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Texto:" />
+                            <TextBox Grid.Row="1"
+                                     Margin="10,31,10,0"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     Text="{Binding Texto,
+                                                    Mode=TwoWay}"
+                                     TextWrapping="Wrap" />
+                            <Label Grid.Row="2"
+                                   Margin="10,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Precedentes:" />
+                            <TextBox Grid.Row="2"
+                                     Margin="10,31,10,10"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     Text="{Binding Precedentes,
+                                                    Mode=TwoWay}"
+                                     TextWrapping="Wrap" />
+                        </Grid>
+                    </igWindows:TabItemEx>
+                    <igWindows:TabItemEx x:Name="tabItemEx11" Header="  Notas  ">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".3*" />
+                                <RowDefinition Height=".35*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Height="23"
+                                   Margin="10,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Leyenda de Publicación:" />
+                            <TextBox Name="TxtNotaPublica"
+                                     Margin="10,38,10,10"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
                                      Text="{Binding NotaPublica,
                                                     Mode=TwoWay}"
                                      TextWrapping="Wrap" />
-                            <Label Margin="30,239,0,0"
+                            <Label Grid.Row="1"
+                                   Height="23"
+                                   Margin="10,10,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
-                                   Content="Notas gaceta:" />
-                            <TextBox Name="TxtNotaGaceta"
-                                     Height="150"
-                                     Margin="30,260,30,0"
+                                   Content="Nota Gaceta:" />
+                            <TextBox Grid.Row="1"
+                                     Margin="10,38,10,10"
                                      HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Top"
-                                     AcceptsReturn="True"
-                                     FontSize="16"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
                                      IsReadOnly="{Binding IsReadOnly,
                                                           Mode=TwoWay}"
                                      Text="{Binding NotasGaceta,
                                                     Mode=TwoWay}"
                                      TextWrapping="Wrap" />
+
+                            <GroupBox Grid.Row="2"
+                                      Margin="10,20,10,20"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      Header="Notas al pie"
+                                      IsEnabled="{Binding IsEnable,
+                                                          Mode=TwoWay}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Margin="10,10,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Rubro:" />
+                                    <TextBox Margin="10,31,10,10"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             FontSize="14"
+                                             Foreground="{Binding IsEliminated,
+                                                                  Converter={StaticResource foreground}}"
+                                             IsReadOnly="{Binding IsReadOnly,
+                                                                  Mode=TwoWay}"
+                                             Text="{Binding NotasRubro,
+                                                            Mode=TwoWay}"
+                                             TextWrapping="Wrap" />
+                                    <Label Grid.Column="1"
+                                           Margin="10,10,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Texto:" />
+                                    <TextBox Grid.Column="1"
+                                             Margin="10,31,10,10"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             FontSize="14"
+                                             Foreground="{Binding IsEliminated,
+                                                                  Converter={StaticResource foreground}}"
+                                             IsReadOnly="{Binding IsReadOnly,
+                                                                  Mode=TwoWay}"
+                                             Text="{Binding NotasTexto,
+                                                            Mode=TwoWay}"
+                                             TextWrapping="Wrap" />
+                                    <Label Grid.Column="2"
+                                           Margin="10,10,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Precedentes:" />
+                                    <TextBox Grid.Column="2"
+                                             Margin="10,31,10,10"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             FontSize="14"
+                                             Foreground="{Binding IsEliminated,
+                                                                  Converter={StaticResource foreground}}"
+                                             IsReadOnly="{Binding IsReadOnly,
+                                                                  Mode=TwoWay}"
+                                             Text="{Binding NotasPrecedentes,
+                                                            Mode=TwoWay}"
+                                             TextWrapping="Wrap" />
+                                </Grid>
+                            </GroupBox>
                         </Grid>
                     </igWindows:TabItemEx>
+
+
+
+
                 </igWindows:XamTabControl>
 
             </Grid>

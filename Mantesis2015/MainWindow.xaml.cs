@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Infragistics.Windows.DataPresenter;
+using Infragistics.Windows.Ribbon;
 using Mantesis2015.Controllers;
 using Mantesis2015.Model;
 using MantesisVerIusCommonObjects.Dto;
@@ -36,7 +37,6 @@ namespace Mantesis2015
             apendices = new List<RadioButton>() { rbtAp17, rbtAp2000, rbtAp2001, rbtAp2002, rbtAp2011, rbtAp54 };
             
             CbEpoca.DataContext = DatosCompartidosSingleton.Epocas;
-            SbxRubroClave.LabelText = "Buscar por rubro o clave de tesis";
         }
 
         private void CbEpoca_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -134,13 +134,13 @@ namespace Mantesis2015
 
         #endregion GridTesis
 
-        private void SearchTextBox_Search(object sender, RoutedEventArgs e)
-        {
-            String tempString = ((TextBox)sender).Text.ToUpper();
-            controller.GetSearchResult(tempString);
+        //private void SearchTextBox_Search(object sender, RoutedEventArgs e)
+        //{
+        //    String tempString = ((TextBox)sender).Text.ToUpper();
+        //    controller.GetSearchResult(tempString);
 
             
-        }
+        //}
 
         private void CbxMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -152,6 +152,9 @@ namespace Mantesis2015
             else if (CbxMaterias.SelectedItem is Volumen)
             {
 
+                Volumen volumen = CbxMaterias.SelectedItem as Volumen;
+                ValuesMant.Volumen = volumen.Volumenes;
+                controller.GetTesisFiltradasPorTomo(volumen.Volumenes);
             }
         }
 
@@ -185,13 +188,44 @@ namespace Mantesis2015
             verIus.GetTesisByVerIus(TxtVerIus.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+
+        private void ButtonTool_Click(object sender, RoutedEventArgs e)
         {
+            ButtonTool boton = sender as ButtonTool;
 
+            switch (boton.Name)
+            {
+                case "BtnNuevaTesis":
+                    break;
+                case "BtnVisualizaTesis": controller.MostrarTesis(1,false);
+                    break;
+                case "BtnActualizaTesis": controller.MostrarTesis(2, true);
+                    break;
+                case "BtnEliminaTesis":
+                    break;
 
+            }
 
+        }
 
-            controller.LaunchUnaTesis();
+        private void RepMaterias_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuTool)
+            {
+            }
+            else
+            {
+                ToolMenuItem item = sender as ToolMenuItem;
+            }
+        }
+
+        private void ExportarGroupClick(object sender, RoutedEventArgs e)
+        {
+            ButtonTool action = sender as ButtonTool;
+
+            controller.ExportarOptions(action.Id);
+
         }
 
         

@@ -16,8 +16,6 @@ namespace Mantesis2015
         {
             InitializeComponent();
             this.ius = ius;
-            xamBitacora.FieldSettings.AllowEdit = false;
-            xamBitacora.FieldSettings.AllowResize = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -26,24 +24,12 @@ namespace Mantesis2015
 
             Style wrapstyle = new Style(typeof(XamTextEditor));
             wrapstyle.Setters.Add(new Setter(XamTextEditor.TextWrappingProperty, TextWrapping.Wrap));
-
             xamBitacora.FieldSettings.EditorStyle = wrapstyle;
-
 
             xamBitacora.DataSource = bitacora.GetBitacoraCambios(ius);
 
-            xamBitacora.Records.FieldLayout.Fields[0].Width = new Infragistics.Windows.DataPresenter.FieldLength(80);
-            xamBitacora.Records.FieldLayout.Fields[1].Width = new Infragistics.Windows.DataPresenter.FieldLength(80);
-            xamBitacora.Records.FieldLayout.Fields[2].Width = new Infragistics.Windows.DataPresenter.FieldLength(450);
-
-            xamBitacora.Records.FieldLayout.Fields[0].Height = new Infragistics.Windows.DataPresenter.FieldLength(80);
-            xamBitacora.Records.FieldLayout.Fields[1].Height = new Infragistics.Windows.DataPresenter.FieldLength(80);
-            xamBitacora.Records.FieldLayout.Fields[2].Height = new Infragistics.Windows.DataPresenter.FieldLength(80);
         }
 
-        private void BtnRegresar_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        
     }
 }

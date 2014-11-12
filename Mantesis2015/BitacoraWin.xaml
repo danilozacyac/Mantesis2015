@@ -3,21 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:igDP="http://infragistics.com/DataPresenter"
          Title="Bitácora"
-        Width="805"
-        Height="382"
+        Width="820"
+        Height="350"
         Loaded="Window_Loaded"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <igDP:XamDataGrid Name="xamBitacora"
-                          Width="783"
-                          Height="292"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          
                           GroupByAreaLocation="None">
             <igDP:XamDataGrid.FieldSettings>
-                <igDP:FieldSettings AllowEdit="False" CellClickAction="SelectRecord" />
-
+                <igDP:FieldSettings AllowEdit="False" CellClickAction="SelectRecord" AllowResize="False" />
             </igDP:XamDataGrid.FieldSettings>
             <igDP:XamDataGrid.Resources>
                 <Style TargetType="{x:Type igDP:DataRecordCellArea}">
@@ -26,15 +24,28 @@
                     <Setter Property="BackgroundHover" Value="#FF757D9D" />
                 </Style>
             </igDP:XamDataGrid.Resources>
-        </igDP:XamDataGrid>
+            <igDP:XamDataGrid.FieldLayouts>
+                <igDP:FieldLayout>
+                    <igDP:FieldLayout.Fields>
+                        <igDP:Field Name="Fecha"
+                                    Height="80"
+                                            Width="100"
+                                            Label=" Fecha " />
+                        <igDP:Field Name="TpoMov" Height="80"
+                                            Width="80"
+                                            Label="Cambio" />
+                        <igDP:Field Name="Causa" Height="80"
+                                            Width="*"
+                                            Label="Motivo" />
 
-        <Button Name="btRegresar"
-                Width="75"
-                Height="23"
-                Margin="555,308,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="BtnRegresar_Click"
-                Content="Regresar" />
+                        <igDP:Field Name="Registro" Height="80"
+                                            Width="80"
+                                            Label="Registro" />
+
+                    </igDP:FieldLayout.Fields>
+                </igDP:FieldLayout>
+            </igDP:XamDataGrid.FieldLayouts>
+
+        </igDP:XamDataGrid>
     </Grid>
 </Window>

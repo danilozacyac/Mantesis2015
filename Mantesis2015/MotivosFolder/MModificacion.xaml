@@ -1,0 +1,73 @@
+﻿<Window x:Class="Mantesis2015.MotivosFolder.MModificacion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:igDP="http://infragistics.com/DataPresenter"
+        Title="frmMotivosModif"
+        Width="840"
+        Height="669"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="306*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+
+        <igDP:XamDataGrid Name="xamDataGrid"
+                          Grid.Row="1"
+                          Width="Auto"
+                          Margin="0"
+                          DataSource="{Binding Path=Members}"
+                          FontSize="10">
+
+            <igDP:XamDataGrid.FieldLayouts>
+                <igDP:FieldLayout>
+                    <igDP:FieldLayout.Fields>
+                        <igDP:Field Name="IsChecked"
+                                    Width="100"
+                                    Label="Selección" />
+                        <igDP:Field Name="DescMotivo"
+                                    Width="*"
+                                    Label="Descripción" />
+                        <igDP:Field Name="TipoMotivo"
+                                    Width="0"
+                                    Visibility="Hidden" />
+                        <igDP:Field Name="CveMotivo"
+                                    Width="0"
+                                    Visibility="Hidden" />
+                    </igDP:FieldLayout.Fields>
+
+                </igDP:FieldLayout>
+            </igDP:XamDataGrid.FieldLayouts>
+        </igDP:XamDataGrid>
+
+        <TextBlock Name="textBlock1"
+                   Height="23"
+                   Margin="32,7,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="14"
+                   Text="Señale cual de los siguientes puntos se aplican a la revisión de este registro" />
+        <Button Name="btnAceptar"
+                Grid.Row="2"
+                Width="111"
+                Height="23"
+                Margin="577,7,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnAceptar_Click"
+                Content="Aceptar" />
+        <Button Name="btnCancelar"
+                Grid.Row="2"
+                Width="75"
+                Height="23"
+                Margin="710,7,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnCancelar_Click"
+                Content="Cancelar" />
+    </Grid>
+</Window>

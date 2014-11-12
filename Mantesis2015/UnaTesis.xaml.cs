@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Windows;
 using Mantesis2015.Controllers;
 using Mantesis2015.Model;
+using MantesisVerIusCommonObjects.Dto;
+using MateriasSgaControl;
 using Microsoft.Windows.Controls.Ribbon;
 using UtilsMantesis;
 
@@ -24,9 +27,9 @@ namespace Mantesis2015
         private readonly byte accion;
         public List<AddTesis> ListaTesis;
         public int PosActual;
-        private readonly bool isTesisUpdatable;
-
-
+        public readonly bool IsTesisUpdatable;
+        private readonly bool isVerIusAccess;
+        private TesisDto tesisMostrada;
 
         public UnaTesis()
         {
@@ -48,8 +51,21 @@ namespace Mantesis2015
             this.accion = accion;
             this.PosActual = posActual;
             this.ListaTesis = listaTesis;
-            this.isTesisUpdatable = isTesisUpdatable;
+            this.IsTesisUpdatable = isTesisUpdatable;
+            this.isVerIusAccess = false;
             controller = new UnaTesisController(this);
+
+            
+        }
+
+        public UnaTesis(TesisDto tesisMostrada, bool isTesisUpdatable)
+            : this()
+        {
+            this.tesisMostrada = tesisMostrada;
+            this.ius = tesisMostrada.Ius;
+            this.IsTesisUpdatable = isTesisUpdatable;
+            isVerIusAccess = true;
+            controller = new UnaTesisController(this,tesisMostrada);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -72,11 +88,21 @@ namespace Mantesis2015
                     break;
                 case "RbtnFin": controller.TesisEnd();
                     break;
-                case "RbtnClipboard": controller.TesisToClipboard();
+                case "RbtnClipboard": controller.TesisToClipboard(1);
                     break;
                 case "RbtnLigas": controller.LaunchLigasPreview();
                     break;
                 case "RbtnBitacora": controller.LaunchBitacora();
+                    break;
+                case "BtnCIus": controller.TesisToClipboard(2);
+                    break;
+                case "BtnCRubro": controller.TesisToClipboard(3);
+                    break;
+                case "BtnCTexto": controller.TesisToClipboard(4);
+                    break;
+                case "BtnCPrec": controller.TesisToClipboard(5);
+                    break;
+                case "RBtnSalir": this.Close();
                     break;
             }
         }

@@ -1,0 +1,75 @@
+﻿<Window x:Class="Mantesis2015.MotivosFolder.MAltas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:igDP="http://infragistics.com/DataPresenter"
+        Title="  Alta Registro"
+        Width="677"
+        Height="378"
+        Icon="/Mantesis2015;component/Resources/tesis.png"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Width="661" Height="331">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="39*" />
+            <RowDefinition Height="251*" />
+            <RowDefinition Height="41*" />
+        </Grid.RowDefinitions>
+
+        <igDP:XamDataGrid Name="xamDataGrid"
+                          Grid.Row="1"
+                          Width="Auto"
+                          Margin="0"
+                          DataSource="{Binding Path=Members}">
+
+            <igDP:XamDataGrid.FieldLayouts>
+                <igDP:FieldLayout>
+                    <igDP:FieldLayout.Fields>
+                        <igDP:Field Name="IsChecked"
+                                    Width="100"
+                                    Label="Selección" />
+                        <igDP:Field Name="DescMotivo"
+                                    Width="*"
+                                    Label="Descripción" />
+                        <igDP:Field Name="TipoMotivo"
+                                    Width="0"
+                                    Visibility="Hidden" />
+                        <igDP:Field Name="CveMotivo"
+                                    Width="0"
+                                    Visibility="Hidden" />
+                    </igDP:FieldLayout.Fields>
+
+                </igDP:FieldLayout>
+            </igDP:XamDataGrid.FieldLayouts>
+
+        </igDP:XamDataGrid>
+
+        <Button Name="btnAceptar"
+                Grid.Row="2"
+                Width="112"
+                Height="22"
+                Margin="396,12,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnAceptar_Click"
+                Content="Aceptar" />
+        <Button Name="btnCancelar"
+                Grid.Row="2"
+                Width="85"
+                Height="23"
+                Margin="538,12,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="BtnCancelar_Click"
+                Content="Cancelar" />
+        <TextBlock Name="textBlock1"
+                   Height="23"
+                   Margin="62,15,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="14"
+                   Text="Antes de dar de alta un registro, verifique que la tesis:" />
+
+
+    </Grid>
+</Window>

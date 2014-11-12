@@ -1,18 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Model;
 using MantesisVerIusCommonObjects.Utilities;
 using ScjnUtilities;
+using UtilsMantesis;
 
 namespace Mantesis2015.Controllers
 {
     public class NumIusController
     {
-        //private readonly MainWindow main;
+        private readonly MainWindow main;
 
         
+
+
 
         public void GetTesisByVerIus(string txtNumIus)
         {
@@ -35,10 +39,11 @@ namespace Mantesis2015.Controllers
 
                             MessageBox.Show("Esta tesis fue eliminada");
 
-                            //fUnaTesis = new FrmUnaTesis(tesis, userCanModify);
+                            UnaTesis unaTesis = new UnaTesis(tesis, true);
                             //fUnaTesis.Tag = permisos;
-                            //fUnaTesis.ShowDialog();
+                            unaTesis.ShowDialog();
                             //this.Show();
+
                         }
                         else
                         {
@@ -48,9 +53,9 @@ namespace Mantesis2015.Controllers
                                 tesis.IsEliminated = isTesisEliminated;
                                 MessageBox.Show("Esta tesis fue eliminada");
 
-                                //fUnaTesis = new FrmUnaTesis(tesis, userCanModify);
+                                UnaTesis unaTesis = new UnaTesis(tesis, true);
                                 //fUnaTesis.Tag = permisos;
-                                //fUnaTesis.ShowDialog();
+                                unaTesis.ShowDialog();
                                 //this.Show();
                             }
                             else
@@ -83,9 +88,9 @@ namespace Mantesis2015.Controllers
                         {
                             //this.Hide();
 
-                            //fUnaTesis = new FrmUnaTesis(tesis, userCanModify);
+                            UnaTesis unaTesis = new UnaTesis(tesis, true);
                             //fUnaTesis.Tag = permisos;
-                            //fUnaTesis.ShowDialog();
+                            unaTesis.ShowDialog();
                             //this.Show();
                         }
                         else

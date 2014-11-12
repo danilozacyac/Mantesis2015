@@ -55,9 +55,10 @@ namespace Mantesis2015.Reportes
 
             oTable = oDoc.Tables.Add(wrdRng, (new ReporteModel().GetNoTesis() + 1), 8, ref oMissing, ref oMissing);
             oTable.Range.ParagraphFormat.SpaceAfter = 6;
-            oTable.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
-            oTable.Range.Font.Size = 10;
-            oTable.Range.Font.Bold = 1;
+            oTable.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            oTable.Range.Font.Size = 9;
+            oTable.Range.Font.Bold = 0;
+            oTable.Borders.Enable = 1;
 
             oTable.Columns[1].SetWidth(40, WdRulerStyle.wdAdjustSameWidth);
             oTable.Columns[2].SetWidth(70, WdRulerStyle.wdAdjustSameWidth);
@@ -79,13 +80,9 @@ namespace Mantesis2015.Reportes
 
             for (int x = 1; x < 9; x++)
             {
-                oTable.Cell(fila, x).Borders.Enable = 1;
                 oTable.Cell(fila, x).Range.Font.Size = 10;
                 oTable.Cell(fila, x).Range.Font.Bold = 1;
-                oTable.Cell(fila, x).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
             }
-
-
 
             fila++;
 
@@ -124,6 +121,7 @@ namespace Mantesis2015.Reportes
 
         private void ImprimeDocumento()
         {
+            oWord.Visible = true;
             List<long> idsMatSga = new ReporteModel().GetidMatSgaMes();
 
             int numTesis = 0;
@@ -144,7 +142,7 @@ namespace Mantesis2015.Reportes
 
                 foreach (TesisReg tesis in listaImprimir)
                 {
-                    oWord.Visible = true;
+                    
                     int nivelImprime = DicNiveles[idMat];
                     int nivelPadre = DicPadres[idMat];
 
@@ -203,18 +201,9 @@ namespace Mantesis2015.Reportes
                     oTable.Cell(fila, 1).Range.Text = tesis.ius4.ToString();
                     oTable.Cell(fila, 6).Range.Text = tesis.epoca;
                     oTable.Cell(fila, 7).Range.Text = tesis.RUBRO;
+                    oTable.Cell(fila, 7).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
                     oTable.Cell(fila, 8).Range.Text = tesis.tesis;
 
-                    for (int x = 1; x < 9; x++)
-                    {
-                        oTable.Cell(fila, x).Borders.Enable = 1;
-                        oTable.Cell(fila, x).Range.Font.Size = 9;
-                        oTable.Cell(fila, x).Range.Font.Bold = 0;
-
-                        oTable.Cell(fila, 1).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                        oTable.Cell(fila, 6).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                        oTable.Cell(fila, 8).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                    }
 
                     fila++;
                     numTesis++;
@@ -250,7 +239,6 @@ namespace Mantesis2015.Reportes
             }
         }
 
-
         /// <summary>
         /// Creates a BackgroundWorker class to do work
         /// on a background thread.
@@ -268,7 +256,6 @@ namespace Mantesis2015.Reportes
             worker.RunWorkerAsync();
         }
 
-
         /// <summary>
         /// The work for the BackgroundWorker to perform.
         /// </summary>
@@ -278,7 +265,6 @@ namespace Mantesis2015.Reportes
         void DoWork(object sender, DoWorkEventArgs e)
         {
             this.GeneraWord();
-
         }
 
         /// <summary>
@@ -301,7 +287,5 @@ namespace Mantesis2015.Reportes
             //_backgroundButton.IsEnabled = true;
             //pbLoad.Visibility = Visibility.Collapsed;
         }
-
-
     }
 }

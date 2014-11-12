@@ -75,3 +75,5 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\it\Telerik.Windows.Controls.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\nl\Telerik.Windows.Controls.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\tr\Telerik.Windows.Controls.resources.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\itextsharp.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\itextsharp.xml

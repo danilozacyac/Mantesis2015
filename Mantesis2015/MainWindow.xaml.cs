@@ -209,22 +209,12 @@ namespace Mantesis2015
 
         }
 
-        private void RepMaterias_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is MenuTool)
-            {
-            }
-            else
-            {
-                ToolMenuItem item = sender as ToolMenuItem;
-            }
-        }
+        
 
         private void ExportarGroupClick(object sender, RoutedEventArgs e)
         {
             ButtonTool action = sender as ButtonTool;
-
-            controller.ExportarOptions(action.Id);
+            controller.ExportarOptions(action.Name);
 
         }
 

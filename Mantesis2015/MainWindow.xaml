@@ -71,22 +71,17 @@
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
                 </igRibbon:RibbonGroup>
                 <igRibbon:RibbonGroup Caption="Exportar">
-                    <igRibbon:ButtonTool Caption="PDF"
+                    <igRibbon:ButtonTool Caption="PDF" Name="RBtnPdf"
                                          Id="PDF"
                                          LargeImage="Resources/pdf_256.png"
                                          SmallImage="Resources/pdf_128.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" Click="ExportarGroupClick" />
-                    <igRibbon:ButtonTool Caption="Word"
+                    <igRibbon:ButtonTool Caption="Word" Name="RBtnWord"
                                          Id="Word"
                                          LargeImage="Resources/word_256.png"
                                          SmallImage="Resources/word_128.png" Click="ExportarGroupClick"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Caption="Excel"
-                                         Id="Excel"
-                                         LargeImage="Resources/excel_256.png"
-                                         SmallImage="Resources/excel_128.png" Click="ExportarGroupClick"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Caption="Materias SGA"
+                    <igRibbon:ButtonTool Caption="Materias SGA" Name="RBtnSga"
                                          Id="MatSga"
                                          LargeImage="Resources/info_256.png"
                                          SmallImage="Resources/info_128.png" Click="ExportarGroupClick"

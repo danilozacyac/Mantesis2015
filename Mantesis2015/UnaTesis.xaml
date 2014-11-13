@@ -27,7 +27,7 @@
             <my:Ribbon.ApplicationMenu>
                 <my:RibbonApplicationMenu Visibility="Collapsed" />
             </my:Ribbon.ApplicationMenu>
-            <my:RibbonGroup Header="Navegar" Name="Navega">
+            <my:RibbonGroup Name="Navega" Header="Navegar">
                 <StackPanel Orientation="Horizontal">
                     <my:RibbonButton Name="RbtnInicio"
                                      Click="RibbonButton_Click"
@@ -81,11 +81,6 @@
                                      Click="RibbonButton_Click"
                                      Label="Precedentes"
                                      LargeImageSource="Resources/p_128.png" />
-                    <StackPanel Orientation="Vertical">
-                        <my:RibbonButton Label="N. Rubro" />
-                        <my:RibbonButton Label="N.Texto" />
-                        <my:RibbonButton Label="N. Precedentes" />
-                    </StackPanel>
                 </StackPanel>
             </my:RibbonGroup>
             <my:RibbonGroup Header="Herramientas">
@@ -104,17 +99,23 @@
             </my:RibbonGroup>
             <my:RibbonGroup Header="Exportar">
                 <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Label="PDF"
+                    <my:RibbonButton Name="RBtnPdf"
+                                     Click="ExportarGroupClick"
+                                     Label="PDF"
                                      LargeImageSource="Resources/pdf_256.png"
                                      SmallImageSource="Resources/pdf_128.png" />
-                    <my:RibbonButton Label="Word"
+                    <my:RibbonButton Name="RBtnWord"
+                                     Click="ExportarGroupClick"
+                                     Label="Word"
                                      LargeImageSource="Resources/word_256.png"
                                      SmallImageSource="Resources/word_128.png" />
                 </StackPanel>
             </my:RibbonGroup>
             <my:RibbonGroup Header=" ">
                 <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Label="Salir" Name="RBtnSalir" Click="RibbonButton_Click"
+                    <my:RibbonButton Name="RBtnSalir"
+                                     Click="RibbonButton_Click"
+                                     Label="Salir"
                                      LargeImageSource="Resources/exit_256.png"
                                      SmallImageSource="Resources/exit_128.png" />
                     <my:RibbonButton Label="Guardar"
@@ -381,7 +382,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Materias SGA">
-                          <sga:MateriasControl />  
+                        <!--  <sga:MateriasControl />  -->
                     </TabItem>
                 </TabControl>
 
@@ -563,6 +564,60 @@
                                              TextWrapping="Wrap" />
                                 </Grid>
                             </GroupBox>
+                        </Grid>
+                    </igWindows:TabItemEx>
+                    <igWindows:TabItemEx x:Name="TabTesisReferencia" Header="Tesis de referencia">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="43*" />
+                                <RowDefinition Height="34*" />
+                                <RowDefinition Height="344*" />
+                                <RowDefinition Height="62*" />
+                            </Grid.RowDefinitions>
+                            <TextBox Name="txtReferencia"
+                                     Grid.Row="2"
+                                     AcceptsReturn="True"
+                                     FontFamily="Arial"
+                                     FontSize="14"
+                                     IsEnabled="{Binding IsEnable,
+                                                         Mode=TwoWay}"
+                                     TextWrapping="WrapWithOverflow"
+                                     VerticalScrollBarVisibility="Auto" />
+                            <Button Name="btnTesisElim"
+                                    Width="116"
+                                    Height="28"
+                                    Margin="24,6,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Content="Tesis Eliminada" />
+                            <TextBox Name="txtRefMotivo"
+                                     Grid.Row="3"
+                                     Width="840"
+                                     Height="28"
+                                     Margin="18,28,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top" />
+                            <TextBlock Name="txtRefIUS"
+                                       Grid.Row="3"
+                                       Width="132"
+                                       Height="23"
+                                       Margin="18,5,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       FontSize="14"
+                                       Foreground="Black"
+                                       Text="Registro IUS :" />
+                            <TextBox Name="txtRefLocAbr"
+                                     Grid.Row="1"
+                                     Width="840"
+                                     Height="28"
+                                     Margin="18,0,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     FontSize="14"
+                                     Foreground="Black"
+                                     Text=""
+                                     VerticalScrollBarVisibility="Auto" />
                         </Grid>
                     </igWindows:TabItemEx>
 

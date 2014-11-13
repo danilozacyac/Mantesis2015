@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.Windows;
 using Mantesis2015.Model;
+using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
@@ -13,7 +14,6 @@ namespace Mantesis2015.Controllers
 {
     public class UnaTesisController
     {
-
         private readonly UnaTesis unaTesis;
 
         private UnaTesisModel unaTesisModel; 
@@ -21,13 +21,12 @@ namespace Mantesis2015.Controllers
         private TesisDto tesisMostrada = null;
         private TesisDto tesisEdoAnterior = null;
 
-
         public UnaTesisController(UnaTesis unaTesis)
         {
             this.unaTesis = unaTesis;
         }
 
-        public UnaTesisController(UnaTesis unaTesis,TesisDto tesisMostrada)
+        public UnaTesisController(UnaTesis unaTesis, TesisDto tesisMostrada)
         {
             this.unaTesis = unaTesis;
             this.tesisMostrada = tesisMostrada;
@@ -116,13 +115,6 @@ namespace Mantesis2015.Controllers
             }
         }
 
-
-
-
-
-
-
-
         #region RibbonButtons
 
         public void TesisStart()
@@ -182,30 +174,27 @@ namespace Mantesis2015.Controllers
             unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
         }
 
-
         public void TesisToClipboard(int queMando)
         {
             switch (queMando)
             {
-
                 case 1: // Toda la tesis
                     Clipboard.SetText(
-                                     unaTesis.TxtEpoca.Text + "\r\n" + "Registro: " + tesisMostrada.Ius + "\r\n" +
-                                     "Instancia: " + unaTesis.CbxInstancia.Text + "\r\n" +
-                                     ((unaTesis.RbtJurisp.IsChecked == true) ? "Jurisprudencia" : "Tesis Aislada") + "\r\n" +
-                                     "Fuente: " + unaTesis.CbxFuente.Text + "\r\n" +
-                                     unaTesis.TxtVolumen.Text + "\r\n" +
-                                     "Materia(s): " + unaTesis.CbxMat1.Text + ((!unaTesis.CbxMat2.Text.Equals("<sin materia>"))
-                                                                      ? (", " + unaTesis.CbxMat2.Text + ((!unaTesis.CbxMat3.Text.Equals("<sin materia>")) ? ", " + unaTesis.CbxMat3.Text : "")) : "") + "\r\n" +
-                                     "Tesis: " + unaTesis.TxtTesis.Text + "\r\n" + "Página: " + unaTesis.TxtPag.Text + "\r\n" +
-                                     "\r\n" +
-                                     ((!unaTesis.TxtGenealogia.Text.Equals(String.Empty)) ? "Genealogía: " + unaTesis.TxtGenealogia.Text + "\r\n" : String.Empty) +
-                                     tesisMostrada.Rubro + "\r\n" + tesisMostrada.Texto + "\r\n" +
-                                     tesisMostrada.Precedentes + "\r\n" + "\r\n" + "\r\n" +
-                                     ((!unaTesis.TxtObservaciones.Text.Equals(String.Empty)) ? "Notas: " + "\r\n" + unaTesis.TxtObservaciones.Text + "\r\n" + "\r\n" : "") +
-                                     ((!unaTesis.TxtConcordancia.Text.Equals(String.Empty)) ? "Notas: " + "\r\n" + unaTesis.TxtConcordancia.Text + "\r\n" + "\r\n" : "") +
-                                     "Nota de publicación:" + "\r\n" + unaTesis.TxtNotaPublica.Text
-                                     );
+                                      unaTesis.TxtEpoca.Text + "\r\n" + "Registro: " + tesisMostrada.Ius + "\r\n" +
+                                      "Instancia: " + unaTesis.CbxInstancia.Text + "\r\n" +
+                                      ((unaTesis.RbtJurisp.IsChecked == true) ? "Jurisprudencia" : "Tesis Aislada") + "\r\n" +
+                                      "Fuente: " + unaTesis.CbxFuente.Text + "\r\n" +
+                                      unaTesis.TxtVolumen.Text + "\r\n" +
+                                      "Materia(s): " + unaTesis.CbxMat1.Text + ((!unaTesis.CbxMat2.Text.Equals("<sin materia>"))
+                                                                                ? (", " + unaTesis.CbxMat2.Text + ((!unaTesis.CbxMat3.Text.Equals("<sin materia>")) ? ", " + unaTesis.CbxMat3.Text : "")) : "") + "\r\n" +
+                                      "Tesis: " + unaTesis.TxtTesis.Text + "\r\n" + "Página: " + unaTesis.TxtPag.Text + "\r\n" +
+                                      "\r\n" +
+                                      ((!unaTesis.TxtGenealogia.Text.Equals(String.Empty)) ? "Genealogía: " + unaTesis.TxtGenealogia.Text + "\r\n" : String.Empty) +
+                                      tesisMostrada.Rubro + "\r\n" + tesisMostrada.Texto + "\r\n" +
+                                      tesisMostrada.Precedentes + "\r\n" + "\r\n" + "\r\n" +
+                                      ((!unaTesis.TxtObservaciones.Text.Equals(String.Empty)) ? "Notas: " + "\r\n" + unaTesis.TxtObservaciones.Text + "\r\n" + "\r\n" : "") +
+                                      ((!unaTesis.TxtConcordancia.Text.Equals(String.Empty)) ? "Notas: " + "\r\n" + unaTesis.TxtConcordancia.Text + "\r\n" + "\r\n" : "") +
+                                      "Nota de publicación:" + "\r\n" + unaTesis.TxtNotaPublica.Text);
                     MessageBox.Show("Tesis enviada al portapapeles");
                     break;
                 case 2: // NumIus
@@ -230,7 +219,6 @@ namespace Mantesis2015.Controllers
                     Clipboard.SetText(tesisMostrada.NotasPrecedentes);
                     break;
             }
-            
         }
 
         public void LaunchLigasPreview()
@@ -245,6 +233,24 @@ namespace Mantesis2015.Controllers
             bitacora.ShowDialog();
         }
 
+        #endregion
+
+        #region Exportar
+        
+        public void ExportarOptions(string name)
+        {
+            switch (name)
+            {
+                case "RBtnPdf":
+                    new ListaTesisPdf().GeneraPdfConDetalleTesis(tesisMostrada);
+                    break;
+                case "RBtnWord":
+                    
+                    new ListaTesisWord().GeneraWordConDetalleTesis(tesisMostrada);
+                    break;
+            }
+        }
+        
         #endregion
     }
 }

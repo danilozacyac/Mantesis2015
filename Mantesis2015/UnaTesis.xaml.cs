@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Windows;
+using Infragistics.Windows.Ribbon;
 using Mantesis2015.Controllers;
 using Mantesis2015.Model;
 using MantesisVerIusCommonObjects.Dto;
@@ -105,6 +106,13 @@ namespace Mantesis2015
                 case "RBtnSalir": this.Close();
                     break;
             }
+        }
+
+        private void ExportarGroupClick(object sender, RoutedEventArgs e)
+        {
+            RibbonButton action = sender as RibbonButton;
+            controller.ExportarOptions(action.Name);
+
         }
     }
 }

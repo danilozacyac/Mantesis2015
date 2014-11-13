@@ -8,6 +8,8 @@ using ScjnUtilities;
 using System.Diagnostics;
 using System.IO;
 using Mantesis2015.Model;
+using MantesisVerIusCommonObjects.Dto;
+using MantesisVerIusCommonObjects.Utilities;
 
 namespace Mantesis2015.Reportes
 {
@@ -226,6 +228,105 @@ namespace Mantesis2015.Reportes
             }
         }
 
-        
+        public void GeneraWordConDetalleTesis(TesisDto tesis)
+        {
+            oWord = new Microsoft.Office.Interop.Word.Application();
+            oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+            try
+            {
+                Microsoft.Office.Interop.Word.Paragraph par = oDoc.Content.Paragraphs.Add(ref oMissing);
+
+                par.Range.Font.Bold = 0;
+                par.Range.Font.Size = 10;
+                par.Range.Font.Name = "Arial";
+                par.Range.Text = tesis.Epoca;
+                //par.Range.Text = "Décima Época";
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Text = "Registro: " + tesis.Ius;
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Text = "Instancia: " + Utils.GetInfoDatosCompartidos(2,tesis.Sala);
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Text = tesis.TaTj == 1 ? "Jurisprudencia" : "Tesis Aislada";
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Text = "Fuente: " + Utils.GetInfoDatosCompartidos(3,tesis.Fuente);
+                par.Range.InsertParagraphAfter();
+
+                //par.Range.Text = tesis.Estado + ", " + new ReporteModel().GetTomo(tesis.SubTema);
+                //par.Range.InsertParagraphAfter();
+
+                string materiaStr = "";
+
+                if (!tesis.Materia1.Equals(""))
+                {
+                    materiaStr += Utils.GetInfoDatosCompartidos(4,tesis.Materia1);
+
+                    if (!tesis.Materia2.Equals("<sin materia>"))
+                    {
+                        materiaStr += ", " + Utils.GetInfoDatosCompartidos(4, tesis.Materia2);
+
+                        if (!tesis.Materia3.Equals("<sin materia>"))
+                        {
+                            materiaStr += ", " + Utils.GetInfoDatosCompartidos(4,tesis.Materia3);
+                        }
+                    }
+                }
+
+                par.Range.Text = "Materia(s): " + materiaStr;
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Text = "Tesis: " + tesis.Tesis;
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Text = "Página: " + tesis.Pagina;
+                par.Range.InsertParagraphAfter();
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Font.Bold = 1;
+                par.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                par.Range.Text = tesis.Rubro;
+                par.Range.InsertParagraphAfter();
+
+                par.Range.Font.Bold = 0;
+                par.Range.Text = tesis.Texto;
+                par.Range.InsertParagraphAfter();
+                par.Range.InsertParagraphAfter();
+                
+                par.Range.Text = tesis.Precedentes;
+                par.Range.InsertParagraphAfter();
+
+
+                //Agregando esto para guardar hasta el inicio del catch
+                SaveFileDialog cuadroDialogo = new SaveFileDialog();
+                cuadroDialogo.DefaultExt = "docx";
+                cuadroDialogo.Filter = "docx file(*.docx)|*.docx";
+                cuadroDialogo.AddExtension = true;
+                cuadroDialogo.RestoreDirectory = true;
+                cuadroDialogo.Title = "Guardar";
+                cuadroDialogo.InitialDirectory = @"D:\RESPALDO\SEMANARI\";
+                if (cuadroDialogo.ShowDialog() == DialogResult.OK)
+                {
+                    oWord.ActiveDocument.SaveAs(cuadroDialogo.FileName);
+                    oWord.ActiveDocument.Saved = true;
+                    cuadroDialogo.Dispose();
+                    cuadroDialogo = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                oWord.Visible = true;
+            }
+        }
     }
 }

@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Mantesis2015.Model;
+using MantesisVerIusCommonObjects.Dto;
+using MantesisVerIusCommonObjects.Utilities;
 using ScjnUtilities;
 using UtilsMantesis;
 
@@ -33,7 +35,7 @@ namespace Mantesis2015.Reportes
 
             try
             {
-                List<TesisReg>  tesisImprime = new ReporteModel().GetTesisPorMateria(materia);
+                List<TesisReg> tesisImprime = new ReporteModel().GetTesisPorMateria(materia);
 
                 if (tesisImprime.Count > 0)
                 {
@@ -116,6 +118,83 @@ namespace Mantesis2015.Reportes
             return numTesis;
         }
 
+        public void GeneraPdfConDetalleTesis(TesisDto tesis)
+        {
+            myDocument = new iTextSharp.text.Document(PageSize.A4, 50, 50, 50, 50);
+            string documento = Path.GetTempFileName() + ".pdf";
+            PdfWriter writer = PdfWriter.GetInstance(myDocument, new FileStream(documento, FileMode.Create));
+
+            myDocument.Open();
+
+            try
+            {
+                Paragraph para = new Paragraph(tesis.Epoca, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                myDocument.Add(para);
+                para = new Paragraph("Registro: " + tesis.Ius, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_LEFT;
+                myDocument.Add(para);
+
+                para = new Paragraph("Instancia: " + Utils.GetInfoDatosCompartidos(2,tesis.Sala), Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                myDocument.Add(para);
+                para = new Paragraph((tesis.TaTj == 1) ? "Jurisprudencia" : "Tesis Aislada", Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_LEFT;
+                myDocument.Add(para);
+
+                para = new Paragraph("Fuente: " + Utils.GetInfoDatosCompartidos(3,tesis.Fuente), Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                myDocument.Add(para);
+                //para = new Paragraph(tesis.Estado + ", " + new ReporteModel().GetTomo(tesis.SubTema), Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                //para.Alignment = Element.ALIGN_LEFT;
+                //myDocument.Add(para);
+
+                string materiaTxt = Utils.GetInfoDatosCompartidos(4,tesis.Materia1) + ", " + Utils.GetInfoDatosCompartidos(4,tesis.Materia2)
+                    + ", " + Utils.GetInfoDatosCompartidos(4,tesis.Materia3);
+
+                para = new Paragraph("Materia(s): " + materiaTxt, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                myDocument.Add(para);
+                para = new Paragraph("Tesis: " + tesis.Tesis, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_LEFT;
+                myDocument.Add(para);
+
+                para = new Paragraph("Página: " + tesis.Pagina, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                myDocument.Add(para);
+                para = new Paragraph(" ", Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_LEFT;
+                myDocument.Add(para);
+
+                para = new Paragraph(tesis.Rubro, Fuentes.BoldFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_JUSTIFIED;
+                myDocument.Add(para);
+
+                para = new Paragraph(tesis.Texto, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_JUSTIFIED;
+                myDocument.Add(para);
+                para = new Paragraph(" ", Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_CENTER;
+                myDocument.Add(para);
+
+                para = new Paragraph(tesis.Precedentes, Fuentes.NormalFont(Fuentes.Black, Fuentes.ArialFont, 12));
+                para.Alignment = Element.ALIGN_JUSTIFIED;
+                myDocument.Add(para);
+                para = new Paragraph(" ");
+                myDocument.Add(para);
+                para = new Paragraph(" ");
+                myDocument.Add(para);
+
+                myDocument.NewPage();
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                myDocument.Close();
+                System.Diagnostics.Process.Start(documento);
+            }
+        }
 
         /// <summary>
         /// Genera un PDF con el listado de tesis que se visualiza en la ventana principal
@@ -125,13 +204,11 @@ namespace Mantesis2015.Reportes
         /// <param name="volumen"></param>
         public void GeneraPdfListaTesis(List<AddTesis> listaTesis, string epoca, string volumen)
         {
-
             myDocument = new iTextSharp.text.Document(PageSize.A4, 50, 50, 50, 50);
             string documento = Path.GetTempFileName() + ".pdf";
 
             try
             {
-
                 PdfWriter writer = PdfWriter.GetInstance(myDocument, new FileStream(documento, FileMode.Create));
 
                 Paragraph para;
@@ -163,7 +240,6 @@ namespace Mantesis2015.Reportes
 
                     white = new iTextSharp.text.Paragraph(" ");
                     myDocument.Add(white);
-
 
                     PdfPTable table = new PdfPTable(5);
                     //table.TotalWidth = 400;

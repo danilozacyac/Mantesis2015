@@ -316,7 +316,12 @@ namespace Mantesis2015.Controllers
                     else if (result == MessageBoxResult.No)
                         new ListaTesisPdf().GeneraPdfListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
                     break;
-                case "RBtnWord": new ListaTesisWord().GeneraPdfListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
+                case "RBtnWord": 
+                    MessageBoxResult result2 = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (result2 == MessageBoxResult.Yes)
+                        new ListaTesisWord().GeneraWordConDetalleTesis(Convert.ToInt32(main.CbxMaterias.SelectedValue));
+                    else if (result2 == MessageBoxResult.No)
+                        new ListaTesisWord().GeneraWordListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
                     break;
                 case "RBtnSga":
                     TablaSga tabla = new TablaSga();

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using ScjnUtilities;
 using System.Diagnostics;
 using System.IO;
+using Mantesis2015.Model;
 
 namespace Mantesis2015.Reportes
 {
@@ -23,21 +24,21 @@ namespace Mantesis2015.Reportes
 
         Microsoft.Office.Interop.Word.Table oTable;
 
-        public void GeneraPdfListaTesis(List<AddTesis> listaTesis, string epoca, string volumen)
+        public void GeneraWordListaTesis(List<AddTesis> listaTesis, string epoca, string volumen)
         {
             oWord = new Microsoft.Office.Interop.Word.Application();
             oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
             oDoc.PageSetup.Orientation = WdOrientation.wdOrientLandscape;
 
             //Insert a paragraph at the beginning of the document.
-            Microsoft.Office.Interop.Word.Paragraph oPara1;
-            oPara1 = oDoc.Content.Paragraphs.Add(ref oMissing);
-            oPara1.Range.Text = "Suprema Corte de Justicia de la Nación (" + DateTimeUtilities.ToMonthName(DateTime.Now.Month - 1) + " " + DateTime.Now.Year + ")";
-            oPara1.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
-            oPara1.Range.Font.Bold = 1;
-            oPara1.Range.Font.Name = "Times New Roman";
-            oPara1.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
-            oPara1.Range.InsertParagraphAfter();
+            //Microsoft.Office.Interop.Word.Paragraph oPara1;
+            //oPara1 = oDoc.Content.Paragraphs.Add(ref oMissing);
+            //oPara1.Range.Text = "Suprema Corte de Justicia de la Nación (" + DateTimeUtilities.ToMonthName(DateTime.Now.Month - 1) + " " + DateTime.Now.Year + ")";
+            //oPara1.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            //oPara1.Range.Font.Bold = 1;
+            //oPara1.Range.Font.Name = "Times New Roman";
+            //oPara1.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
+            //oPara1.Range.InsertParagraphAfter();
 
             Microsoft.Office.Interop.Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
 
@@ -83,7 +84,6 @@ namespace Mantesis2015.Reportes
 
                     fila++;
                 }
-                
 
                 foreach (Section wordSection in oDoc.Sections)
                 {
@@ -93,8 +93,8 @@ namespace Mantesis2015.Reportes
 
                     Range footerRange = wordSection.Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
                     footerRange.Paragraphs.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
-                    footerRange.Font.ColorIndex = WdColorIndex.wdDarkRed;
-                    footerRange.Font.Size = 10;
+                    footerRange.Font.ColorIndex = WdColorIndex.wdBlack;
+                    footerRange.Font.Size = 12;
                     footerRange.Text = "Reporte de las tesis dadas de alta en el " + volumen;
                 }
 
@@ -119,5 +119,113 @@ namespace Mantesis2015.Reportes
             MessageBox.Show("Total de Tesis impresas " + listaTesis.Count);
         }
 
+        public void GeneraWordConDetalleTesis(int materia)
+        {
+            oWord = new Microsoft.Office.Interop.Word.Application();
+            oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+            try
+            {
+                Microsoft.Office.Interop.Word.Paragraph par = oDoc.Content.Paragraphs.Add(ref oMissing);
+
+                List<TesisReg> tesisImprime = new ReporteModel().GetTesisPorMateria(materia);
+
+                foreach (TesisReg tesis in tesisImprime)
+                {
+                    par.Range.Font.Bold = 0;
+                    par.Range.Font.Size = 10;
+                    par.Range.Font.Name = "Arial";
+                    //par.Range.Text = tesis.Epoca;
+                    par.Range.Text = "Décima Época";
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = "Registro: " + tesis.ius4;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = "Instancia: " + tesis.sala;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = tesis.ta_tj;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = "Fuente: " + tesis.fuente;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = tesis.Estado + ", " + new ReporteModel().GetTomo(tesis.SubTema);
+                    par.Range.InsertParagraphAfter();
+
+                    string materiaStr = "";
+
+                    if (!tesis.materia1.Equals(""))
+                    {
+                        materiaStr += tesis.materia1;
+
+                        if (!tesis.materia2.Equals("<sin materia>"))
+                        {
+                            materiaStr += ", " + tesis.materia2;
+
+                            if (!tesis.materia3.Equals("<sin materia>"))
+                            {
+                                materiaStr += ", " + tesis.materia3;
+                            }
+                        }
+                    }
+
+                    par.Range.Text = "Materia(s): " + materiaStr;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = "Tesis: " + tesis.tesis;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = "Página: " + tesis.pagina;
+                    par.Range.InsertParagraphAfter();
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Font.Bold = 1;
+                    par.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    par.Range.Text = tesis.RUBRO;
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Font.Bold = 0;
+                    par.Range.Text = tesis.TEXTO;
+                    par.Range.InsertParagraphAfter();
+                    par.Range.InsertParagraphAfter();
+
+                    par.Range.Text = tesis.PRECEDENTES;
+                    par.Range.InsertParagraphAfter();
+
+                    oDoc.Words.Last.InsertBreak(Microsoft.Office.Interop.Word.WdBreakType.wdPageBreak);
+                }
+
+                //Agregando esto para guardar hasta el inicio del catch
+                SaveFileDialog cuadroDialogo = new SaveFileDialog();
+                cuadroDialogo.DefaultExt = "docx";
+                cuadroDialogo.Filter = "docx file(*.docx)|*.docx";
+                cuadroDialogo.AddExtension = true;
+                cuadroDialogo.RestoreDirectory = true;
+                cuadroDialogo.Title = "Guardar";
+                cuadroDialogo.InitialDirectory = @"D:\RESPALDO\SEMANARI\";
+                if (cuadroDialogo.ShowDialog() == DialogResult.OK)
+                {
+                    oWord.ActiveDocument.SaveAs(cuadroDialogo.FileName);
+                    oWord.ActiveDocument.Saved = true;
+                    cuadroDialogo.Dispose();
+                    cuadroDialogo = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                oWord.Visible = true;
+            }
+        }
+
+        
     }
 }

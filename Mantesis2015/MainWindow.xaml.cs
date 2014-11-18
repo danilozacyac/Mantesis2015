@@ -24,6 +24,7 @@ namespace Mantesis2015
         private DatosComp epocaSelec;
         private object volumeSelect;
         private MainWindowController controller;
+        private PermisosController permisosCon;
 
         public MainWindow()
         {
@@ -34,9 +35,11 @@ namespace Mantesis2015
         {
             new AccesoModel().ObtenerUsuarioContraseña("lvega", "lvegaa");
             controller = new MainWindowController(this);
+            permisosCon = new PermisosController(this);
             apendices = new List<RadioButton>() { rbtAp17, rbtAp2000, rbtAp2001, rbtAp2002, rbtAp2011, rbtAp54 };
             
             CbEpoca.DataContext = DatosCompartidosSingleton.Epocas;
+            permisosCon.LoadPermission();
         }
 
         private void CbEpoca_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,8 +187,7 @@ namespace Mantesis2015
 
         private void BtnVerIus_Click(object sender, RoutedEventArgs e)
         {
-            NumIusController verIus = new NumIusController();
-            verIus.GetTesisByVerIus(TxtVerIus.Text);
+            controller.GetTesisByVerIus(TxtVerIus.Text);
         }
 
         

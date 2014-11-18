@@ -46,7 +46,7 @@
         <igRibbon:XamRibbon Theme="Office2k7Black">
 
             <igRibbon:RibbonTabItem Header="Mantenimiento">
-                <igRibbon:RibbonGroup Caption="General">
+                <igRibbon:RibbonGroup Caption="General" Uid="5">
                     <igRibbon:ButtonTool Name="BtnNuevaTesis"
                                          Caption="Tesis Nueva"
                                          Click="ButtonTool_Click"
@@ -78,7 +78,7 @@
                                          SmallImage="Resources/delTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
                 </igRibbon:RibbonGroup>
-                <igRibbon:RibbonGroup Caption="Exportar">
+                <igRibbon:RibbonGroup Caption="Exportar" Name="GrExport" IsEnabled="False">
                     <igRibbon:ButtonTool Name="RBtnPdf"
                                          Caption="PDF"
                                          Click="ExportarGroupClick"
@@ -115,11 +115,13 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <GroupBox Height="150"
-                          Margin="35,30,35,0" Uid="3"
+                <GroupBox Name="VerIus" IsEnabled="False"
+                          Height="150"
+                          Margin="35,30,35,0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
-                          Header="Ver IUS">
+                          Header="Ver IUS"
+                          Uid="3">
                     <Grid>
                         <Label Width="150"
                                Height="20"
@@ -141,11 +143,12 @@
                                 Content="Buscar" />
                     </Grid>
                 </GroupBox>
-                <GroupBox Height="350"
-                          Margin="35,220,35,0" Uid="2"
+                <GroupBox Height="350" Name="EpocaVolumen"
+                          Margin="35,220,35,0" IsEnabled="False"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
-                          Header="Selección">
+                          Header="Selección"
+                          Uid="2">
                     <Grid>
                         <Label Margin="10,22,0,0"
                                HorizontalAlignment="Left"

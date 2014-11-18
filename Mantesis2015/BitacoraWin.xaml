@@ -6,7 +6,6 @@
         Width="820"
         Height="350"
         Loaded="Window_Loaded"
-        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <igDP:XamDataGrid Name="xamBitacora"

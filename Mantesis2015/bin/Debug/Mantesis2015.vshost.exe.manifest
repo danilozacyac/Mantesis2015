@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1294848">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1296384">
       <assemblyIdentity name="Mantesis2015" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>G4+4p3NougHPg3sK/MPik/nnE+s=</dsig:DigestValue>
+        <dsig:DigestValue>o1jaD1DvLB/AjCCDJYPjZeykiR4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -145,7 +145,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>4tfh0qIt8X4dA73BQMF4AxjJ1uQ=</dsig:DigestValue>
+        <dsig:DigestValue>GAhKqEEB3lLgzgtXxbax/WGUIWI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

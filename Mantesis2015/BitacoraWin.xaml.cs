@@ -28,6 +28,8 @@ namespace Mantesis2015
 
             xamBitacora.DataSource = bitacora.GetBitacoraCambios(ius);
 
+            //xamBitacora.Records.FieldLayout.Fields[4].Visibility = System.Windows.Visibility.Collapsed;
+
         }
 
         

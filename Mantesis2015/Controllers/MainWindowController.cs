@@ -5,10 +5,13 @@ using System.Windows;
 using Infragistics.Windows.DataPresenter;
 using Mantesis2015.Model;
 using Mantesis2015.Reportes;
+using MantesisAdminUtil.Dto;
 using MantesisVerIusCommonObjects.Dto;
+using MantesisVerIusCommonObjects.Model;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
 using MateriasSgaControl;
+using ScjnUtilities;
 using UtilsMantesis;
 
 namespace Mantesis2015.Controllers
@@ -82,6 +85,8 @@ namespace Mantesis2015.Controllers
             }
 
             this.SetFiltroPorMateriaTomo();
+
+            main.GrExport.IsEnabled = true;
         }
 
         public void GetTesisFiltradasPorMateria(int qMateria)
@@ -306,6 +311,99 @@ namespace Mantesis2015.Controllers
 
         #endregion 
 
+        public void GetTesisByVerIus(string txtNumIus)
+        {
+            try
+            {
+                if (txtNumIus.Length < 8)
+                {
+                    NumIusModel numIusModel = new NumIusModel();
+
+                    bool isTesisEliminated = numIusModel.GetCurrentTesisState(Convert.ToInt32(txtNumIus));
+                    TesisDto tesis;
+
+                    if (isTesisEliminated)//La tesis ya fue eliminada
+                    {
+                        tesis = numIusModel.BuscaTesisEliminadasPorRegistro(Convert.ToInt32(txtNumIus));
+
+                        if (tesis != null)
+                        {
+                            tesis.IsEliminated = isTesisEliminated;
+
+                            MessageBox.Show("Esta tesis fue eliminada");
+
+                            UnaTesis unaTesis = new UnaTesis(tesis, true);
+                            unaTesis.Tag = main.VerIus.Tag;
+                            unaTesis.ShowDialog();
+
+                        }
+                        else
+                        {
+                            tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
+                            if (tesis != null)
+                            {
+                                tesis.IsEliminated = isTesisEliminated;
+                                MessageBox.Show("Esta tesis fue eliminada");
+
+                                UnaTesis unaTesis = new UnaTesis(tesis, true);
+                                unaTesis.Tag = main.VerIus.Tag;
+                                unaTesis.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Introduzca un número de registro valido");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
+
+                        var volumenAuth = (from n in AccesoUsuarioModel.VolumenesPermitidos
+                                           where n.Volumen == tesis.VolumenInt
+                                           select n).ToList();
+
+                        //if (volumenAuth.Count() == 0 && userCanModify == true)
+                        //    userCanModify = false;
+                        //else if (volumenAuth.Count() > 0 && userCanModify == false)
+                        //    userCanModify = true;
+
+                        if (tesis.Parte >= 100 && tesis.Parte <= 145)
+                        {
+                            ValuesMant.Epoca = 7;
+                            ValuesMant.Volumen = tesis.VolumenInt;
+                        }
+
+
+                        if (tesis != null)
+                        {
+                            UnaTesis unaTesis = new UnaTesis(tesis, true);
+                            unaTesis.Tag = main.VerIus.Tag;
+                            unaTesis.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Introduzca un número de registro valido");
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Introduzca un número de registro valido");
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message);//, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+        }
+
+
+
         public void ExportarOptions(string id)
         {
             switch (id)
@@ -330,5 +428,11 @@ namespace Mantesis2015.Controllers
                     break;
             }
         }
+
+        #region CargaPermisos
+
+        
+
+        #endregion
     }
 }

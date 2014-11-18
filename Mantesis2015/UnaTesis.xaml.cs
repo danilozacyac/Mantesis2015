@@ -114,5 +114,15 @@ namespace Mantesis2015
             controller.ExportarOptions(action.Name);
 
         }
+
+        private void RBtnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            controller.GuardarCambios();
+        }
+
+        private void BtnTesisElim_Click(object sender, RoutedEventArgs e)
+        {
+            controller.TesisEliminar(this.ius);
+        }
     }
 }

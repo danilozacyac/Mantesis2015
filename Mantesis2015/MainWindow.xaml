@@ -116,7 +116,7 @@
 
             <Grid Grid.Column="0">
                 <GroupBox Height="150"
-                          Margin="35,30,35,0"
+                          Margin="35,30,35,0" Uid="3"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
                           Header="Ver IUS">
@@ -142,7 +142,7 @@
                     </Grid>
                 </GroupBox>
                 <GroupBox Height="350"
-                          Margin="35,220,35,0"
+                          Margin="35,220,35,0" Uid="2"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
                           Header="Selección">

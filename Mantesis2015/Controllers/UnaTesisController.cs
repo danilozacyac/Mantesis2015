@@ -1,13 +1,17 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using Mantesis2015.Model;
+using Mantesis2015.MotivosFolder;
 using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
 using MateriasSgaControl;
+using ScjnUtilities;
 using UtilsMantesis;
 
 namespace Mantesis2015.Controllers
@@ -20,6 +24,20 @@ namespace Mantesis2015.Controllers
 
         private TesisDto tesisMostrada = null;
         private TesisDto tesisEdoAnterior = null;
+
+        private bool isModifRubro = false;
+        private bool isModifTexto = false;
+        private bool isModifPrec = false;
+        private bool isModifNotas = false;
+
+        private bool isModifNotaRubro = false;
+        private bool isModifNotaTexto = false;
+        private bool isModifNotaPrec = false;
+        private bool isModifNotasGaceta = false;
+        private bool isModifNotaPublica = false;
+
+
+
 
         public UnaTesisController(UnaTesis unaTesis)
         {
@@ -70,6 +88,7 @@ namespace Mantesis2015.Controllers
                 unaTesis.Navega.IsEnabled = false;
             }
 
+            tesisMostrada.PropertyChanged += TesisDto_PropertyChanged;
             RequestData.ConnectionString = ConfigurationManager.ConnectionStrings["BaseIUS"].ConnectionString;
             RequestData.Ius = tesisMostrada.Ius;
             RequestData.Volumen = tesisMostrada.VolumenInt;
@@ -112,6 +131,229 @@ namespace Mantesis2015.Controllers
             {
                 unaTesis.RbtJurisp.IsChecked = true;
                 unaTesis.RbtJurisp.FontWeight = FontWeights.Bold;
+            }
+        }
+
+        private char[] binaryArray;
+        private string sCamposModif = "";
+        private void TesisDto_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "Rubro":
+                    //txtRubro.Text = tesisMostrada.Rubro;
+                    sCamposModif += "R";
+                    isModifRubro = true;
+                    if (binaryArray.Length >= 2)
+                    {
+                        if (binaryArray[2 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 2;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 2;
+                    }
+                    break;
+                case "Texto":
+                    //txtTexto.Text = tesisMostrada.Texto;
+                    sCamposModif += "T";
+                    isModifTexto = true;
+                    if (binaryArray.Length >= 9)
+                    {
+                        if (binaryArray[9 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 256;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 256;
+                    }
+                    break;
+                case "Precedentes":
+                    //txtPrec.Text = tesisMostrada.Precedentes;
+                    sCamposModif += "P";
+                    isModifPrec = true;
+                    if (binaryArray.Length >= 7)
+                    {
+                        if (binaryArray[7 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 64;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 64;
+                    }
+                    break;
+                case "NotasRubro":
+                   // TxtNotaR.Text = tesisMostrada.NotasRubro;
+                    sCamposModif += "nRub";
+                    isModifNotaRubro = true;
+                    if (binaryArray.Length >= 26)
+                    {
+                        if (binaryArray[26 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 268435456;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 268435456;
+                    }
+                    break;
+                case "NotasTexto":
+                   // TxtNotaT.Text = tesisMostrada.NotasTexto;
+                    sCamposModif += "nTex";
+                    isModifNotaTexto = true;
+                    if (binaryArray.Length >= 27)
+                    {
+                        if (binaryArray[27 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 134217728;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 134217728;
+                    }
+                    break;
+                case "NotasPrecedente":
+                    //TxtNotaP.Text = tesisMostrada.NotasPrecedentes;
+                    sCamposModif += "nPrec";
+                    isModifNotaPrec = true;
+                    if (binaryArray.Length >= 28)
+                    {
+                        if (binaryArray[28 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 134217728;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 134217728;
+                    }
+                    break;
+                case "NotasGaceta":
+                    //TxtNotaGaceta.Text = tesisMostrada.NotasGaceta;
+                    sCamposModif += "nGac";
+                    isModifNotasGaceta = true;
+                    if (binaryArray.Length >= 29)
+                    {
+                        if (binaryArray[29 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 536870912;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 536870912;
+                    }
+
+                    tesisMostrada.IsNotasModif = true;
+                    break;
+                case "NotasPublica":
+                    //TxtNotaPublica.Text = tesisMostrada.NotaPublica;
+                    sCamposModif += "nPub";
+                    isModifNotaPublica = true;
+                    if (binaryArray.Length >= 30)
+                    {
+                        if (binaryArray[30 - 1] == '0')
+                            tesisMostrada.MotivoModificar += 1073741824;
+                    }
+                    else
+                    {
+                        tesisMostrada.MotivoModificar += 1073741824;
+                    }
+
+                    tesisMostrada.IsNotasModif = true;
+                    break;
+            }
+        }
+
+        public void GuardarCambios()
+        {
+            
+
+            MModificacion modif = new MModificacion(this.tesisMostrada.MotivoModificar);
+            bool? dResult = modif.ShowDialog();
+
+            if (dResult == true)
+            {
+                this.tesisMostrada.Sala = Convert.ToInt16(unaTesis.CbxInstancia.SelectedValue);
+                this.tesisMostrada.Fuente = Convert.ToInt16(unaTesis.CbxFuente.SelectedValue);
+                this.tesisMostrada.RubroStr = StringUtilities.ConvMay(StringUtilities.QuitaCarCad(unaTesis.TxtRubro.Text));
+
+                this.tesisMostrada.TaTj = (unaTesis.RbtAislada.IsChecked == true) ? 0 : 1;
+
+                this.tesisMostrada.Materia1 = Convert.ToInt16(unaTesis.CbxMat1.SelectedValue);
+                this.tesisMostrada.Materia2 = Convert.ToInt16(unaTesis.CbxMat2.SelectedValue);
+                this.tesisMostrada.Materia3 = Convert.ToInt16(unaTesis.CbxMat3.SelectedValue);
+                this.tesisMostrada.Materia4 = Convert.ToInt16(unaTesis.CbxMat4.SelectedValue);
+                this.tesisMostrada.Materia5 = Convert.ToInt16(unaTesis.CbxMat5.SelectedValue);
+
+                this.tesisMostrada.Estado = 2;
+                this.tesisMostrada.MotivoModificar = MiscFunct.ToDecimal(ValuesMant.BinaryVal);
+                this.tesisMostrada.CamposModif = sCamposModif;
+
+                string idAbs = Guid.NewGuid().ToString();
+
+                unaTesisModel.DbConnectionOpen();
+
+                unaTesisModel.SalvarRegistroMantesisSql(this.tesisMostrada, idAbs); // Salva los cambios en Mantesis SQL
+                unaTesisModel.SalvarRegistro(this.tesisMostrada);                   // Salva los cambios en las bases de Access
+
+                if (tesisMostrada != tesisEdoAnterior)
+                {
+                    tesisEdoAnterior.IdAbs = tesisMostrada.IdAbs;
+                    unaTesisModel.InsertaHistoricoTesis(tesisEdoAnterior, idAbs);
+                }
+                unaTesisModel.DbConnectionClose();
+
+                ///Verifica que el número de registro de la tesis que se esta actualizando
+                ///ya exista dentro de la base de datos IUS del servidor CT9BD3
+                if (unaTesisModel.DoesRegIusExist(tesisMostrada.Ius))
+                    unaTesisModel.ActualizaRegistroDSql(tesisMostrada);
+
+                unaTesis.Close();
+            }
+        }
+
+        public void TesisEliminar(long ius)
+        {
+            MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja = 0;
+
+            DataTableReader reader = unaTesisModel.RevisaTesisReferencia(ius);
+
+            if (reader != null)
+            {
+                if (reader.Read())
+                {
+                    unaTesis.txtRefIUS.Text = unaTesis.txtRefIUS.Text + reader["IUS"].ToString();
+
+                    unaTesis.txtReferencia.Text = reader["Rubro"].ToString() + (Convert.ToChar(13).ToString() + Convert.ToChar(10).ToString()) + (Convert.ToChar(13).ToString() + Convert.ToChar(10).ToString());
+                    unaTesis.txtReferencia.Text = unaTesis.txtReferencia.Text + reader["Texto"].ToString() + (Convert.ToChar(13).ToString() + Convert.ToChar(10).ToString());
+                    unaTesis.txtReferencia.Text = unaTesis.txtReferencia.Text + reader["Prec"].ToString();
+
+                    unaTesis.txtRefLocAbr.Text = reader["LocAbr"].ToString();
+
+                    switch (MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja)
+                    {
+                        case 1:
+                            unaTesis.txtRefMotivo.Text = "La tesis aislada ha integrado jurisprudencia.";
+                            break;
+                        case 2:
+                            unaTesis.txtRefMotivo.Text = "La tesis se encuentra repetida de manera idéntica en otro reistro.";
+                            break;
+                        case 4:
+                            unaTesis.txtRefMotivo.Text = "La tesis se encuentra repetida con diferentes datos de publicación y diferentes precedentes.";
+                            break;
+                        case 8:
+                            unaTesis.txtRefMotivo.Text = "La tesis se encuentra repetida con diferentes datos de publicación e ideénticos precedentes.";
+                            break;
+                        case 16:
+                            unaTesis.txtRefMotivo.Text = "La tesis se ha vuelto a publicar con correcciones de la instancia judicial que emitió.";
+                            break;
+                        case 32:
+                            unaTesis.txtRefMotivo.Text = "La tesis no corresponde a la publicación que señala, y no se pudo determinar el volumen correcto.";
+                            break;
+                        case 64:
+                            unaTesis.txtRefMotivo.Text = "La tesis se ha vuelto a publicar con correcciones u observaciones de una instancia superior emisora.";
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("  No existe información relacionada");
             }
         }
 

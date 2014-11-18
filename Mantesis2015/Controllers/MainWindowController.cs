@@ -43,9 +43,9 @@ namespace Mantesis2015.Controllers
             {
                 Volumen selectedVolume = volumenSelect as Volumen;
                 ValuesMant.Volumen = selectedVolume.Volumenes;
-                //permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                //             where n.Volumen == selectedVolume.Volumenes
-                //             select n).ToList().Count;
+                permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
+                             where n.Volumen == selectedVolume.Volumenes
+                             select n).ToList().Count;
             }
             else if (volumenSelect is DatosComp)
             {
@@ -54,16 +54,17 @@ namespace Mantesis2015.Controllers
 
                 ValuesMant.Parte = Utils.GetParte(selectedVolume.IdDato, ValuesMant.ApendicNom);
                 ValuesMant.Volumen = selectedVolume.IdDato;
-                //permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                //             where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
-                //             select n.Volumen).ToList().Count;
+                permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
+                             where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
+                             select n.Volumen).ToList().Count;
             }
 
-            //if (permitido == 0)
-            //{
-            //    MessageBox.Show("No tiene permiso para revisar la información relacionada con este volumen", "  Aviso  ");
-            //    return;
-            //}
+            if (permitido == 0)
+            {
+                MessageBox.Show("No tiene permiso para revisar la información relacionada con este volumen", "  Aviso  ");
+                main.XamDataGridTesis.DataSource = new List<AddTesis>();
+                return;
+            }
 
             ListaTesisModel listaTesisModel = new ListaTesisModel();
             listaTesis = listaTesisModel.CargaTesisMantesisSql(qMateria);

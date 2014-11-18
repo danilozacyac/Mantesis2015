@@ -63,3 +63,7 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\MotivosFolder\MModificacion.g.cs
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\itextsharp.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\itextsharp.xml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\Mantesis2015.exe.manifest
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\Mantesis2015.application
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.exe.manifest
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.application

@@ -212,6 +212,7 @@ namespace Mantesis2015.MotivosFolder
             if (SelectedRecords())
             {
                 ValuesMant.SelectedMotiv = true;
+                DialogResult = true;
                 Close();
             }
             else
@@ -222,6 +223,7 @@ namespace Mantesis2015.MotivosFolder
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             Close();
         }
 

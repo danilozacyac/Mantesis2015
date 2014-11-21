@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Windows;
-using Infragistics.Windows.Ribbon;
 using Mantesis2015.Controllers;
 using Mantesis2015.Model;
 using MantesisVerIusCommonObjects.Dto;
-using MateriasSgaControl;
 using Microsoft.Windows.Controls.Ribbon;
 using UtilsMantesis;
 
@@ -104,6 +101,8 @@ namespace Mantesis2015
                 case "BtnCPrec": controller.TesisToClipboard(5);
                     break;
                 case "RBtnSalir": this.Close();
+                    break;
+                case "RBtnSga": controller.LaunchSga();
                     break;
             }
         }

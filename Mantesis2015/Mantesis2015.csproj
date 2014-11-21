@@ -26,8 +26,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\ct9iis2\Mant.BD\wpf\mantesis2015\updates\</UpdateUrl>
+    <ProductName>Mantesis 2015</ProductName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -64,6 +65,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tesis.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Infragistics3.Wpf.DataPresenter.v10.1, Version=10.1.20101.1000, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
@@ -88,10 +92,6 @@
     </Reference>
     <Reference Include="MantesisAdminUtil">
       <HintPath>..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisWpf\bin\Debug\MantesisAdminUtil.dll</HintPath>
-    </Reference>
-    <Reference Include="MateriasSgaControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Visual Studio 2010\Projects\MateriasSgaTest\MateriasSgaTest\bin\Debug\MateriasSgaControl.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -149,9 +149,13 @@
     <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\UnaTesisController.cs" />
     <Compile Include="Dto\Estructura.cs" />
+    <Compile Include="MateriasSga\MateriasSgaWin.xaml.cs">
+      <DependentUpon>MateriasSgaWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dto\TesisReferencia.cs" />
+    <Compile Include="MateriasSga\MateriasModel.cs" />
+    <Compile Include="MateriasSga\MateriasViewModel.cs" />
     <Compile Include="Model\AccesoModel.cs" />
-    <Compile Include="Model\AccesoUsuarioModel.cs" />
     <Compile Include="Model\EstructuraModel.cs" />
     <Compile Include="Model\ListaTesisModel.cs" />
     <Compile Include="Model\ReporteModel.cs" />
@@ -176,6 +180,10 @@
       <DependentUpon>TextControlView.xaml</DependentUpon>
     </Compile>
     <Page Include="BitacoraWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MateriasSga\MateriasSgaWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,6 +419,13 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tesis.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\scjn.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Mantesis2015.Dto;
 using MantesisVerIusCommonObjects.DataAccess;
+using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Utilities;
 using ScjnUtilities;
 using UtilsMantesis;

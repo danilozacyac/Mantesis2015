@@ -39,8 +39,6 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\UIControls.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\UserControls\TextControlView.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\UserControls\TextControlView.g.cs
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\MateriasSgaControl.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\MateriasSgaControl.pdb
 C:\Users\lavega\Documents\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\bin\Debug\Mantesis2015.exe.config
 C:\Users\lavega\Documents\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\obj\Debug\Mantesis2015.exe
 C:\Users\lavega\Documents\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\obj\Debug\Mantesis2015.pdb
@@ -67,3 +65,5 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\Mantesis2015.application
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.exe.manifest
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.application
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\MateriasSga\MateriasSgaWin.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\MateriasSga\MateriasSgaWin.g.cs

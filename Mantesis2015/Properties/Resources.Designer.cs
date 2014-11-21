@@ -393,6 +393,16 @@ namespace Mantesis2015.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap scjn {
+            get {
+                object obj = ResourceManager.GetObject("scjn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap t_128 {
             get {
                 object obj = ResourceManager.GetObject("t_128", resourceCulture);

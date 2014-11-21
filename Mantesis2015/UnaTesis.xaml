@@ -5,7 +5,6 @@
         xmlns:converter="clr-namespace:Mantesis2015.Classes"
         xmlns:igWindows="http://infragistics.com/Windows"
         xmlns:my="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
-        xmlns:sga="clr-namespace:MateriasSgaControl;assembly=MateriasSgaControl"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         Title="UnaTesis"
         Width="1200"
@@ -85,7 +84,13 @@
             </my:RibbonGroup>
             <my:RibbonGroup Header="Herramientas">
                 <StackPanel Orientation="Horizontal">
+                    <my:RibbonButton Name="RBtnSga"
+                                     IsEnabled="False"
+                                     Click="RibbonButton_Click"
+                                     Label="Materias SGA"
+                                     LargeImageSource="Resources/scjn.png" />
                     <my:RibbonButton Name="RbtnLigas"
+                                     IsEnabled="False"
                                      Click="RibbonButton_Click"
                                      Label="Ver ligas"
                                      LargeImageSource="Resources/link_256.png"
@@ -93,6 +98,7 @@
                     <my:RibbonButton Name="RbtnBitacora"
                                      Click="RibbonButton_Click"
                                      Label="Bitácora"
+                                     IsEnabled="False"
                                      LargeImageSource="Resources/blog_256.png"
                                      SmallImageSource="Resources/blog_64.png" />
                 </StackPanel>
@@ -120,6 +126,8 @@
                                      SmallImageSource="Resources/exit_128.png" />
                     <my:RibbonButton Name="RBtnGuardar"
                                      Label="Guardar"
+                                     IsEnabled="{Binding IsEnable,
+                                                          Mode=TwoWay}"
                                      LargeImageSource="Resources/save_256.png"
                                      SmallImageSource="Resources/save_128.png" Click="RBtnGuardar_Click" />
                 </StackPanel>
@@ -383,7 +391,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Materias SGA">
-                        <!--  <sga:MateriasControl />  -->
+                       
                     </TabItem>
                 </TabControl>
 

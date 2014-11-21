@@ -40,6 +40,7 @@ namespace Mantesis2015
             
             CbEpoca.DataContext = DatosCompartidosSingleton.Epocas;
             permisosCon.LoadPermission();
+            
         }
 
         private void CbEpoca_SelectionChanged(object sender, SelectionChangedEventArgs e)

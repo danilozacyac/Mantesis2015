@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using MantesisVerIusCommonObjects.DataAccess;
+using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Utilities;
 using ScjnUtilities;
 using UtilsMantesis;

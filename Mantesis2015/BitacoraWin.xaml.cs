@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using Infragistics.Windows.Editors;
 using MantesisVerIusCommonObjects.Model;
 
@@ -20,6 +21,8 @@ namespace Mantesis2015
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            List<int> permisos = (List<int>)this.Tag;
+
             BitacoraModel bitacora = new BitacoraModel();
 
             Style wrapstyle = new Style(typeof(XamTextEditor));
@@ -28,7 +31,8 @@ namespace Mantesis2015
 
             xamBitacora.DataSource = bitacora.GetBitacoraCambios(ius);
 
-            //xamBitacora.Records.FieldLayout.Fields[4].Visibility = System.Windows.Visibility.Collapsed;
+            if(!permisos.Contains(16))
+                xamBitacora.Records.FieldLayout.Fields[4].Visibility = System.Windows.Visibility.Collapsed;
 
         }
 

@@ -84,7 +84,7 @@ namespace Mantesis2015.MotivosFolder
                 {
                     if (pBinaryArray[this.motivosDto.ClaveMovimiento - 1] == '1')
                     {
-                        isChecked = false;
+                        isChecked = true;
                         //_isChecked = true; //Cuando quiero que muestre seleccionados los cambios que se hicieron anteriormente
                     }
                 }

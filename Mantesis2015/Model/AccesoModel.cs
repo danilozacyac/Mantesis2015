@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using MantesisAdminUtil.Model;
 using MantesisVerIusCommonObjects.DataAccess;
+using MantesisVerIusCommonObjects.Dto;
 using PVolumenesControl.Models;
 using ScjnUtilities;
 

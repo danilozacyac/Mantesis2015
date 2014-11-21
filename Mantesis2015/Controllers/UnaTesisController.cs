@@ -3,14 +3,14 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
-using System.Windows;
+using System.Windows.Forms;
+using Mantesis2015.MateriasSga;
 using Mantesis2015.Model;
 using Mantesis2015.MotivosFolder;
 using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
-using MateriasSgaControl;
 using ScjnUtilities;
 using UtilsMantesis;
 
@@ -20,7 +20,8 @@ namespace Mantesis2015.Controllers
     {
         private readonly UnaTesis unaTesis;
 
-        private UnaTesisModel unaTesisModel; 
+        private UnaTesisModel unaTesisModel;
+        private PermisosController permisosCon;
 
         private TesisDto tesisMostrada = null;
         private TesisDto tesisEdoAnterior = null;
@@ -42,19 +43,23 @@ namespace Mantesis2015.Controllers
         public UnaTesisController(UnaTesis unaTesis)
         {
             this.unaTesis = unaTesis;
+            permisosCon = new PermisosController(unaTesis);
         }
 
         public UnaTesisController(UnaTesis unaTesis, TesisDto tesisMostrada)
         {
             this.unaTesis = unaTesis;
             this.tesisMostrada = tesisMostrada;
+            permisosCon = new PermisosController(unaTesis);
         }
 
         public void LoadTesisWindow(long ius)
         {
+
             LoadComboBoxes();
             LoadTesis(ius);
             LoadNoBindingValues();
+            permisosCon.SetPermisosUnaTesis();
         }
 
         /// <summary>
@@ -89,11 +94,7 @@ namespace Mantesis2015.Controllers
             }
 
             tesisMostrada.PropertyChanged += TesisDto_PropertyChanged;
-            RequestData.ConnectionString = ConfigurationManager.ConnectionStrings["BaseIUS"].ConnectionString;
-            RequestData.Ius = tesisMostrada.Ius;
-            RequestData.Volumen = tesisMostrada.VolumenInt;
-            RequestData.IdUsuario = AccesoUsuarioModel.Llave;
-            RequestData.Nombre = AccesoUsuarioModel.Nombre.ToUpper();
+            
         }
 
         public void LoadComboBoxes()
@@ -110,8 +111,8 @@ namespace Mantesis2015.Controllers
 
         public void LoadNoBindingValues()
         {
-            unaTesis.RbtAislada.FontWeight = FontWeights.Normal;
-            unaTesis.RbtJurisp.FontWeight = FontWeights.Normal;
+            unaTesis.RbtAislada.FontWeight = System.Windows.FontWeights.Normal;
+            unaTesis.RbtJurisp.FontWeight = System.Windows.FontWeights.Normal;
 
             unaTesis.CbxInstancia.SelectedValue = tesisMostrada.Sala;
             unaTesis.CbxFuente.SelectedValue = tesisMostrada.Fuente;
@@ -125,12 +126,12 @@ namespace Mantesis2015.Controllers
             if (tesisMostrada.TaTj == 0)
             {
                 unaTesis.RbtAislada.IsChecked = true;
-                unaTesis.RbtAislada.FontWeight = FontWeights.Bold;
+                unaTesis.RbtAislada.FontWeight = System.Windows.FontWeights.Bold;
             }
             else
             {
                 unaTesis.RbtJurisp.IsChecked = true;
-                unaTesis.RbtJurisp.FontWeight = FontWeights.Bold;
+                unaTesis.RbtJurisp.FontWeight = System.Windows.FontWeights.Bold;
             }
         }
 
@@ -472,7 +473,22 @@ namespace Mantesis2015.Controllers
         public void LaunchBitacora()
         {
             BitacoraWin bitacora = new BitacoraWin(tesisMostrada.Ius);
+            bitacora.Tag = unaTesis.RbtnBitacora.Tag;
             bitacora.ShowDialog();
+        }
+
+        public void LaunchSga()
+        {
+            MateriasSgaWin sga = new MateriasSgaWin(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
+            sga.Tag = unaTesis.RBtnSga.Tag;
+            sga.ShowDialog();
+
+            if (sga.DialogResult == true)
+            {
+                tesisMostrada.MotivoModificar += 33554432;
+            }
+            
+
         }
 
         #endregion

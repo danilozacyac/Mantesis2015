@@ -5,12 +5,10 @@ using System.Windows;
 using Infragistics.Windows.DataPresenter;
 using Mantesis2015.Model;
 using Mantesis2015.Reportes;
-using MantesisAdminUtil.Dto;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Model;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
-using MateriasSgaControl;
 using ScjnUtilities;
 using UtilsMantesis;
 
@@ -87,6 +85,7 @@ namespace Mantesis2015.Controllers
             this.SetFiltroPorMateriaTomo();
 
             main.GrExport.IsEnabled = true;
+
         }
 
         public void GetTesisFiltradasPorMateria(int qMateria)
@@ -300,13 +299,15 @@ namespace Mantesis2015.Controllers
         /// <param name="isTesisUpdatable">Indica si la tesis puede ser actualizada o no</param>
         public void MostrarTesis(byte materiasEstado, bool isTesisUpdatable)
         {
-            RequestData.Estado = materiasEstado;
-            ValuesMant.IusActualLstTesis = this.selectedIus;
-            UnaTesis fUnaTesis = new UnaTesis(this.selectedIus, materiasEstado, listaTesis, this.selectedRowIndex, isTesisUpdatable);
+            if (listaTesis != null && listaTesis.Count > 0)
+            {
+                ValuesMant.IusActualLstTesis = this.selectedIus;
+                UnaTesis fUnaTesis = new UnaTesis(this.selectedIus, materiasEstado, listaTesis, this.selectedRowIndex, isTesisUpdatable);
 
-            fUnaTesis.ShowDialog();
+                fUnaTesis.ShowDialog();
 
-            MoveGridToIus(ValuesMant.IusActualLstTesis);
+                MoveGridToIus(ValuesMant.IusActualLstTesis);
+            }
         }
 
         #endregion 

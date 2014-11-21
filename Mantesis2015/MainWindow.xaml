@@ -59,6 +59,7 @@
                                          Caption="_Visualizar Tesis"
                                          Click="ButtonTool_Click"
                                          Id="ViewTesis"
+                                         IsEnabled="False"
                                          LargeImage="Resources/viewTesis_128.png"
                                          SmallImage="Resources/viewTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
@@ -66,6 +67,7 @@
                                          Caption="Actualizar Tesis"
                                          Click="ButtonTool_Click"
                                          Id="EditTesis"
+                                         IsEnabled="False"
                                          LargeImage="Resources/editTesis_128.png"
                                          SmallImage="Resources/editTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
@@ -78,7 +80,9 @@
                                          SmallImage="Resources/delTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
                 </igRibbon:RibbonGroup>
-                <igRibbon:RibbonGroup Caption="Exportar" Name="GrExport" IsEnabled="False">
+                <igRibbon:RibbonGroup Name="GrExport"
+                                      Caption="Exportar"
+                                      IsEnabled="False">
                     <igRibbon:ButtonTool Name="RBtnPdf"
                                          Caption="PDF"
                                          Click="ExportarGroupClick"
@@ -115,12 +119,13 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <GroupBox Name="VerIus" IsEnabled="False"
+                <GroupBox Name="VerIus"
                           Height="150"
                           Margin="35,30,35,0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
                           Header="Ver IUS"
+                          IsEnabled="False"
                           Uid="3">
                     <Grid>
                         <Label Width="150"
@@ -143,11 +148,13 @@
                                 Content="Buscar" />
                     </Grid>
                 </GroupBox>
-                <GroupBox Height="350" Name="EpocaVolumen"
-                          Margin="35,220,35,0" IsEnabled="False"
+                <GroupBox Name="EpocaVolumen"
+                          Height="350"
+                          Margin="35,220,35,0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
                           Header="Selección"
+                          IsEnabled="False"
                           Uid="2">
                     <Grid>
                         <Label Margin="10,22,0,0"

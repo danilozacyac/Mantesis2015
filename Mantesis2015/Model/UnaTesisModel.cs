@@ -144,7 +144,7 @@ namespace Mantesis2015.Model
                         tesis.FechaModifica = Convert.ToDateTime(reader["FechaModifica"]);
 
                     tesis.Estado = Convert.ToInt16(reader["Estado"]);
-                    tesis.MotivoModificar = Convert.ToInt32(reader["MotivoModificar"]);
+                    tesis.MotivoModificar = 0;
                     tesis.RubroStr = reader["RubroStr"].ToString();
                     tesis.BaseOrigen = reader["BD"].ToString();
                     tesis.BdGrupo = Convert.ToInt16(reader["BdGrupo"]);

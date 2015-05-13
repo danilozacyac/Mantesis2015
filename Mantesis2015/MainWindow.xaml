@@ -44,7 +44,21 @@
         </Grid.RowDefinitions>
 
         <igRibbon:XamRibbon Theme="Office2k7Black">
+            <igRibbon:XamRibbon.ApplicationMenu>
+                <igRibbon:ApplicationMenu Caption="File" >
+                    <igRibbon:ApplicationMenu.Items>
 
+                        <igRibbon:ButtonTool Caption="Permisos Secciones" Name="RBtnPermisos" SmallImage="Resources/key.png" Click="ButtonTool_Click" IsEnabled="False" />
+
+                        <igRibbon:ButtonTool Caption="Permisos Volumenes" Name="RBtnVolumenes" SmallImage="Resources/lockVol.png" Click="ButtonTool_Click" IsEnabled="False"/>
+
+                        <igRibbon:SeparatorTool />
+
+                        <igRibbon:ButtonTool Caption="Salir" Name="RBtnSalir" SmallImage="Resources/exit_128.png" Click="ButtonTool_Click" />
+
+                    </igRibbon:ApplicationMenu.Items>
+                </igRibbon:ApplicationMenu>
+            </igRibbon:XamRibbon.ApplicationMenu>
             <igRibbon:RibbonTabItem Header="Mantenimiento">
                 <igRibbon:RibbonGroup Caption="General" Uid="5">
                     <igRibbon:ButtonTool Name="BtnNuevaTesis"
@@ -137,7 +151,7 @@
                         <TextBox x:Name="TxtVerIus"
                                  Height="25"
                                  Margin="10,23,10,22"
-                                 PreviewTextInput="TxtIus_PreviewTextInput" />
+                                 PreviewTextInput="TxtIus_PreviewTextInput" KeyDown="TxtVerIus_KeyDown" />
                         <Button Name="BtnVerIus"
                                 Width="80"
                                 Height="20"

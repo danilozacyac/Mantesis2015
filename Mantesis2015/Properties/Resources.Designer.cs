@@ -253,6 +253,16 @@ namespace Mantesis2015.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap key {
+            get {
+                object obj = ResourceManager.GetObject("key", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap last {
             get {
                 object obj = ResourceManager.GetObject("last", resourceCulture);
@@ -276,6 +286,16 @@ namespace Mantesis2015.Properties {
         internal static System.Drawing.Bitmap link_256 {
             get {
                 object obj = ResourceManager.GetObject("link_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lockVol {
+            get {
+                object obj = ResourceManager.GetObject("lockVol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

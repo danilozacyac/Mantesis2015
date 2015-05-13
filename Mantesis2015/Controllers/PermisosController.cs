@@ -19,7 +19,7 @@ namespace Mantesis2015.Controllers
 
         #region Permisos Ventana Principal
 
-        public void LoadPermission()
+        public void LoadAdminPermission()
         {
             if (AccesoUsuarioModel.Permisos.Count > 0)
             {
@@ -28,7 +28,39 @@ namespace Mantesis2015.Controllers
                 {
                     List<int> permisosSeccion = MantesisAdminUtil.Utils.GetDecimalsInBinary(seccion.Permisos);
 
-                    if (seccion.IdSeccion == 2)
+                    if (seccion.IdSeccion == 1)
+                    {
+                        main.RBtnPermisos.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                    }
+                    else if (seccion.IdSeccion == 14)
+                    {
+                        main.RBtnVolumenes.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                    }
+                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("No tienes autorización para utilizar ninguna de las características de este programa, ponte en contacto con tu administrador");
+
+            }
+        }
+        
+        public void LoadPermission()
+        {
+
+            if (AccesoUsuarioModel.Permisos.Count > 0)
+            {
+
+                foreach (Secciones seccion in AccesoUsuarioModel.Permisos)
+                {
+                    List<int> permisosSeccion = MantesisAdminUtil.Utils.GetDecimalsInBinary(seccion.Permisos);
+
+                    if (seccion.IdSeccion == 1)
+                    {
+                        main.RBtnPermisos.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                    }
+                    else if (seccion.IdSeccion == 2)
                     {
                         main.EpocaVolumen.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
                     }
@@ -45,6 +77,10 @@ namespace Mantesis2015.Controllers
                         main.BtnEliminaTesis.IsEnabled = (permisosSeccion.Contains(8)) ? true : false;
 
                     }
+                    else if (seccion.IdSeccion == 14)
+                    {
+                        main.RBtnVolumenes.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                    } 
                 }
             }
             else

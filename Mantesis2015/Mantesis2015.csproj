@@ -15,9 +15,9 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\lavega\Documents\MantesisPublishFolder\</PublishUrl>
+    <PublishUrl>\\ct9iis2\Mant.BD\wpf\mantesis2015\Updates\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -28,7 +28,7 @@
     <UpdateUrl>\\ct9iis2\Mant.BD\wpf\mantesis2015\updates\</UpdateUrl>
     <ProductName>Mantesis 2015</ProductName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -92,6 +92,9 @@
     </Reference>
     <Reference Include="MantesisAdminUtil">
       <HintPath>..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisWpf\bin\Debug\MantesisAdminUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="MantesisSeccionAdmin">
+      <HintPath>..\..\..\..\Visual Studio 2010\Projects\MantesisAdmin\MantesisSeccionAdmin\bin\Debug\MantesisSeccionAdmin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -169,7 +172,15 @@
     <Compile Include="MotivosFolder\MModificacion.xaml.cs">
       <DependentUpon>MModificacion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Permisos\PVolumenes.xaml.cs">
+      <DependentUpon>PVolumenes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Permisos\SeccionAdmin.xaml.cs">
+      <DependentUpon>SeccionAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\EstadoTesis.cs" />
     <Compile Include="Reportes\Fuentes.cs" />
+    <Compile Include="Reportes\HeaderFooter.cs" />
     <Compile Include="Reportes\ListaTesisPdf.cs" />
     <Compile Include="Reportes\ListaTesisWord.cs" />
     <Compile Include="Reportes\TablaSga.cs" />
@@ -208,6 +219,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MotivosFolder\MModificacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Permisos\PVolumenes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Permisos\SeccionAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -425,7 +444,12 @@
   <ItemGroup>
     <Resource Include="Resources\scjn.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\lockVol.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

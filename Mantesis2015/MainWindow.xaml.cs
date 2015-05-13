@@ -33,7 +33,15 @@ namespace Mantesis2015
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            new AccesoModel().ObtenerUsuarioContraseña("lvega", "lvegaa");
+            AccesoModel accesoModel = new AccesoModel();
+
+            if (accesoModel.ObtenerUsuarioContraseña() == false)
+            {
+                MessageBox.Show("  No tienes permiso para acceder a la aplicación  ");
+                this.Close();
+                return;
+            }
+
             controller = new MainWindowController(this);
             permisosCon = new PermisosController(this);
             apendices = new List<RadioButton>() { rbtAp17, rbtAp2000, rbtAp2001, rbtAp2002, rbtAp2011, rbtAp54 };
@@ -191,7 +199,11 @@ namespace Mantesis2015
             controller.GetTesisByVerIus(TxtVerIus.Text);
         }
 
-        
+        private void TxtVerIus_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                controller.GetTesisByVerIus(TxtVerIus.Text);
+        }
 
         private void ButtonTool_Click(object sender, RoutedEventArgs e)
         {
@@ -207,6 +219,12 @@ namespace Mantesis2015
                     break;
                 case "BtnEliminaTesis":
                     break;
+                case "RBtnPermisos": controller.LaunchPermisosSeccion();
+                    break;
+                case "RBtnVolumenes": controller.LaunchPermisosVolumenes();
+                    break;
+                case "RbtnSalir": Application.Current.Shutdown();
+                    break;
 
             }
 
@@ -220,6 +238,8 @@ namespace Mantesis2015
             controller.ExportarOptions(action.Name);
 
         }
+
+        
 
         
 

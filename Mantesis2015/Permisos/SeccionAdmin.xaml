@@ -1,0 +1,12 @@
+﻿<Window x:Class="Mantesis2015.Permisos.SeccionAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:seccion="clr-namespace:MantesisSeccionAdmin;assembly=MantesisSeccionAdmin"
+        Title="Administrador de Permisos por Sección"
+        Width="900"
+        Height="700"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <seccion:MainAccessControl />
+    </Grid>
+</Window>

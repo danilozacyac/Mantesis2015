@@ -289,8 +289,9 @@ namespace Mantesis2015.Controllers
 
                 unaTesisModel.DbConnectionOpen();
 
-                unaTesisModel.SalvarRegistroMantesisSql(this.tesisMostrada, idAbs); // Salva los cambios en Mantesis SQL
-                unaTesisModel.SalvarRegistro(this.tesisMostrada);                   // Salva los cambios en las bases de Access
+                bool guardadoExitoso = false;
+                guardadoExitoso = unaTesisModel.SalvarRegistroMantesisSql(this.tesisMostrada, idAbs); // Salva los cambios en Mantesis SQL
+                guardadoExitoso = unaTesisModel.SalvarRegistro(this.tesisMostrada);                   // Salva los cambios en las bases de Access
 
                 if (tesisMostrada != tesisEdoAnterior)
                 {
@@ -304,6 +305,12 @@ namespace Mantesis2015.Controllers
                 if (unaTesisModel.DoesRegIusExist(tesisMostrada.Ius))
                     unaTesisModel.ActualizaRegistroDSql(tesisMostrada);
 
+                if (guardadoExitoso)
+                {
+                    EstadoTesis certifica = new EstadoTesis(tesisEdoAnterior, tesisMostrada);
+                    certifica.GeneraPdf();
+                }
+                
                 unaTesis.Close();
             }
         }
@@ -365,9 +372,7 @@ namespace Mantesis2015.Controllers
             tesisMostrada = null;
             unaTesis.PosActual = 0;
             AddTesis tesis = unaTesis.ListaTesis[unaTesis.PosActual];
-            //unaTesisModel.DbConnectionOpen();
             this.LoadTesisWindow(tesis.Ius4);
-            //unaTesisModel.DbConnectionClose();
 
             unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
         }
@@ -379,10 +384,7 @@ namespace Mantesis2015.Controllers
             {
                 unaTesis.PosActual--;
                 AddTesis tesis = unaTesis.ListaTesis[unaTesis.PosActual];
-
-                //unaTesisModel.DbConnectionOpen();
                 this.LoadTesisWindow(tesis.Ius4);
-                //unaTesisModel.DbConnectionClose();
 
                 unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
             }
@@ -510,5 +512,7 @@ namespace Mantesis2015.Controllers
         }
         
         #endregion
+
+        
     }
 }

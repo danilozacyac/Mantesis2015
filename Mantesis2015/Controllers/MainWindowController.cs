@@ -4,11 +4,13 @@ using System.Linq;
 using System.Windows;
 using Infragistics.Windows.DataPresenter;
 using Mantesis2015.Model;
+using Mantesis2015.Permisos;
 using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Model;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
+using PVolumenesControl.Dao;
 using ScjnUtilities;
 using UtilsMantesis;
 
@@ -85,7 +87,6 @@ namespace Mantesis2015.Controllers
             this.SetFiltroPorMateriaTomo();
 
             main.GrExport.IsEnabled = true;
-
         }
 
         public void GetTesisFiltradasPorMateria(int qMateria)
@@ -108,7 +109,6 @@ namespace Mantesis2015.Controllers
 
         public void GetTesisFiltradasPorTomo(int volumen)
         {
-
             ListaTesisModel listaTesisModel = new ListaTesisModel();
             listaTesis = listaTesisModel.CargaTesisMantesisSql(volumen);
 
@@ -123,7 +123,6 @@ namespace Mantesis2015.Controllers
                 main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
                 main.TxtRegs.Content = RegLoc + listaTesis.Count;
             }
-            
         }
 
         /// <summary>
@@ -289,6 +288,18 @@ namespace Mantesis2015.Controllers
             unaTesis.ShowDialog();
         }
 
+        public void LaunchPermisosVolumenes()
+        {
+            PVolumenes volumenes = new PVolumenes();
+            volumenes.ShowDialog();
+        }
+
+        public void LaunchPermisosSeccion()
+        {
+            SeccionAdmin secciones = new SeccionAdmin();
+            secciones.ShowDialog();
+        }
+
         #region AccionesTesis
 
         /// <summary>
@@ -314,6 +325,8 @@ namespace Mantesis2015.Controllers
 
         public void GetTesisByVerIus(string txtNumIus)
         {
+            bool updatablePerm = ((List<int>)main.VerIus.Tag).Contains(4);
+
             try
             {
                 if (txtNumIus.Length < 8)
@@ -331,22 +344,26 @@ namespace Mantesis2015.Controllers
                         {
                             tesis.IsEliminated = isTesisEliminated;
 
+                            List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
+
                             MessageBox.Show("Esta tesis fue eliminada");
 
-                            UnaTesis unaTesis = new UnaTesis(tesis, true);
+                            UnaTesis unaTesis = new UnaTesis(tesis, updatablePerm && volPerm.Count > 0);
                             unaTesis.Tag = main.VerIus.Tag;
                             unaTesis.ShowDialog();
-
                         }
                         else
                         {
                             tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
+
+                            List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
+
                             if (tesis != null)
                             {
                                 tesis.IsEliminated = isTesisEliminated;
                                 MessageBox.Show("Esta tesis fue eliminada");
 
-                                UnaTesis unaTesis = new UnaTesis(tesis, true);
+                                UnaTesis unaTesis = new UnaTesis(tesis, updatablePerm && volPerm.Count > 0);
                                 unaTesis.Tag = main.VerIus.Tag;
                                 unaTesis.ShowDialog();
                             }
@@ -360,14 +377,7 @@ namespace Mantesis2015.Controllers
                     {
                         tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
 
-                        var volumenAuth = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                                           where n.Volumen == tesis.VolumenInt
-                                           select n).ToList();
-
-                        //if (volumenAuth.Count() == 0 && userCanModify == true)
-                        //    userCanModify = false;
-                        //else if (volumenAuth.Count() > 0 && userCanModify == false)
-                        //    userCanModify = true;
+                        List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
 
                         if (tesis.Parte >= 100 && tesis.Parte <= 145)
                         {
@@ -375,10 +385,9 @@ namespace Mantesis2015.Controllers
                             ValuesMant.Volumen = tesis.VolumenInt;
                         }
 
-
                         if (tesis != null)
                         {
-                            UnaTesis unaTesis = new UnaTesis(tesis, true);
+                            UnaTesis unaTesis = new UnaTesis(tesis, updatablePerm && volPerm.Count > 0);
                             unaTesis.Tag = main.VerIus.Tag;
                             unaTesis.ShowDialog();
                         }
@@ -387,7 +396,6 @@ namespace Mantesis2015.Controllers
                             MessageBox.Show("Introduzca un número de registro valido");
                         }
                     }
-
                 }
                 else
                 {
@@ -403,14 +411,12 @@ namespace Mantesis2015.Controllers
             }
         }
 
-
-
         public void ExportarOptions(string id)
         {
             switch (id)
             {
                 case "RBtnPdf":
-                    MessageBoxResult result = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis" , "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                         new ListaTesisPdf().GeneraPdfConDetalleTesis(Convert.ToInt32(main.CbxMaterias.SelectedValue));
                     else if (result == MessageBoxResult.No)
@@ -429,11 +435,9 @@ namespace Mantesis2015.Controllers
                     break;
             }
         }
-
-        #region CargaPermisos
-
         
-
+        #region CargaPermisos
+    
         #endregion
     }
 }

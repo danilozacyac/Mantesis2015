@@ -67,3 +67,9 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.application
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\MateriasSga\MateriasSgaWin.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\MateriasSga\MateriasSgaWin.g.cs
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\MantesisSeccionAdmin.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\bin\Debug\MantesisSeccionAdmin.pdb
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Permisos\PVolumenes.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Permisos\SeccionAdmin.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Permisos\PVolumenes.g.cs
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\Permisos\SeccionAdmin.g.cs

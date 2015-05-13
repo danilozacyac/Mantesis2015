@@ -142,71 +142,73 @@ namespace Mantesis2015.Reportes
 
                 foreach (TesisReg tesis in listaImprimir)
                 {
-                    
-                    int nivelImprime = DicNiveles[idMat];
-                    int nivelPadre = DicPadres[idMat];
+                    //if (tesis.tesis.StartsWith("PC."))
+                    //{
+                        int nivelImprime = DicNiveles[idMat];
+                        int nivelPadre = DicPadres[idMat];
 
-                    if (nivelImprime == 4)
-                    {
-                        oTable.Cell(fila, 5).Range.Text = DicDescripciones[idMat]; //Subsección
-                        oTable.Cell(fila, 4).Range.Text = DicDescripciones[nivelPadre];//Sección
-
-                        int nivelAbuelo = DicPadres[nivelPadre];
-
-                        nivelImprime = DicNiveles[nivelAbuelo];
-
-                        if (nivelImprime != 2)
+                        if (nivelImprime == 4)
                         {
-                            oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelAbuelo];
-                        }//SubMateria}
-                        else
-                        {
-                            int nivelBisAbuelo = DicPadres[nivelAbuelo];
-                            if (DicNiveles[nivelBisAbuelo] != 0)
-                                oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelBisAbuelo];
-                            else
-                                oTable.Cell(fila, 3).Range.Text = "";
-                        }
-                        oTable.Cell(fila, 2).Range.Text = GetMateria(idMat);
-                    }
-                    else if (nivelImprime == 3)
-                    {
-                        oTable.Cell(fila, 5).Range.Text = ""; //Subsección
-                        oTable.Cell(fila, 4).Range.Text = DicDescripciones[idMat];//Sección
+                            oTable.Cell(fila, 5).Range.Text = DicDescripciones[idMat]; //Subsección
+                            oTable.Cell(fila, 4).Range.Text = DicDescripciones[nivelPadre];//Sección
 
-                        nivelImprime = DicNiveles[nivelPadre];
-
-                        if (nivelImprime != 2)
-                        {
-                            oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelPadre];
-                        }//SubMateria}
-                        else
-                        {
                             int nivelAbuelo = DicPadres[nivelPadre];
-                            if (DicNiveles[nivelAbuelo] != 0)
+
+                            nivelImprime = DicNiveles[nivelAbuelo];
+
+                            if (nivelImprime != 2)
+                            {
                                 oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelAbuelo];
+                            }//SubMateria}
                             else
-                                oTable.Cell(fila, 3).Range.Text = "";
+                            {
+                                int nivelBisAbuelo = DicPadres[nivelAbuelo];
+                                if (DicNiveles[nivelBisAbuelo] != 0)
+                                    oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelBisAbuelo];
+                                else
+                                    oTable.Cell(fila, 3).Range.Text = "";
+                            }
+                            oTable.Cell(fila, 2).Range.Text = GetMateria(idMat);
                         }
-                        oTable.Cell(fila, 2).Range.Text = GetMateria(idMat);
-                    }
-                    else if (nivelImprime == 2)
-                    {
-                        oTable.Cell(fila, 5).Range.Text = ""; //Subsección
-                        oTable.Cell(fila, 4).Range.Text = "";//Sección
-                        oTable.Cell(fila, 3).Range.Text = (DicNiveles[nivelPadre] == 1) ? DicDescripciones[nivelPadre] : "";// new EstructuraModel().getSubMateriaNivelDos(idTema);//SubMateria
-                        oTable.Cell(fila, 2).Range.Text = GetMateria(idMat);
-                    }
+                        else if (nivelImprime == 3)
+                        {
+                            oTable.Cell(fila, 5).Range.Text = ""; //Subsección
+                            oTable.Cell(fila, 4).Range.Text = DicDescripciones[idMat];//Sección
 
-                    oTable.Cell(fila, 1).Range.Text = tesis.ius4.ToString();
-                    oTable.Cell(fila, 6).Range.Text = tesis.epoca;
-                    oTable.Cell(fila, 7).Range.Text = tesis.RUBRO;
-                    oTable.Cell(fila, 7).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
-                    oTable.Cell(fila, 8).Range.Text = tesis.tesis;
+                            nivelImprime = DicNiveles[nivelPadre];
+
+                            if (nivelImprime != 2)
+                            {
+                                oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelPadre];
+                            }//SubMateria}
+                            else
+                            {
+                                int nivelAbuelo = DicPadres[nivelPadre];
+                                if (DicNiveles[nivelAbuelo] != 0)
+                                    oTable.Cell(fila, 3).Range.Text = DicDescripciones[nivelAbuelo];
+                                else
+                                    oTable.Cell(fila, 3).Range.Text = "";
+                            }
+                            oTable.Cell(fila, 2).Range.Text = GetMateria(idMat);
+                        }
+                        else if (nivelImprime == 2)
+                        {
+                            oTable.Cell(fila, 5).Range.Text = ""; //Subsección
+                            oTable.Cell(fila, 4).Range.Text = "";//Sección
+                            oTable.Cell(fila, 3).Range.Text = (DicNiveles[nivelPadre] == 1) ? DicDescripciones[nivelPadre] : "";// new EstructuraModel().getSubMateriaNivelDos(idTema);//SubMateria
+                            oTable.Cell(fila, 2).Range.Text = GetMateria(idMat);
+                        }
+
+                        oTable.Cell(fila, 1).Range.Text = tesis.ius4.ToString();
+                        oTable.Cell(fila, 6).Range.Text = tesis.epoca;
+                        oTable.Cell(fila, 7).Range.Text = tesis.RUBRO;
+                        oTable.Cell(fila, 7).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                        oTable.Cell(fila, 8).Range.Text = tesis.tesis;
 
 
-                    fila++;
-                    numTesis++;
+                        fila++;
+                        numTesis++;
+                    //}
                 }
             }
             MessageBox.Show("Total de Tesis impresas " + numTesis);

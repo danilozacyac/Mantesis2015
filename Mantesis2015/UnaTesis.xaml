@@ -85,20 +85,20 @@
             <my:RibbonGroup Header="Herramientas">
                 <StackPanel Orientation="Horizontal">
                     <my:RibbonButton Name="RBtnSga"
-                                     IsEnabled="False"
                                      Click="RibbonButton_Click"
+                                     IsEnabled="False"
                                      Label="Materias SGA"
                                      LargeImageSource="Resources/scjn.png" />
                     <my:RibbonButton Name="RbtnLigas"
-                                     IsEnabled="False"
                                      Click="RibbonButton_Click"
+                                     IsEnabled="False"
                                      Label="Ver ligas"
                                      LargeImageSource="Resources/link_256.png"
                                      SmallImageSource="Resources/link_128.png" />
                     <my:RibbonButton Name="RbtnBitacora"
                                      Click="RibbonButton_Click"
-                                     Label="Bitácora"
                                      IsEnabled="False"
+                                     Label="Bitácora"
                                      LargeImageSource="Resources/blog_256.png"
                                      SmallImageSource="Resources/blog_64.png" />
                 </StackPanel>
@@ -125,11 +125,12 @@
                                      LargeImageSource="Resources/exit_256.png"
                                      SmallImageSource="Resources/exit_128.png" />
                     <my:RibbonButton Name="RBtnGuardar"
-                                     Label="Guardar"
+                                     Click="RBtnGuardar_Click"
                                      IsEnabled="{Binding IsEnable,
-                                                          Mode=TwoWay}"
+                                                         Mode=TwoWay}"
+                                     Label="Guardar"
                                      LargeImageSource="Resources/save_256.png"
-                                     SmallImageSource="Resources/save_128.png" Click="RBtnGuardar_Click" />
+                                     SmallImageSource="Resources/save_128.png" />
                 </StackPanel>
             </my:RibbonGroup>
         </my:Ribbon>
@@ -390,9 +391,7 @@
                                      VerticalScrollBarVisibility="Auto" />
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Materias SGA">
-                       
-                    </TabItem>
+
                 </TabControl>
 
             </Grid>
@@ -605,7 +604,8 @@
                                     Margin="24,6,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
-                                    Content="Tesis Eliminada" Click="BtnTesisElim_Click" />
+                                    Click="BtnTesisElim_Click"
+                                    Content="Tesis Eliminada" />
                             <TextBox Name="txtRefMotivo"
                                      Grid.Row="3"
                                      Width="840"

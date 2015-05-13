@@ -443,8 +443,10 @@ namespace Mantesis2015.Model
             return otrosTextos;
         }
 
-        public void SalvarRegistro(TesisDto tesisDto)
+        public bool SalvarRegistro(TesisDto tesisDto)
         {
+            bool registroExitoso = false;
+
             string sSql;
             OleDbConnection connectionEpsOle = new OleDbConnection();
             DbDataAdapter dataAdapter;
@@ -552,6 +554,7 @@ namespace Mantesis2015.Model
 
                 SalvarObservaciones(tesisDto, 2);
                 SalvarObservaciones(tesisDto, 3);
+                registroExitoso = true;
             }
             catch (SqlException ex)
             {
@@ -571,6 +574,8 @@ namespace Mantesis2015.Model
             {
                 connectionEpsOle.Close();
             }
+
+            return registroExitoso;
         }// fin SalvarRegistro
 
         /// <summary>
@@ -578,11 +583,14 @@ namespace Mantesis2015.Model
         /// </summary>
         /// <param name="tesisDto">Tesis por actualizar</param>
         /// <param name="idAbs">Identificardor unico GUID</param>
-        public void SalvarRegistroMantesisSql(TesisDto tesisDto, string idAbs)
+        public bool  SalvarRegistroMantesisSql(TesisDto tesisDto, string idAbs)
         {
+            bool registroExitoso = false;
+
             string sSql;
             SqlConnection connectionMantesisSql = DbConnDac.GetConnectionMantesisSql();
             DbDataAdapter dataAdapter;
+
 
             tesisDto.IdGenealogia = SalvarGenealogiaMantesisSql(tesisDto);
 
@@ -667,6 +675,8 @@ namespace Mantesis2015.Model
                 SalvarObservacionesMantesisSql(tesisDto, 3);
 
                 SalvarBitacora(tesisDto, 2, idAbs);
+
+                registroExitoso = true;
             }
             catch (SqlException ex)
             {
@@ -686,6 +696,8 @@ namespace Mantesis2015.Model
             {
                 connectionMantesisSql.Close();
             }
+
+            return registroExitoso;
         }// fin SalvarRegistroMantesisSql
 
         /// <summary>

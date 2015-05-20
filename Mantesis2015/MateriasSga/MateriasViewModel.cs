@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Windows.Forms;
+using System.Windows;
 using MantesisVerIusCommonObjects.Dto;
+using ScjnUtilities;
 
 namespace Mantesis2015.MateriasSga
 {
@@ -40,13 +41,19 @@ namespace Mantesis2015.MateriasSga
                     listaMaterias.Add(materia);
                 }
             }
-            catch (SqlException sex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sex.Source + sex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton .OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
-            catch (Exception sex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sex.Source + sex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             finally
             {
@@ -80,13 +87,73 @@ namespace Mantesis2015.MateriasSga
                     listaMaterias.Add(Convert.ToInt32(dataReader["idMatSGA"].ToString()));
                 }
             }
-            catch (SqlException sex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sex.Source + sex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
-            catch (Exception sex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sex.Source + sex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                sqlConne.Close();
+            }
+
+            return listaMaterias;
+        }
+
+        /// <summary>
+        /// Devuelve la lista de materias del catálogo SGA asociadas a una tesis en particular, 
+        /// se utiliza para el reporte generado después de que se realizan cambios en la tesis
+        /// </summary>
+        /// <param name="ius">Número de registro digital de la tesis</param>
+        /// <returns></returns>
+        public static List<string> GetMateriasRelacionadas(long ius)
+        {
+            List<string> listaMaterias = new List<string>();
+
+            SqlConnection sqlConne = new SqlConnection(connectionString);
+
+            SqlCommand cmd;
+            SqlDataReader dataReader;
+            string miQry;
+
+            try
+            {
+                sqlConne.Open();
+                miQry = "SELECT T.IdMatSGA,C.descripcion FROM cMateriasSGA C INNER JOIN Tesis_MatSGA T ON T.IdMatSGA = C.ID " +
+                        " WHERE IUS = @ius";
+                cmd = new SqlCommand(miQry, sqlConne);
+                cmd.Parameters.AddWithValue("@ius", ius);
+                dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string materia = dataReader["IdMatSGA"].ToString() + "    " + dataReader["Descripcion"].ToString();
+
+                    listaMaterias.Add(materia);
+                }
+            }
+            catch (SqlException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             finally
             {
@@ -124,13 +191,19 @@ namespace Mantesis2015.MateriasSga
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (SqlException sex)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sex.Source + sex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
-            catch (Exception sex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sex.Source + sex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButton.OK, MessageBoxImage.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             finally
             {
@@ -139,83 +212,5 @@ namespace Mantesis2015.MateriasSga
         }
 
 
-        /*
-        private List<MateriasSga> GetEstructuraNivel(int padre)
-        {
-            List<MateriasSga> ListaMaterias = new List<MateriasSga>();
-
-            SqlConnection sqlConne = (SqlConnection)DBConnDAC.GetConnectionIUS();
-
-            SqlCommand cmd;
-            SqlDataReader dataReader;
-            string miQry;
-
-            try
-            {
-                sqlConne.Open();
-                miQry = "Select * FROM cMateriasSGA WHERE padre = " + padre + " ORDER BY Consec";
-                cmd = new SqlCommand(miQry, sqlConne);
-                dataReader = cmd.ExecuteReader();
-
-                while (dataReader.Read())
-                {
-                    MateriasSga _Materia = new MateriasSga();
-                    _Materia.Id = Convert.ToInt32(dataReader["id"].ToString());
-                    _Materia.Nivel = Convert.ToInt32(dataReader["Nivel"].ToString());
-                    _Materia.Padre = Convert.ToInt32(dataReader["Padre"].ToString());
-                    _Materia.Descripcion = dataReader["Descripcion"].ToString();
-                    _Materia.SeccionPadre = Convert.ToInt32(dataReader["seccionPadre"].ToString());
-                    _Materia.Historica = Convert.ToInt32(dataReader["Historica"].ToString());
-                    _Materia.Consec = Convert.ToInt32(dataReader["Consec"].ToString());
-                    _Materia.Hoja = Convert.ToInt32(dataReader["Hoja"].ToString());
-                    _Materia.NvlImpresion = Convert.ToInt32(dataReader["NvlImpresion"].ToString());
-                    
-                    ListaMaterias.Add(_Materia);
-                }
-            }
-            catch (SqlException) { }
-            finally
-            {
-                sqlConne.Close();
-            }
-
-            return ListaMaterias;
-        }
-
-        public List<TreeViewItem> getArbolClasificación()
-        {
-            List<TreeViewItem> _ArbolClasif = new List<TreeViewItem>();
-
-            List<MateriasSga> _Temas = this.GetEstructuraNivel(0);
-
-            foreach (MateriasSga tema in _Temas)
-            {
-                TreeViewItem item = new TreeViewItem();
-                item.Header = tema.Descripcion;
-                item.Tag = tema;
-
-                item = generaHijoRecursivo(item, tema.Id);
-                item.IsExpanded = true;
-                _ArbolClasif.Add(item);
-            }
-
-            return _ArbolClasif;
-        }
-
-        private TreeViewItem generaHijoRecursivo(TreeViewItem item, int idPadre)
-        {
-            List<MateriasSga> _Childs = this.GetEstructuraNivel(idPadre);
-
-            foreach (MateriasSga hijo in _Childs)
-            {
-                TreeViewItem child = new TreeViewItem();
-                child.Header = hijo.Descripcion;
-                child.Tag = hijo;
-                child = generaHijoRecursivo(child, hijo.Id);
-                child.IsExpanded = true;
-                item.Items.Add(child);
-            }
-            return item;
-        }*/
     }
 }

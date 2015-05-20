@@ -488,6 +488,7 @@ namespace Mantesis2015.Controllers
             if (sga.DialogResult == true)
             {
                 tesisMostrada.MotivoModificar += 33554432;
+                tesisMostrada.MateriasSga = MateriasViewModel.GetMateriasRelacionadas(tesisMostrada.Ius);
             }
             
 

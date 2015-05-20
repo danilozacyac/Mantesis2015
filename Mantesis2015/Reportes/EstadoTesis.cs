@@ -118,6 +118,14 @@ namespace Mantesis2015.Reportes
 
             this.SetInfo("Concordancia: ", String.Empty);
             this.SetInfo(String.Empty, tesis.NotasPrecedentes);
+
+            this.SetInfo("Clasificación de Materias SGA:", String.Empty);
+
+            foreach (string clasif in tesis.MateriasSga)
+            {
+                this.SetInfo(String.Empty, clasif);
+            }
+            
         }
 
 

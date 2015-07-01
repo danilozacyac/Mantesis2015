@@ -27,8 +27,9 @@
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\ct9iis2\Mant.BD\wpf\mantesis2015\updates\</UpdateUrl>
     <ProductName>Mantesis 2015</ProductName>
+    <PublisherName>Suprema Corte de Justicia de la Nación</PublisherName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

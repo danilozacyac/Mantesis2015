@@ -37,10 +37,13 @@ namespace Mantesis2015.Controllers
         /// Regresa las tesis del Volumen solicitado y posteriormente llama a setGRidResultados
         /// </summary>
         /// <param name="qMateria"></param>
-        public void GetTesisPorEpocaVolumen(int qMateria, object volumenSelect, DatosComp epoca)
+        public void GetTesisPorEpocaVolumen(int qMateria, object volumenSelect, DatosComp epoca,bool isApendice)
         {
             int permitido = 0;
-            ValuesMant.Epoca = epoca.IdDato;
+            if (isApendice)
+                ValuesMant.Epoca = 7;
+            else
+                ValuesMant.Epoca = epoca.IdDato;
 
             if (volumenSelect is Volumen)
             {
@@ -50,12 +53,13 @@ namespace Mantesis2015.Controllers
                              where n.Volumen == selectedVolume.Volumenes
                              select n).ToList().Count;
             }
-            else if (volumenSelect is DatosComp)
+            else if (volumenSelect is DatosComp)// Si es apéndice
             {
                 DatosComp selectedVolume = volumenSelect as DatosComp;
                 this.SetSelectedApendice();
 
                 ValuesMant.Parte = Utils.GetParte(selectedVolume.IdDato, ValuesMant.ApendicNom);
+                Utils.GetVolumenesParte(ValuesMant.Parte);
                 ValuesMant.Volumen = selectedVolume.IdDato;
                 permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
                              where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
@@ -206,27 +210,27 @@ namespace Mantesis2015.Controllers
 
         private void SetSelectedApendice()
         {
-            if (main.rbtAp17.IsChecked == true)
+            if (main.epocaSelec.IdDato == 1995)
             {
                 ValuesMant.ApendicNom = 1;
             }
-            else if (main.rbtAp54.IsChecked == true)
+            else if (main.epocaSelec.IdDato == 1988)
             {
                 ValuesMant.ApendicNom = 2;
             }
-            else if (main.rbtAp2000.IsChecked == true)
+            else if (main.epocaSelec.IdDato == 2000)
             {
                 ValuesMant.ApendicNom = 3;
             }
-            else if (main.rbtAp2001.IsChecked == true)
+            else if (main.epocaSelec.IdDato == 2001)
             {
                 ValuesMant.ApendicNom = 4;
             }
-            else if (main.rbtAp2002.IsChecked == true)
+            else if (main.epocaSelec.IdDato == 2002)
             {
                 ValuesMant.ApendicNom = 5;
             }
-            else if (main.rbtAp2011.IsChecked == true)
+            else if (main.epocaSelec.IdDato == 20011)
             {
                 ValuesMant.ApendicNom = 6;
             }

@@ -1,0 +1,238 @@
+﻿<UserControl x:Class="InformesSalas.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:igDP="http://infragistics.com/DataPresenter"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="500"
+             d:DesignWidth="900"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate x:Key="TreeDataTemp" ItemsSource="{Binding Hijos}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="White">
+            <GroupBox Height="100"
+                      Margin="10,25,10,0"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      Header="Disco">
+                <ComboBox x:Name="CbxProyectos"
+                          Height="25"
+                          Margin="10,25,10,0"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Top"
+                          DisplayMemberPath="Descripcion"
+                          ItemsSource="{Binding}"
+                          SelectedValuePath="IdProyecto"
+                          SelectionChanged="CbxProyectos_SelectionChanged" />
+
+            </GroupBox>
+
+            <telerik:RadTreeView x:Name="ClasificacionTreeView"
+                                 Height="250"
+                                 Margin="10,150,10,0"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Top"
+                                 ItemTemplate="{StaticResource TreeDataTemp}"
+                                 ItemsSource="{Binding}">
+                <telerik:RadTreeView.ItemContainerStyle>
+                    <Style TargetType="telerik:RadTreeViewItem">
+                        <Setter Property="telerik:RadTreeViewItem.IsExpanded" Value="True" />
+                    </Style>
+                </telerik:RadTreeView.ItemContainerStyle>
+            </telerik:RadTreeView>
+
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+
+            <telerik:RadGridView x:Name="dgTesis"
+                                 Grid.Row="1"
+                                 AutoGenerateColumns="False"
+                                 ItemsSource="{Binding}"
+                                 MouseDoubleClick="DgTesis_MouseDoubleClick"
+                                 SelectionChanged="dgTesis_SelectionChanged"
+                                 ShowGroupPanel="False">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Width="60"
+                                                DataMemberBinding="{Binding Ius}"
+                                                Header="IUS"
+                                                IsReadOnly="True" />
+                    <telerik:GridViewDataColumn Width="*"
+                                                DataMemberBinding="{Binding Rubro}"
+                                                Header="Rubro"
+                                                IsReadOnly="True" />
+                    <telerik:GridViewDataColumn Width="120"
+                                                DataMemberBinding="{Binding Tesis}"
+                                                Header="Tesis"
+                                                IsReadOnly="True" />
+                    <telerik:GridViewDataColumn Width="80"
+                                                DataMemberBinding="{Binding Pagina}"
+                                                Header="Página"
+                                                IsReadOnly="True" />
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+
+            <!--
+                <igDP:XamDataGrid Name="dgTesis"
+                Grid.Row="1"
+                DataSource="{Binding}"
+                GroupByAreaLocation="None"
+                
+                MouseDoubleClick="DgTesis_MouseDoubleClick"
+                RecordActivated="DgTesis_RecordActivated">
+                <igDP:XamDataGrid.FieldLayouts>
+                <igDP:FieldLayout>
+                <igDP:FieldLayout.Fields>
+                <igDP:Field Name="IsCheck"
+                Width="60"
+                Label="IsCheck"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Ius"
+                Width="60"
+                Label=" IUS " />
+                <igDP:Field Name="Rubro"
+                Width="*"
+                Height="80"
+                Label="Rubro" />
+                <igDP:Field Name="Sala"
+                Width="0"
+                Height="80"
+                Label="Sala"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Volumen"
+                Width="0"
+                Height="80"
+                Label="Volumen"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Tesis"
+                Width="120"
+                Height="80"
+                Label="Tesis" />
+                <igDP:Field Name="Pagina"
+                Width="80"
+                Height="80"
+                Label="Página" />
+                <igDP:Field Name="IdProy"
+                Width="0"
+                Height="80"
+                Label="IdProy"
+                Visibility="Collapsed" />
+                <igDP:Field Name="IdClasif"
+                Width="0"
+                Height="80"
+                Label="IdClasif"
+                Visibility="Collapsed" />
+                <igDP:Field Name="IdClasifAnterior"
+                Width="0"
+                Height="80"
+                Label="IdClasifAnterior"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Epoca"
+                Width="0"
+                Height="80"
+                Label="Epoca"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Texto"
+                Width="0"
+                Height="80"
+                Label="Texto"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Precedentes"
+                Width="0"
+                Height="80"
+                Label="Precedentes"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Tatj"
+                Width="0"
+                Height="80"
+                Label="Tatj"
+                Visibility="Collapsed" />
+                <igDP:Field Name="NumericOrder"
+                Width="0"
+                Height="80"
+                Label="NumericOrder"
+                Visibility="Collapsed" />
+                <igDP:Field Name="Fuente"
+                Width="0"
+                Height="80"
+                Label="Fuente"
+                Visibility="Collapsed" />
+                </igDP:FieldLayout.Fields>
+                </igDP:FieldLayout>
+                </igDP:XamDataGrid.FieldLayouts>
+                
+                </igDP:XamDataGrid>
+            -->
+            <TextBlock x:Name="textBlock3"
+                       Width="55"
+                       Height="23"
+                       Margin="7,18,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="14"
+                       Text="Buscar:" />
+            <TextBox x:Name="TxtBuscar"
+                     Width="143"
+                     Height="23"
+                     Margin="68,17,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     KeyDown="TxtBuscar_KeyDown" />
+            <Button x:Name="BtnIr"
+                    Width="43"
+                    Height="23"
+                    Margin="217,17,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="BtnIr_Click"
+                    Content="Ir" />
+            <TextBlock x:Name="textBlock1"
+                       Height="23"
+                       Margin="0,17,139,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       FontSize="14"
+                       Text="Ordenar por:" />
+            <ComboBox x:Name="cbOrden"
+                      Width="124"
+                      Height="23"
+                      Margin="0,17,10,0"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      FontSize="14"
+                      SelectionChanged="CbOrden_SelectionChanged">
+                <ComboBoxItem x:Name="publi"
+                              Content="Publicación"
+                              Tag="0" />
+                <ComboBoxItem x:Name="ius"
+                              Content="IUS"
+                              Tag="1" />
+                <ComboBoxItem x:Name="tesis"
+                              Content="Tesis"
+                              Tag="2" />
+            </ComboBox>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

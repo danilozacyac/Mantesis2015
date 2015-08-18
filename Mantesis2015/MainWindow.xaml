@@ -8,6 +8,7 @@
         xmlns:igRibbon="http://infragistics.com/Ribbon"
         xmlns:local="clr-namespace:Mantesis2015.Classes"
         xmlns:search="clr-namespace:UIControls;assembly=UIControls"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         Title="MainWindow"
         Width="1200"
         Height="900"
@@ -16,7 +17,7 @@
     <Window.Resources>
         <local:ConverterBrush x:Key="ValueToBrushConverter" />
         <Style x:Key="MyConvert" TargetType="{x:Type igEditors:XamNumericEditor}">
-            <Setter Property="Background" Value="{Binding Path=Value, RelativeSource={RelativeSource Self}, Converter={StaticResource ValueToBrushConverter}}" />
+            <Setter Property="Background" Value="{Binding Value, Converter={StaticResource ValueToBrushConverter}, RelativeSource={RelativeSource Self}}" />
         </Style>
         <Style x:Key="changeForeground" TargetType="{x:Type igDP:CellValuePresenter}">
             <Setter Property="Foreground" Value="blue" />
@@ -28,7 +29,7 @@
         <Style x:Key="MyConvertRow" TargetType="{x:Type igDP:DataRecordPresenter}">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Opacity="0.3" Color="{Binding Path=Cells[Tatj].Value, Converter={StaticResource genderToColorConverter}}" />
+                    <SolidColorBrush Opacity="0.3" Color="{Binding Cells[Tatj].Value, Converter={StaticResource genderToColorConverter}}" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -45,23 +46,32 @@
 
         <igRibbon:XamRibbon Theme="Office2k7Black">
             <igRibbon:XamRibbon.ApplicationMenu>
-                <igRibbon:ApplicationMenu Caption="File" >
-                    <igRibbon:ApplicationMenu.Items>
+                <igRibbon:ApplicationMenu Caption="File">
 
-                        <igRibbon:ButtonTool Caption="Permisos Secciones" Name="RBtnPermisos" SmallImage="Resources/key.png" Click="ButtonTool_Click" IsEnabled="False" />
+                    <igRibbon:ButtonTool x:Name="RBtnPermisos"
+                                         Caption="Permisos Secciones"
+                                         Click="ButtonTool_Click"
+                                         IsEnabled="False"
+                                         SmallImage="Resources/key.png" />
 
-                        <igRibbon:ButtonTool Caption="Permisos Volumenes" Name="RBtnVolumenes" SmallImage="Resources/lockVol.png" Click="ButtonTool_Click" IsEnabled="False"/>
+                    <igRibbon:ButtonTool x:Name="RBtnVolumenes"
+                                         Caption="Permisos Volumenes"
+                                         Click="ButtonTool_Click"
+                                         IsEnabled="False"
+                                         SmallImage="Resources/lockVol.png" />
 
-                        <igRibbon:SeparatorTool />
+                    <igRibbon:SeparatorTool />
 
-                        <igRibbon:ButtonTool Caption="Salir" Name="RBtnSalir" SmallImage="Resources/exit_128.png" Click="ButtonTool_Click" />
+                    <igRibbon:ButtonTool x:Name="RBtnSalir"
+                                         Caption="Salir"
+                                         Click="ButtonTool_Click"
+                                         SmallImage="Resources/exit_128.png" />
 
-                    </igRibbon:ApplicationMenu.Items>
                 </igRibbon:ApplicationMenu>
             </igRibbon:XamRibbon.ApplicationMenu>
             <igRibbon:RibbonTabItem Header="Mantenimiento">
                 <igRibbon:RibbonGroup Caption="General" Uid="5">
-                    <igRibbon:ButtonTool Name="BtnNuevaTesis"
+                    <igRibbon:ButtonTool x:Name="BtnNuevaTesis"
                                          Caption="Tesis Nueva"
                                          Click="ButtonTool_Click"
                                          Id="NewTesis"
@@ -69,7 +79,7 @@
                                          LargeImage="Resources/addTesis_128.png"
                                          SmallImage="Resources/addTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Name="BtnVisualizaTesis"
+                    <igRibbon:ButtonTool x:Name="BtnVisualizaTesis"
                                          Caption="_Visualizar Tesis"
                                          Click="ButtonTool_Click"
                                          Id="ViewTesis"
@@ -77,7 +87,7 @@
                                          LargeImage="Resources/viewTesis_128.png"
                                          SmallImage="Resources/viewTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Name="BtnActualizaTesis"
+                    <igRibbon:ButtonTool x:Name="BtnActualizaTesis"
                                          Caption="Actualizar Tesis"
                                          Click="ButtonTool_Click"
                                          Id="EditTesis"
@@ -85,7 +95,7 @@
                                          LargeImage="Resources/editTesis_128.png"
                                          SmallImage="Resources/editTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Name="BtnEliminaTesis"
+                    <igRibbon:ButtonTool x:Name="BtnEliminaTesis"
                                          Caption="Eliminar Tesis"
                                          Click="ButtonTool_Click"
                                          Id="DelTesis"
@@ -94,24 +104,24 @@
                                          SmallImage="Resources/delTesis_64.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
                 </igRibbon:RibbonGroup>
-                <igRibbon:RibbonGroup Name="GrExport"
+                <igRibbon:RibbonGroup x:Name="GrExport"
                                       Caption="Exportar"
                                       IsEnabled="False">
-                    <igRibbon:ButtonTool Name="RBtnPdf"
+                    <igRibbon:ButtonTool x:Name="RBtnPdf"
                                          Caption="PDF"
                                          Click="ExportarGroupClick"
                                          Id="PDF"
                                          LargeImage="Resources/pdf_256.png"
                                          SmallImage="Resources/pdf_128.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Name="RBtnWord"
+                    <igRibbon:ButtonTool x:Name="RBtnWord"
                                          Caption="Word"
                                          Click="ExportarGroupClick"
                                          Id="Word"
                                          LargeImage="Resources/word_256.png"
                                          SmallImage="Resources/word_128.png"
                                          igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool Name="RBtnSga"
+                    <igRibbon:ButtonTool x:Name="RBtnSga"
                                          Caption="Materias SGA"
                                          Click="ExportarGroupClick"
                                          Id="MatSga"
@@ -123,7 +133,17 @@
 
 
             </igRibbon:RibbonTabItem>
-            <igRibbon:RibbonTabItem Header="Informe de las Salas" />
+            <igRibbon:RibbonTabItem Header="Informe de las Salas" IsEnabled="False" >
+                <igRibbon:RibbonGroup Caption="Clasificación">
+                    <igRibbon:ButtonTool x:Name="BtnMostrarProy"
+                                         Caption="Mostrar Proyectos"
+                                         Id="MostrarProyecto"
+                                         IsEnabled="False"
+                                         LargeImage="Resources/delTesis_128.png"
+                                         SmallImage="Resources/delTesis_64.png"
+                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
+                </igRibbon:RibbonGroup>
+            </igRibbon:RibbonTabItem>
             <igRibbon:RibbonTabItem Header="Herramientas administrativas" />
         </igRibbon:XamRibbon>
         <Grid Grid.Row="1">
@@ -133,9 +153,9 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <GroupBox Name="VerIus"
+                <GroupBox x:Name="VerIus"
                           Height="150"
-                          Margin="35,30,35,0"
+                          Margin="35,30,20,0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
                           Header="Ver IUS"
@@ -151,8 +171,9 @@
                         <TextBox x:Name="TxtVerIus"
                                  Height="25"
                                  Margin="10,23,10,22"
-                                 PreviewTextInput="TxtIus_PreviewTextInput" KeyDown="TxtVerIus_KeyDown" />
-                        <Button Name="BtnVerIus"
+                                 KeyDown="TxtVerIus_KeyDown"
+                                 PreviewTextInput="TxtIus_PreviewTextInput" />
+                        <Button x:Name="BtnVerIus"
                                 Width="80"
                                 Height="20"
                                 Margin="128,82,0,0"
@@ -162,22 +183,18 @@
                                 Content="Buscar" />
                     </Grid>
                 </GroupBox>
-                <GroupBox Name="EpocaVolumen"
-                          Height="350"
-                          Margin="35,220,35,0"
+                <GroupBox x:Name="EpocaVolumen"
+                          Height="200"
+                          Margin="35,220,20,0"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Top"
                           Header="Selección"
                           IsEnabled="False"
                           Uid="2">
                     <Grid>
-                        <Label Margin="10,22,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               Content="Época / Apéndice / Informes" />
                         <ComboBox x:Name="CbEpoca"
-                                  Width="198"
-                                  Margin="10,43,0,0"
+                                  Width="220"
+                                  Margin="10,47,0,0"
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Top"
                                   DisplayMemberPath="Descripcion"
@@ -185,101 +202,114 @@
                                   ItemsSource="{Binding}"
                                   SelectedValuePath="IdDato"
                                   SelectionChanged="CbEpoca_SelectionChanged" />
-                        <Label Margin="10,91,0,0"
+                        <Label Margin="10,101,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Content="Tomo / Volumen / Libro / Número " />
                         <ComboBox x:Name="CbxVolumen"
-                                  Width="198"
-                                  Margin="10,117,0,0"
+                                  Width="220"
+                                  Margin="10,127,0,0"
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Top"
                                   FontSize="13"
                                   SelectionChanged="CbxVolumen_SelectionChanged" />
 
-                        <RadioButton x:Name="rbtAp17"
-                                     Grid.Row="3"
-                                     Grid.RowSpan="2"
-                                     Grid.ColumnSpan="2"
-                                     Height="16"
-                                     Margin="15,160,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     Checked="RadioApendiceChecked"
-                                     Content="Apéndice 1917 a 1995"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     IsEnabled="False"
-                                     Tag="1995" />
-                        <RadioButton x:Name="rbtAp54"
-                                     Grid.Row="4"
-                                     Grid.RowSpan="2"
-                                     Grid.ColumnSpan="2"
-                                     Height="16"
-                                     Margin="15,180,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     Checked="RadioApendiceChecked"
-                                     Content="Apéndice 1954 a 1988"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     IsEnabled="False"
-                                     Tag="1988" />
-                        <RadioButton x:Name="rbtAp2000"
-                                     Grid.Row="5"
-                                     Grid.RowSpan="2"
-                                     Grid.ColumnSpan="2"
-                                     Height="16"
-                                     Margin="15,200,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     Checked="RadioApendiceChecked"
-                                     Content="Apéndice 2000"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     IsEnabled="False"
-                                     Tag="2000" />
-                        <RadioButton x:Name="rbtAp2001"
-                                     Grid.Row="6"
-                                     Grid.ColumnSpan="2"
-                                     Height="16"
-                                     Margin="15,220,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     Checked="RadioApendiceChecked"
-                                     Content="Apéndice 2001"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     IsEnabled="False"
-                                     Tag="2001" />
-                        <RadioButton x:Name="rbtAp2002"
-                                     Grid.Row="6"
-                                     Grid.ColumnSpan="2"
-                                     Margin="15,240,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     Checked="RadioApendiceChecked"
-                                     Content="Apéndice 2002"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     IsEnabled="False"
-                                     Tag="2002" />
-                        <RadioButton x:Name="rbtAp2011"
-                                     Grid.Row="6"
-                                     Grid.ColumnSpan="2"
-                                     Height="16"
-                                     Margin="15,260,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     Checked="RadioApendiceChecked"
-                                     Content="Apéndice 2011"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     IsEnabled="False"
-                                     Tag="2011" />
+                        <!--
+                            <RadioButton x:Name="rbtAp17"
+                            Height="16"
+                            Margin="15,235,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Checked="RadioApendiceChecked"
+                            Content="Apéndice 1917 a 1995"
+                            FontSize="14"
+                            Foreground="Black"
+                            IsEnabled="False"
+                            Tag="1995" />
+                            <RadioButton x:Name="rbtAp54"
+                            Height="16"
+                            Margin="15,255,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Checked="RadioApendiceChecked"
+                            Content="Apéndice 1954 a 1988"
+                            FontSize="14"
+                            Foreground="Black"
+                            IsEnabled="False"
+                            Tag="1988" />
+                            <RadioButton x:Name="rbtAp2000"
+                            Height="16"
+                            Margin="15,275,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Checked="RadioApendiceChecked"
+                            Content="Apéndice 2000"
+                            FontSize="14"
+                            Foreground="Black"
+                            IsEnabled="False"
+                            Tag="2000" />
+                            <RadioButton x:Name="rbtAp2001"
+                            Height="16"
+                            Margin="15,295,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Checked="RadioApendiceChecked"
+                            Content="Apéndice 2001"
+                            FontSize="14"
+                            Foreground="Black"
+                            IsEnabled="False"
+                            Tag="2001" />
+                            <RadioButton x:Name="rbtAp2002"
+                            Margin="15,315,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Checked="RadioApendiceChecked"
+                            Content="Apéndice 2002"
+                            FontSize="14"
+                            Foreground="Black"
+                            IsEnabled="False"
+                            Tag="2002" />
+                            <RadioButton x:Name="rbtAp2011"
+                            Height="16"
+                            Margin="15,335,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Checked="RadioApendiceChecked"
+                            Content="Apéndice 2011"
+                            FontSize="14"
+                            Foreground="Black"
+                            IsEnabled="False"
+                            Tag="2011" />
+                        -->
+
+
+                        <telerik:RadRadioButton x:Name="RRadEpocas"
+                                                Width="70"
+                                                Height="23"
+                                                Margin="10,10,0,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                Checked="RRadEpocas_Checked"
+                                                Content="Épocas" />
+                        <telerik:RadRadioButton x:Name="RRadApendices"
+                                                Width="70"
+                                                Height="23"
+                                                Margin="85,10,0,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                Checked="RRadApendices_Checked"
+                                                Content="Apéndices" />
+                        <telerik:RadRadioButton x:Name="RRadInformes"
+                                                Width="70"
+                                                Height="23"
+                                                Margin="160,10,0,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                Checked="RRadInformes_Checked"
+                                                Content="Informes" />
                     </Grid>
                 </GroupBox>
-                <Label Name="TxtRegs"
+                <Label x:Name="TxtRegs"
                        Margin="35,612,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
@@ -308,9 +338,6 @@
                                   PreviewMouseDoubleClick="XamDataGridTesis_PreviewMouseDoubleClick"
                                   RecordActivated="XamDataGridTesis_RecordActivated"
                                   Sorting="XamDataGridTesis_Sorting">
-                    <igDP:XamDataGrid.FieldSettings>
-                        <igDP:FieldSettings AllowEdit="False" CellClickAction="SelectRecord" />
-                    </igDP:XamDataGrid.FieldSettings>
 
                     <igDP:XamDataGrid.Resources>
                         <Style TargetType="{x:Type igDP:DataRecordCellArea}">
@@ -318,63 +345,59 @@
                             <Setter Property="BackgroundActive" Value="#FFC5CED8" />
                         </Style>
 
-
-
-
-
                     </igDP:XamDataGrid.Resources>
+
+                    <igDP:XamDataGrid.FieldSettings>
+                        <igDP:FieldSettings AllowEdit="False" CellClickAction="SelectRecord" />
+                    </igDP:XamDataGrid.FieldSettings>
 
                     <igDP:XamDataGrid.FieldLayouts>
                         <igDP:FieldLayout>
 
-                            <igDP:FieldLayout.Fields>
+                            <igDP:Field Name="ID"
+                                        Width="60"
+                                        Label=" ID " />
+                            <igDP:Field Name="Ius4"
+                                        Width="70"
+                                        Label="IUS" />
+                            <igDP:Field Name="Tesis"
+                                        Width="90"
+                                        Label="Tesis" />
+                            <igDP:Field Name="Rubro"
+                                        Width="*"
+                                        Label="Rubro">
 
-                                <igDP:Field Name="ID"
-                                            Width="60"
-                                            Label=" ID " />
-                                <igDP:Field Name="Ius4"
-                                            Width="70"
-                                            Label="IUS" />
-                                <igDP:Field Name="Tesis"
-                                            Width="90"
-                                            Label="Tesis" />
-                                <igDP:Field Name="Rubro"
-                                            Width="*"
-                                            Label="Rubro">
+                                <igDP:Field.Settings>
+                                    <igDP:FieldSettings>
+                                        <igDP:FieldSettings.CellValuePresenterStyle>
+                                            <Style TargetType="{x:Type igDP:CellValuePresenter}">
 
-                                    <igDP:Field.Settings>
-                                        <igDP:FieldSettings>
-                                            <igDP:FieldSettings.CellValuePresenterStyle>
-                                                <Style TargetType="{x:Type igDP:CellValuePresenter}">
+                                                <Setter Property="ToolTip" Value="{Binding Value, RelativeSource={RelativeSource Self}}" />
 
-                                                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+                                            </Style>
+                                        </igDP:FieldSettings.CellValuePresenterStyle>
 
-                                                </Style>
-                                            </igDP:FieldSettings.CellValuePresenterStyle>
+                                    </igDP:FieldSettings>
+                                </igDP:Field.Settings>
 
-                                        </igDP:FieldSettings>
-                                    </igDP:Field.Settings>
+                            </igDP:Field>
 
+                            <igDP:Field Name="Pagina"
+                                        Width="70"
+                                        Label="Pagina" />
+                            <igDP:Field Name="Estado" Label="Estado" />
+                            <igDP:Field Name="Tatj" Visibility="Collapsed">
+                                <igDP:Field.Settings>
+                                    <igDP:FieldSettings EditorStyle="{StaticResource MyConvert}" />
+                                </igDP:Field.Settings>
+                            </igDP:Field>
+                            <igDP:Field Name="PaginaNum"
+                                        Label="Pagina"
+                                        Visibility="Collapsed" />
+                            <igDP:Field Name="Volumen"
+                                        Label="Volumen"
+                                        Visibility="Collapsed" />
 
-                                </igDP:Field>
-
-                                <igDP:Field Name="Pagina"
-                                            Width="70"
-                                            Label="Pagina" />
-                                <igDP:Field Name="Estado" Label="Estado" />
-                                <igDP:Field Name="Tatj" Visibility="Collapsed">
-                                    <igDP:Field.Settings>
-                                        <igDP:FieldSettings EditorStyle="{StaticResource MyConvert}" />
-                                    </igDP:Field.Settings>
-                                </igDP:Field>
-                                <igDP:Field Name="PaginaNum"
-                                            Label="Pagina"
-                                            Visibility="Collapsed" />
-                                <igDP:Field Name="Volumen"
-                                            Label="Volumen"
-                                            Visibility="Collapsed" />
-
-                            </igDP:FieldLayout.Fields>
                         </igDP:FieldLayout>
                     </igDP:XamDataGrid.FieldLayouts>
                 </igDP:XamDataGrid>
@@ -391,7 +414,7 @@
                          KeyDown="TxtIus_KeyDown"
                          PreviewTextInput="TxtIus_PreviewTextInput"
                          TextWrapping="Wrap" />
-                <Button Name="BtnIusLista"
+                <Button x:Name="BtnIusLista"
                         Grid.Row="0"
                         Width="45"
                         Height="23"

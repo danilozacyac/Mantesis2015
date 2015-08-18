@@ -52,10 +52,14 @@ namespace Mantesis2015
             this.IsTesisUpdatable = isTesisUpdatable;
             this.isVerIusAccess = false;
             controller = new UnaTesisController(this);
-
             
         }
 
+        /// <summary>
+        /// Constructor que utiliza la funcionalidad de Ver IUS para lanzar la una nueva ventana con la tesis buscada
+        /// </summary>
+        /// <param name="tesisMostrada"></param>
+        /// <param name="isTesisUpdatable"></param>
         public UnaTesis(TesisDto tesisMostrada, bool isTesisUpdatable)
             : this()
         {
@@ -69,7 +73,7 @@ namespace Mantesis2015
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             controller.LoadTesisWindow(this.ius);
-            
+            this.Title = (IsTesisUpdatable) ? "Actualizar Tesis" : "Visualizar Tesis";
         }
 
         private void RibbonButton_Click(object sender, RoutedEventArgs e)

@@ -11,7 +11,6 @@ namespace Mantesis2015.MateriasSga
     public partial class MateriasSgaWin : Window
     {
         private List<int> idMaterias;
-        MateriasModel root;
         List<MateriasModel> listaMaterias;
 
         private readonly int ius;

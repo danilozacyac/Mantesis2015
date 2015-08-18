@@ -179,14 +179,16 @@
                                                  Margin="0,7,0,-7"
                                                  HorizontalAlignment="Left"
                                                  VerticalAlignment="Top"
-                                                 Content=" Jurisprudencia" />
+                                                 Content=" Jurisprudencia"
+                                                 IsEnabled="False" />
                                     <RadioButton x:Name="RbtAislada"
                                                  Width="80"
                                                  Height="28"
                                                  Margin="109,7,0,-7"
                                                  HorizontalAlignment="Left"
                                                  VerticalAlignment="Top"
-                                                 Content=" T. Aislada" />
+                                                 Content=" T. Aislada"
+                                                 IsEnabled="False" />
                                 </Grid>
                             </GroupBox>
                             <Label Margin="10,227,0,0"
@@ -199,8 +201,7 @@
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
                                       DisplayMemberPath="Descripcion"
-                                      IsEnabled="{Binding IsEnable,
-                                                          Mode=TwoWay}"
+                                      IsEnabled="False"
                                       SelectedValuePath="IdDato" />
                             <Label Margin="10,284,0,0"
                                    HorizontalAlignment="Left"
@@ -212,8 +213,7 @@
                                       HorizontalAlignment="Left"
                                       VerticalAlignment="Top"
                                       DisplayMemberPath="Descripcion"
-                                      IsEnabled="{Binding IsEnable,
-                                                          Mode=TwoWay}"
+                                      IsEnabled="False"
                                       SelectedValuePath="IdDato" />
                             <GroupBox Height="305"
                                       Margin="10,349,35,0"
@@ -281,8 +281,7 @@
                                      VerticalAlignment="Top"
                                      Foreground="{Binding IsEliminated,
                                                           Converter={StaticResource foreground}}"
-                                     IsReadOnly="{Binding IsReadOnly,
-                                                          Mode=TwoWay}"
+                                     IsReadOnly="True"
                                      Text="{Binding Ius}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtEpoca"
@@ -293,8 +292,7 @@
                                      VerticalAlignment="Top"
                                      Foreground="{Binding IsEliminated,
                                                           Converter={StaticResource foreground}}"
-                                     IsReadOnly="{Binding IsReadOnly,
-                                                          Mode=TwoWay}"
+                                     IsReadOnly="True"
                                      Text="{Binding Epoca}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtVolumen"
@@ -305,8 +303,7 @@
                                      VerticalAlignment="Top"
                                      Foreground="{Binding IsEliminated,
                                                           Converter={StaticResource foreground}}"
-                                     IsReadOnly="{Binding IsReadOnly,
-                                                          Mode=TwoWay}"
+                                     IsReadOnly="True"
                                      Text="{Binding Volumen}"
                                      TextWrapping="NoWrap" />
                             <TextBox x:Name="TxtTesis"
@@ -317,8 +314,7 @@
                                      VerticalAlignment="Top"
                                      Foreground="{Binding IsEliminated,
                                                           Converter={StaticResource foreground}}"
-                                     IsReadOnly="{Binding IsReadOnly,
-                                                          Mode=TwoWay}"
+                                     IsReadOnly="True"
                                      Text="{Binding Tesis}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtPag"
@@ -329,8 +325,7 @@
                                      VerticalAlignment="Top"
                                      Foreground="{Binding IsEliminated,
                                                           Converter={StaticResource foreground}}"
-                                     IsReadOnly="{Binding IsReadOnly,
-                                                          Mode=TwoWay}"
+                                     IsReadOnly="True"
                                      Text="{Binding Pagina}"
                                      TextWrapping="Wrap" />
 

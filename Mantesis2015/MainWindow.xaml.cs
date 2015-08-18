@@ -21,7 +21,7 @@ namespace Mantesis2015
     public partial class MainWindow : Window
     {
         private List<RadioButton> apendices;
-        private DatosComp epocaSelec;
+        public DatosComp epocaSelec;
         private object volumeSelect;
         private MainWindowController controller;
         private PermisosController permisosCon;
@@ -44,39 +44,47 @@ namespace Mantesis2015
 
             controller = new MainWindowController(this);
             permisosCon = new PermisosController(this);
-            apendices = new List<RadioButton>() { rbtAp17, rbtAp2000, rbtAp2001, rbtAp2002, rbtAp2011, rbtAp54 };
+            //apendices = new List<RadioButton>() { rbtAp17, rbtAp2000, rbtAp2001, rbtAp2002, rbtAp2011, rbtAp54 };
             
-            CbEpoca.DataContext = DatosCompartidosSingleton.Epocas;
+           // CbEpoca.DataContext = DatosCompartidosSingleton.Epocas;
             permisosCon.LoadPermission();
-            
+            RRadEpocas.IsChecked = true;
         }
 
         private void CbEpoca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             epocaSelec = CbEpoca.SelectedItem as DatosComp;
 
-            if (epocaSelec.IdDato == 7) //Muestra materias apendices
+            if (epocaSelec != null)
             {
-                CbxVolumen.IsEnabled = false;
-                this.SetApendicesState(true);
-            }
-            else //Muestra Volumen epocas
-            {
-                CbxVolumen.IsEnabled = true;
-                this.SetApendicesState(false);
-                CbxVolumen.ItemsSource = Utils.GetVolumenesEpoca(epocaSelec.IdDato);
-                CbxVolumen.DisplayMemberPath = "VolumenTxt";
-                CbxVolumen.SelectedValuePath = "Volumenes";
+
+                if (RRadApendices.IsChecked == true) //Muestra materias apendices
+                {
+                    //CbxVolumen.IsEnabled = false;
+                    //this.SetApendicesState(true);
+                    ValuesMant.ApendicYear = epocaSelec.IdDato;
+                    CbxVolumen.ItemsSource = Utils.GetMateriasApendice(epocaSelec.IdDato);
+                    CbxVolumen.DisplayMemberPath = "Descripcion";
+                    CbxVolumen.SelectedValuePath = "IdDato";
+                }
+                else //Muestra Volumen epocas
+                {
+                    CbxVolumen.IsEnabled = true;
+                    //this.SetApendicesState(false);
+                    CbxVolumen.ItemsSource = Utils.GetVolumenesEpoca(epocaSelec.IdDato);
+                    CbxVolumen.DisplayMemberPath = "VolumenTxt";
+                    CbxVolumen.SelectedValuePath = "Volumenes";
+                }
             }
         }
 
-        private void SetApendicesState(bool state)
-        {
-            foreach (RadioButton radio in apendices)
-            {
-                radio.IsEnabled = state;
-            }
-        }
+        //private void SetApendicesState(bool state)
+        //{
+        //    foreach (RadioButton radio in apendices)
+        //    {
+        //        radio.IsEnabled = state;
+        //    }
+        //}
 
         private void RadioApendiceChecked(object sender, RoutedEventArgs e)
         {
@@ -98,7 +106,7 @@ namespace Mantesis2015
             else if (CbxVolumen.SelectedItem is DatosComp)
                 volumeSelect = CbxVolumen.SelectedItem as DatosComp;
 
-            controller.GetTesisPorEpocaVolumen(99, volumeSelect, epocaSelec);
+            controller.GetTesisPorEpocaVolumen(99, volumeSelect, epocaSelec,RRadApendices.IsChecked.Value);
         }
 
         #region  GridTesis
@@ -237,6 +245,29 @@ namespace Mantesis2015
             ButtonTool action = sender as ButtonTool;
             controller.ExportarOptions(action.Name);
 
+        }
+
+        private void RRadEpocas_Checked(object sender, RoutedEventArgs e)
+        {
+            CbEpoca.DataContext = from n in DatosCompartidosSingleton.Epocas
+                                  where n.IdDato != 6 && n.IdDato != 7
+                                  select n;
+            CbxVolumen.DataContext = null;
+        }
+
+        private void RRadApendices_Checked(object sender, RoutedEventArgs e)
+        {
+
+            CbEpoca.DataContext = DatosCompartidosSingleton.Apendices;
+            CbxVolumen.DataContext = null;
+        }
+
+        private void RRadInformes_Checked(object sender, RoutedEventArgs e)
+        {
+            CbEpoca.DataContext = from n in DatosCompartidosSingleton.Epocas
+                                  where n.IdDato == 6 
+                                  select n;
+            CbxVolumen.DataContext = null;
         }
 
         

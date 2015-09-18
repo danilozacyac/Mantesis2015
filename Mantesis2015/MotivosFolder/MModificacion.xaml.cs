@@ -6,6 +6,7 @@ using System.Windows;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Model;
 using MantesisVerIusCommonObjects.Utilities;
+using ScjnUtilities;
 
 namespace Mantesis2015.MotivosFolder
 {
@@ -37,7 +38,7 @@ namespace Mantesis2015.MotivosFolder
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MantesisVerIusCommonObjects.Utilities.ValuesMant.SelectedMotiv = false;
-            binaryMotivos = MiscFunct.ToBinaryInvert(lMotivoModif);
+            binaryMotivos = NumericUtilities.ToBinaryInvert(lMotivoModif);
             binaryArray = binaryMotivos.ToCharArray();
 
             MotivosModel motivosModifModel = new MotivosModel();

@@ -3,10 +3,9 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using MantesisAdminUtil.Model;
+using AuthManager.Models;
 using MantesisVerIusCommonObjects.DataAccess;
 using MantesisVerIusCommonObjects.Dto;
-using PVolumenesControl.Models;
 using ScjnUtilities;
 
 namespace Mantesis2015.Model
@@ -37,7 +36,7 @@ namespace Mantesis2015.Model
                     AccesoUsuarioModel.Llave = Convert.ToInt16(reader["Llave"].ToString());
                     AccesoUsuarioModel.Grupo = Convert.ToInt16(reader["Grupo"].ToString());
                     AccesoUsuarioModel.Nombre = reader["nombre"].ToString();
-                    AccesoUsuarioModel.Permisos = new PermisosModel().GetSeccionesByUsuario(AccesoUsuarioModel.Llave);
+                    AccesoUsuarioModel.Permisos = new PermisosSeccionModel().GetSeccionesByUsuario(AccesoUsuarioModel.Llave);
                     AccesoUsuarioModel.VolumenesPermitidos = new VolumenesViewModel().GetVolumenesPorUser(AccesoUsuarioModel.Llave);
                     bExisteUsuario = true;
                 }
@@ -92,10 +91,10 @@ namespace Mantesis2015.Model
                 {
                     AccesoUsuarioModel.Usuario = reader["usuario"].ToString();
                     AccesoUsuarioModel.Pwd = reader["contraseña"].ToString();
-                    AccesoUsuarioModel.Llave = Convert.ToInt16(reader["Llave"].ToString());
-                    AccesoUsuarioModel.Grupo = Convert.ToInt16(reader["Grupo"].ToString());
+                    AccesoUsuarioModel.Llave = Convert.ToInt16(reader["Llave"]);
+                    AccesoUsuarioModel.Grupo = Convert.ToInt16(reader["Grupo"]);
                     AccesoUsuarioModel.Nombre = reader["nombre"].ToString();
-                    AccesoUsuarioModel.Permisos = new PermisosModel().GetSeccionesByUsuario(AccesoUsuarioModel.Llave);
+                    AccesoUsuarioModel.Permisos = new PermisosSeccionModel().GetSeccionesByUsuario(AccesoUsuarioModel.Llave);
                     AccesoUsuarioModel.VolumenesPermitidos = new VolumenesViewModel().GetVolumenesPorUser(AccesoUsuarioModel.Llave);
                     bExisteUsuario = true;
                 }

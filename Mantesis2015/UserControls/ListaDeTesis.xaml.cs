@@ -4,10 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Infragistics.Windows.DataPresenter;
+using Mantesis2015.Controllers;
 using Mantesis2015.UserControls.Controller;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Utilities;
 using ScjnUtilities;
+using Telerik.Windows.Controls;
 
 namespace Mantesis2015.UserControls
 {
@@ -17,6 +19,7 @@ namespace Mantesis2015.UserControls
     public partial class ListaDeTesis : UserControl
     {
         ListaTesisController controller;
+        private PermisosController permisosCon;
         
 
         /// <summary>
@@ -43,6 +46,11 @@ namespace Mantesis2015.UserControls
 
             controller = new ListaTesisController(this);
 
+            permisosCon = new PermisosController(this);
+            permisosCon.LoadListaTesisControlAuth();
+
+            RRadEpocas.IsChecked = true;
+
         }
 
         private void RRadEpocas_Checked(object sender, RoutedEventArgs e)
@@ -68,7 +76,8 @@ namespace Mantesis2015.UserControls
 
         private void CbxVolumen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            controller.GetTesisPorEpocaVolumen(99, CbxVolumen.SelectedItem, selectedEpoca);
+            if (CbxVolumen.SelectedItem != null)
+                controller.GetTesisPorEpocaVolumen(99, CbxVolumen.SelectedItem, selectedEpoca);
         }
 
         private void XamDataGridTesis_Loaded(object sender, RoutedEventArgs e)
@@ -142,5 +151,28 @@ namespace Mantesis2015.UserControls
             if (e.Key == Key.Enter)
                 controller.GetTesisByVerIus(TxtVerIus.Text);
         }
+
+
+
+
+        #region Metodos Externos
+
+        /// <summary>
+        /// Muestra el detalle de la tesis seleccionada
+        /// </summary>
+        /// <param name="materiasSgaEstado">Indica si las materias SGA pueden ser actualizadas</param>
+        /// <param name="isTesisUpdatable">Indica si la tesis que se va a mostrar puede sufrir modificaciones</param>
+        /// <param name="mainWindow">Ventana dueña de la que esta por ser lanzada</param>
+        public void MostrarTesis(byte materiasSgaEstado, bool isTesisUpdatable,MainWindow mainWindow)
+        {
+            controller.MostrarTesis(materiasSgaEstado, isTesisUpdatable,mainWindow);
+        }
+
+        public void ExportaInformacionTesis(RadRibbonButton action)
+        {
+            controller.ExportarOptions(action.Name);
+        }
+
+        #endregion
     }
 }

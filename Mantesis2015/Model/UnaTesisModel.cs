@@ -893,7 +893,7 @@ namespace Mantesis2015.Model
                 sRubroStr = tesisDto.Rubro;
                 sRubroStr = StringUtilities.QuitaCarCad(sRubroStr);
                 sRubroStr = StringUtilities.ConvMay(sRubroStr);
-                sRubroStr = MiscFunct.QuitaDblEspacio(sRubroStr);
+                sRubroStr = StringUtilities.ReplaceDoubleSpaces(sRubroStr);
                 sRubroStr = sRubroStr.Trim();
 
                 if (sRubroStr.Length > 250)
@@ -1267,7 +1267,7 @@ namespace Mantesis2015.Model
                 sRubroStr = tesisDto.Rubro;
                 sRubroStr = StringUtilities.QuitaCarCad(sRubroStr);
                 sRubroStr = StringUtilities.ConvMay(sRubroStr);
-                sRubroStr = MiscFunct.QuitaDblEspacio(sRubroStr);
+                sRubroStr = StringUtilities.ReplaceDoubleSpaces(sRubroStr);
                 sRubroStr = sRubroStr.Trim();
 
                 if (sRubroStr.Length > 250)

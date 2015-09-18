@@ -282,7 +282,7 @@ namespace Mantesis2015.Controllers
                 this.tesisMostrada.Materia5 = Convert.ToInt16(unaTesis.CbxMat5.SelectedValue);
 
                 this.tesisMostrada.Estado = 2;
-                this.tesisMostrada.MotivoModificar = MiscFunct.ToDecimal(ValuesMant.BinaryVal);
+                this.tesisMostrada.MotivoModificar = NumericUtilities.BinaryToDecimal(ValuesMant.BinaryVal);
                 this.tesisMostrada.CamposModif = sCamposModif;
 
                 string idAbs = Guid.NewGuid().ToString();

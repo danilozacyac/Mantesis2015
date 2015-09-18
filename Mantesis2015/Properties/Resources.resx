@@ -253,4 +253,76 @@
   <data name="lockVol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lockVol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="show_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\show_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="show_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\show_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="checklist_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\checklist_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reload" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colorBooks_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\colorBooks_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flatcheck_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatcheck_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flatcross_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatcross_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="table_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\table_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1425495825_add_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1425495825_add-user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1425495839_edit_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1425495839_edit-user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1425495848_group" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1425495848_group.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1425495857_delete_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1425495857_delete-user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editLock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editLock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="epocasAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\epocasAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="epocasRemove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\epocasRemove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="keys_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\keys_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="locklist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\locklist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lock_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unlock_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unlock_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tree2_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tree2_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tree2_128_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tree2_128_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tree2_128_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tree2_128_pdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tree2_128_word" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tree2_128_word.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

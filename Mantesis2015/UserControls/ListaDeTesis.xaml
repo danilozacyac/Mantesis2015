@@ -46,10 +46,10 @@
         <Grid Grid.Column="0">
             <GroupBox x:Name="VerIus"
                       Height="150"
-                      Margin="35,30,20,0"
+                      Margin="35,250,20,0"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Top"
-                      Header="Ver IUS"
+                      Header="Busqueda global por Reg. Digital"
                       IsEnabled="False"
                       Uid="3">
                 <Grid>
@@ -67,7 +67,7 @@
                     <Button x:Name="BtnVerIus"
                             Width="80"
                             Height="20"
-                            Margin="128,82,0,0"
+                            Margin="140,82,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Click="BtnVerIus_Click"
@@ -76,7 +76,7 @@
             </GroupBox>
             <GroupBox x:Name="EpocaVolumen"
                       Height="200"
-                      Margin="35,220,20,0"
+                      Margin="35,30,20,0"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Top"
                       Header="Selección"

@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using Infragistics.Windows.DataPresenter;
 using Mantesis2015.Model;
+using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Model;
 using MantesisVerIusCommonObjects.Singletons;
 using MantesisVerIusCommonObjects.Utilities;
-using PVolumenesControl.Dao;
 using ScjnUtilities;
 using UtilsMantesis;
 
@@ -53,6 +50,7 @@ namespace Mantesis2015.UserControls.Controller
         /// <param name="tipoEpoca">5. Épocas -- 6. Informes -- 7. Apéndices</param>
         public void SetEpocasComboValues(int tipoEpoca)
         {
+            listaTesisWindow.CbxVolumen.DataContext = null;
             switch (tipoEpoca)
             {
                 case 5: listaTesisWindow.CbEpoca.DataContext = from n in DatosCompartidosSingleton.Epocas
@@ -69,7 +67,7 @@ namespace Mantesis2015.UserControls.Controller
 
             }
 
-            listaTesisWindow.CbxVolumen.DataContext = null;
+            
         }
 
         /// <summary>
@@ -78,6 +76,7 @@ namespace Mantesis2015.UserControls.Controller
         /// <param name="selectedEpoca">Epoca, Informe o Apéndice seleccionado</param>
         public void SeleccionaEpoca(DatosComp selectedEpoca)
         {
+            listaTesisWindow.CbxVolumen.DataContext = null;
             this.selectedEpoca = selectedEpoca;
 
             if (selectedEpoca != null)
@@ -115,7 +114,7 @@ namespace Mantesis2015.UserControls.Controller
                 Volumen selectedVolume = volumenSelect as Volumen;
                 ValuesMant.Volumen = selectedVolume.Volumenes;
                 permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                             where n.Volumen == selectedVolume.Volumenes
+                             where n.Volumenes == selectedVolume.Volumenes
                              select n).ToList().Count;
                 ValuesMant.Epoca = epoca.IdDato;
             }
@@ -128,8 +127,8 @@ namespace Mantesis2015.UserControls.Controller
                 Utils.GetVolumenesParte(ValuesMant.Parte);
                 ValuesMant.Volumen = selectedVolume.IdDato;
                 permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                             where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
-                             select n.Volumen).ToList().Count;
+                             where n.Volumenes >= ValuesMant.MinVolumen && n.Volumenes <= ValuesMant.MaxVolumen
+                             select n.Volumenes).ToList().Count;
                 ValuesMant.Epoca = 7;
             }
 
@@ -336,7 +335,7 @@ namespace Mantesis2015.UserControls.Controller
                         {
                             tesis.IsEliminated = isTesisEliminated;
 
-                            List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
+                            List<Volumen> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumenes == tesis.VolumenInt).ToList();
 
                             MessageBox.Show("Esta tesis fue eliminada");
 
@@ -348,7 +347,7 @@ namespace Mantesis2015.UserControls.Controller
                         {
                             tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
 
-                            List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
+                            List<Volumen> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumenes == tesis.VolumenInt).ToList();
 
                             if (tesis != null)
                             {
@@ -369,7 +368,7 @@ namespace Mantesis2015.UserControls.Controller
                     {
                         tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
 
-                        List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
+                        List<Volumen> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumenes == tesis.VolumenInt).ToList();
 
                         if (tesis.Parte >= 100 && tesis.Parte <= 145)
                         {
@@ -400,6 +399,52 @@ namespace Mantesis2015.UserControls.Controller
 
                 MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message);//, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+        }
+
+
+        /// <summary>
+        /// Permite observar todos los detalles de la tesis, además de sus datos de publicación
+        /// NO permite actulizar ningún dato de publicación
+        /// </summary>
+        /// <param name="materiasEstado">Indica si las materias SGA pueden ser actualizadas o no</param>
+        /// <param name="isTesisUpdatable">Indica si la tesis puede ser actualizada o no</param>
+        /// <param name="mainWindow">Ventana propietaria de la que esta por ser lanzada</param>
+        public void MostrarTesis(byte materiasEstado, bool isTesisUpdatable,MainWindow mainWindow)
+        {
+            if (listaTesis != null && listaTesis.Count > 0)
+            {
+                ValuesMant.IusActualLstTesis = this.selectedIus;
+                UnaTesis fUnaTesis = new UnaTesis(this.selectedIus, materiasEstado, listaTesis, this.selectedRowIndex, isTesisUpdatable);
+                fUnaTesis.Owner = mainWindow;
+                fUnaTesis.ShowDialog();
+
+                //MoveGridToIus(ValuesMant.IusActualLstTesis);
+            }
+        }
+
+        public void ExportarOptions(string id)
+        {
+            switch (id)
+            {
+                case "RBtnPdf":
+                    MessageBoxResult result = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                        new ListaTesisPdf().GeneraPdfConDetalleTesis(Convert.ToInt32(listaTesisWindow.CbxMaterias.SelectedValue));
+                    else if (result == MessageBoxResult.No)
+                        new ListaTesisPdf().GeneraPdfListaTesis(listaTesis, listaTesisWindow.CbEpoca.Text, listaTesisWindow.CbxVolumen.Text);
+                    break;
+                case "RBtnWord":
+                    MessageBoxResult result2 = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (result2 == MessageBoxResult.Yes)
+                        new ListaTesisWord().GeneraWordConDetalleTesis(Convert.ToInt32(listaTesisWindow.CbxMaterias.SelectedValue));
+                    else if (result2 == MessageBoxResult.No)
+                        new ListaTesisWord().GeneraWordListaTesis(listaTesis, listaTesisWindow.CbEpoca.Text, listaTesisWindow.CbxVolumen.Text);
+                    break;
+                case "RBtnSga":
+                    TablaSga tabla = new TablaSga();
+                    tabla.GeneraReporte();
+                    break;
             }
         }
 

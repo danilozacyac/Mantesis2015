@@ -2,446 +2,239 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Infragistics.Windows.DataPresenter;
-using Mantesis2015.Model;
-using Mantesis2015.Permisos;
-using Mantesis2015.Reportes;
+using AuthManager.Models;
+using AuthManager.PermisosSecciones;
+using AuthManager.PermisosVolumen;
+using CatalogoSga;
+using ClasifInformeSalas15;
 using MantesisVerIusCommonObjects.Dto;
-using MantesisVerIusCommonObjects.Model;
-using MantesisVerIusCommonObjects.Singletons;
-using MantesisVerIusCommonObjects.Utilities;
-using PVolumenesControl.Dao;
-using ScjnUtilities;
+using Telerik.Windows.Controls;
 using UtilsMantesis;
 
 namespace Mantesis2015.Controllers
 {
-    public class MainWindowController 
+    public class MainWindowController
     {
         readonly MainWindow main;
         private List<AddTesis> listaTesis;
-        //private List<AddTesis> listaTesisTemp;
-
-        //Datos de la tesis seleccionada
-        private int selectedIus;
-        private int selectedRowIndex;
-
-        private const string RegLoc = "Registros localizados : ";
 
         public MainWindowController(MainWindow main)
         {
             this.main = main;
         }
 
-        /// <summary>
-        /// Regresa las tesis del Volumen solicitado y posteriormente llama a setGRidResultados
-        /// </summary>
-        /// <param name="qMateria"></param>
-        public void GetTesisPorEpocaVolumen(int qMateria, object volumenSelect, DatosComp epoca,bool isApendice)
+        public void LaunchInformesPane()
         {
-            int permitido = 0;
-            if (isApendice)
-                ValuesMant.Epoca = 7;
-            else
-                ValuesMant.Epoca = epoca.IdDato;
-
-            if (volumenSelect is Volumen)
+            if (main.InformesPane == null)
             {
-                Volumen selectedVolume = volumenSelect as Volumen;
-                ValuesMant.Volumen = selectedVolume.Volumenes;
-                permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                             where n.Volumen == selectedVolume.Volumenes
-                             select n).ToList().Count;
+                main.InformesPane = new RadPane();
+                main.ClasifTesisInf = new VistaTesisPorClasif();
+                
+                main.InformesPane.Header = "Informe de Salas";
+                main.InformesPane.Content = main.ClasifTesisInf;
+                main.InformesPane.CanFloat = false;
+                main.MainPanel.Items.Add(main.InformesPane);
             }
-            else if (volumenSelect is DatosComp)// Si es apéndice
+            else if(main.InformesPane.IsVisible == false)
             {
-                DatosComp selectedVolume = volumenSelect as DatosComp;
-                this.SetSelectedApendice();
-
-                ValuesMant.Parte = Utils.GetParte(selectedVolume.IdDato, ValuesMant.ApendicNom);
-                Utils.GetVolumenesParte(ValuesMant.Parte);
-                ValuesMant.Volumen = selectedVolume.IdDato;
-                permitido = (from n in AccesoUsuarioModel.VolumenesPermitidos
-                             where n.Volumen >= ValuesMant.MinVolumen && n.Volumen <= ValuesMant.MaxVolumen
-                             select n.Volumen).ToList().Count;
+                main.InformesPane.IsHidden = false;
             }
+            
 
-            if (permitido == 0)
-            {
-                MessageBox.Show("No tiene permiso para revisar la información relacionada con este volumen", "  Aviso  ");
-                main.XamDataGridTesis.DataSource = new List<AddTesis>();
-                return;
-            }
-
-            ListaTesisModel listaTesisModel = new ListaTesisModel();
-            listaTesis = listaTesisModel.CargaTesisMantesisSql(qMateria);
-
-            main.XamDataGridTesis.DataSource = listaTesis;
-            main.XamDataGridTesis.Focus();
-            if (main.XamDataGridTesis.Records.Count == 0)
-            {
-                MessageBox.Show("No existe el registro");
-            }
-            else
-            {
-                main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
-                main.TxtRegs.Content = RegLoc + listaTesis.Count;
-            }
-
-            this.SetFiltroPorMateriaTomo();
-
-            main.GrExport.IsEnabled = true;
         }
 
-        public void GetTesisFiltradasPorMateria(int qMateria)
+        public void LaunchSeccionesPane()
         {
-            ListaTesisModel listaTesisModel = new ListaTesisModel();
-            listaTesis = listaTesisModel.CargaTesisMantesisSql(qMateria);
+            if (main.SeccionesPane == null)
+            {
+                main.SeccionesPane = new RadPane();
+                main.PermisosSecciones = new MainSeccionesPanel();
 
-            main.XamDataGridTesis.DataSource = listaTesis;
-            main.XamDataGridTesis.Focus();
-            if (main.XamDataGridTesis.Records.Count == 0)
-            {
-                MessageBox.Show("No existe el registro");
+                main.SeccionesPane.Header = "Permisos Secciones";
+                main.SeccionesPane.Content = main.PermisosSecciones;
+                main.SeccionesPane.CanFloat = false;
+                main.MainPanel.Items.Add(main.SeccionesPane);
             }
-            else
+            else if (main.SeccionesPane.IsVisible == false)
             {
-                main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
-                main.TxtRegs.Content = RegLoc + listaTesis.Count;
+                main.SeccionesPane.IsHidden = false;
             }
         }
 
-        public void GetTesisFiltradasPorTomo(int volumen)
+        public void LaunchVolumenesPane()
         {
-            ListaTesisModel listaTesisModel = new ListaTesisModel();
-            listaTesis = listaTesisModel.CargaTesisMantesisSql(volumen);
+            if (main.VolumenesPane == null)
+            {
+                main.VolumenesPane = new RadPane();
+                main.PermisosVolumenes = new MainVolumenPanel();
 
-            main.XamDataGridTesis.DataSource = listaTesis;
-            main.XamDataGridTesis.Focus();
-            if (main.XamDataGridTesis.Records.Count == 0)
-            {
-                MessageBox.Show("No existen registros");
+                main.VolumenesPane.Header = "Permisos Volumenes";
+                main.VolumenesPane.Content = main.PermisosVolumenes;
+                main.VolumenesPane.CanFloat = false;
+                main.MainPanel.Items.Add(main.VolumenesPane);
             }
-            else
+            else if (main.VolumenesPane.IsVisible == false)
             {
-                main.XamDataGridTesis.ActiveRecord = main.XamDataGridTesis.Records[0];
-                main.TxtRegs.Content = RegLoc + listaTesis.Count;
+                main.VolumenesPane.IsHidden = false;
             }
         }
 
-        /// <summary>
-        /// Llena el comboBox que permite filtrar la lista de materias de determinada época y tomo/número
-        /// de acuerdo a la materia o clasificación de las tesis
-        /// </summary>
-        private void SetFiltroPorMateriaTomo()
+        public void DeleteClasifTesis()
         {
-            main.CbxMaterias.Visibility = Visibility.Visible;
-            main.LblMaterias.Visibility = Visibility.Visible;
-            if (ValuesMant.Epoca == ConstMant.Apendice)
-            {
-                if (ValuesMant.ApendicNom == 6)
-                {
-                    this.CargaVolumenesApendice2011();
-                }
-                else
-                {
-                    main.CbxMaterias.Visibility = Visibility.Collapsed;
-                    main.LblMaterias.Visibility = Visibility.Collapsed;
-                }
-            }
-            else
-            {
-                main.CbxMaterias.ItemsSource = Utils.GetMateriasForFiltro();
-                main.CbxMaterias.DisplayMemberPath = "Descripcion";
-                main.CbxMaterias.SelectedValuePath = "IdDato";
-            }
+            main.ClasifTesisInf.EliminarRelacionTesis();
         }
 
-        /// <summary>
-        /// Devuelve el rango de volumenes para cada uno de los tomos del apéndice de 2011
-        /// </summary>
-        private void CargaVolumenesApendice2011()
+        public void ActualizaVarias()
         {
-            int volInicial = 0;
-            int volFinal = 0;
-            switch (MantesisVerIusCommonObjects.Utilities.ValuesMant.Volumen)
-            {
-                case 1:
-                    volInicial = 14000;//Constitucional
-                    volFinal = 14052;
-                    break;
-                case 2:
-                    volInicial = 14119; //Penal
-                    volFinal = 14127;
-                    break;
-                case 3:
-                    volInicial = 14128; //Administrativa
-                    volFinal = 14139;
-                    break;
-                case 4:
-                    volInicial = 14140; //Civil
-                    volFinal = 14162;
-                    break;
-                case 5:
-                    volInicial = 14163; //Laboral
-                    volFinal = 14179;
-                    break;
-                case 10:
-                    volInicial = 14194; //Electoral
-                    volFinal = 14195;
-                    break;
-                case 50:
-                    volInicial = 14053; // Procesal Constitucional
-                    volFinal = 14118;
-                    break;
-                case 51:
-                    volInicial = 14180; // Conflictos Competenciales
-                    volFinal = 14193;
-                    break;
-            }
-
-            main.CbxMaterias.ItemsSource = (from n in VolumenSingleton.Volumenes
-                                            where n.Volumenes == -1 || (n.Volumenes >= volInicial && n.Volumenes <= volFinal)
-                                            orderby n.Orden
-                                            select n).ToArray();
-            main.CbxMaterias.DisplayMemberPath = "VolumenTxt";
-            main.CbxMaterias.SelectedValuePath = "Volumenes";
+            main.ClasifTesisInf.ActualizarVarias();
         }
 
-        private void SetSelectedApendice()
-        {
-            if (main.epocaSelec.IdDato == 1995)
-            {
-                ValuesMant.ApendicNom = 1;
-            }
-            else if (main.epocaSelec.IdDato == 1988)
-            {
-                ValuesMant.ApendicNom = 2;
-            }
-            else if (main.epocaSelec.IdDato == 2000)
-            {
-                ValuesMant.ApendicNom = 3;
-            }
-            else if (main.epocaSelec.IdDato == 2001)
-            {
-                ValuesMant.ApendicNom = 4;
-            }
-            else if (main.epocaSelec.IdDato == 2002)
-            {
-                ValuesMant.ApendicNom = 5;
-            }
-            else if (main.epocaSelec.IdDato == 20011)
-            {
-                ValuesMant.ApendicNom = 6;
-            }
-        }
-        
-        //public void GetSearchResult(string search)
-        //{
-
-        //    if (!String.IsNullOrEmpty(search))
-        //    {
-        //        listaTesisTemp = (from n in listaTesis
-        //                          where n.Rubro.Contains(search) || n.Tesis.ToUpper().Contains(search)
-        //                          select n).ToList();
-        //        main.XamDataGridTesis.DataSource = listaTesisTemp;
-        //        main.TxtRegs.Content = RegLoc + listaTesisTemp.Count;
-        //    }
-        //    else
-        //    {
-        //        main.XamDataGridTesis.DataSource = listaTesis;
-        //        main.TxtRegs.Content = RegLoc + listaTesis.Count;
-        //    }
-        //}
-
-        public void MoveGridToIus(long nIus)
-        {
-            bool existe = false;
-            foreach (DataRecord item in main.XamDataGridTesis.Records)
-            {
-                if (nIus == Convert.ToInt32(item.Cells[1].Value))
-                {
-                    item.IsSelected = true;
-                    main.XamDataGridTesis.ActiveRecord = item;
-                    existe = true;
-                    break;
-                }
-            }
-
-            if (!existe)
-                MessageBox.Show("No existe el registro solicitado");
-        }
-
-        public void GetDatosTesisSeleccionada(Infragistics.Windows.DataPresenter.Events.RecordActivatedEventArgs e)
-        {
-            if (e.Record is DataRecord)
-            {
-                // Cast the record passed in as a DataRecord
-                DataRecord myRecord = (DataRecord)e.Record;
-                // Display the selected Records values in the appropriate 
-                // editor
-
-                this.selectedIus = Convert.ToInt32(myRecord.Cells[1].Value);
-                this.selectedRowIndex = myRecord.Index;
-            }
-        }
-
-        public void LaunchUnaTesis()
-        {
-            UnaTesis unaTesis = new UnaTesis(selectedIus, 1, listaTesis, selectedRowIndex, false);
-            unaTesis.ShowDialog();
-        }
-
-        public void LaunchPermisosVolumenes()
-        {
-            PVolumenes volumenes = new PVolumenes();
-            volumenes.ShowDialog();
-        }
-
-        public void LaunchPermisosSeccion()
-        {
-            SeccionAdmin secciones = new SeccionAdmin();
-            secciones.ShowDialog();
-        }
-
-        #region AccionesTesis
-
-        /// <summary>
-        /// Permite observar todos los detalles de la tesis, además de sus datos de publicación
-        /// NO permite actulizar ningún dato 
-        /// </summary>
-        /// <param name="materiasEstado">Indica si las materias SGA pueden ser actualizadas o no</param>
-        /// <param name="isTesisUpdatable">Indica si la tesis puede ser actualizada o no</param>
-        public void MostrarTesis(byte materiasEstado, bool isTesisUpdatable)
-        {
-            if (listaTesis != null && listaTesis.Count > 0)
-            {
-                ValuesMant.IusActualLstTesis = this.selectedIus;
-                UnaTesis fUnaTesis = new UnaTesis(this.selectedIus, materiasEstado, listaTesis, this.selectedRowIndex, isTesisUpdatable);
-
-                fUnaTesis.ShowDialog();
-
-                MoveGridToIus(ValuesMant.IusActualLstTesis);
-            }
-        }
-
-        #endregion 
-
-        public void GetTesisByVerIus(string txtNumIus)
-        {
-            bool updatablePerm = ((List<int>)main.VerIus.Tag).Contains(4);
-
-            try
-            {
-                if (txtNumIus.Length < 8)
-                {
-                    NumIusModel numIusModel = new NumIusModel();
-
-                    bool isTesisEliminated = numIusModel.GetCurrentTesisState(Convert.ToInt32(txtNumIus));
-                    TesisDto tesis;
-
-                    if (isTesisEliminated)//La tesis ya fue eliminada
-                    {
-                        tesis = numIusModel.BuscaTesisEliminadasPorRegistro(Convert.ToInt32(txtNumIus));
-
-                        if (tesis != null)
-                        {
-                            tesis.IsEliminated = isTesisEliminated;
-
-                            List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
-
-                            MessageBox.Show("Esta tesis fue eliminada");
-
-                            UnaTesis unaTesis = new UnaTesis(tesis, updatablePerm && volPerm.Count > 0);
-                            unaTesis.Tag = main.VerIus.Tag;
-                            unaTesis.ShowDialog();
-                        }
-                        else
-                        {
-                            tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
-
-                            List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
-
-                            if (tesis != null)
-                            {
-                                tesis.IsEliminated = isTesisEliminated;
-                                MessageBox.Show("Esta tesis fue eliminada");
-
-                                UnaTesis unaTesis = new UnaTesis(tesis, updatablePerm && volPerm.Count > 0);
-                                unaTesis.Tag = main.VerIus.Tag;
-                                unaTesis.ShowDialog();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Introduzca un número de registro valido");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        tesis = numIusModel.BuscaTesis(Convert.ToInt32(txtNumIus));
-
-                        List<VolumenesDao> volPerm = AccesoUsuarioModel.VolumenesPermitidos.Where(x => x.Volumen == tesis.VolumenInt).ToList();
-
-                        if (tesis.Parte >= 100 && tesis.Parte <= 145)
-                        {
-                            ValuesMant.Epoca = 7;
-                            ValuesMant.Volumen = tesis.VolumenInt;
-                        }
-
-                        if (tesis != null)
-                        {
-                            UnaTesis unaTesis = new UnaTesis(tesis, updatablePerm && volPerm.Count > 0);
-                            unaTesis.Tag = main.VerIus.Tag;
-                            unaTesis.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Introduzca un número de registro valido");
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Introduzca un número de registro valido");
-                }
-            }
-            catch (NullReferenceException ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message);//, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
-            }
-        }
 
         public void ExportarOptions(string id)
         {
-            switch (id)
+            //switch (id)
+            //{
+            //    case "RBtnPdf":
+            //        MessageBoxResult result = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            //        if (result == MessageBoxResult.Yes)
+            //            new ListaTesisPdf().GeneraPdfConDetalleTesis(Convert.ToInt32(main.CbxMaterias.SelectedValue));
+            //        else if (result == MessageBoxResult.No)
+            //            new ListaTesisPdf().GeneraPdfListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
+            //        break;
+            //    case "RBtnWord":
+            //        MessageBoxResult result2 = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            //        if (result2 == MessageBoxResult.Yes)
+            //            new ListaTesisWord().GeneraWordConDetalleTesis(Convert.ToInt32(main.CbxMaterias.SelectedValue));
+            //        else if (result2 == MessageBoxResult.No)
+            //            new ListaTesisWord().GeneraWordListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
+            //        break;
+            //    case "RBtnSga":
+            //        TablaSga tabla = new TablaSga();
+            //        tabla.GeneraReporte();
+            //        break;
+            //}
+        }
+
+
+        #region Materias SGA
+
+        public void LaunchMateriasSgaPane()
+        {
+            if (main.MateriasSgaPane == null)
             {
-                case "RBtnPdf":
-                    MessageBoxResult result = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
-                        new ListaTesisPdf().GeneraPdfConDetalleTesis(Convert.ToInt32(main.CbxMaterias.SelectedValue));
-                    else if (result == MessageBoxResult.No)
-                        new ListaTesisPdf().GeneraPdfListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
-                    break;
-                case "RBtnWord": 
-                    MessageBoxResult result2 = MessageBox.Show("¿Desea generar el reporte con el detalle de las tesis? Si su respuesta es NO solo se generará el listado de tesis", "Atención:", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                    if (result2 == MessageBoxResult.Yes)
-                        new ListaTesisWord().GeneraWordConDetalleTesis(Convert.ToInt32(main.CbxMaterias.SelectedValue));
-                    else if (result2 == MessageBoxResult.No)
-                        new ListaTesisWord().GeneraWordListaTesis(listaTesis, main.CbEpoca.Text, main.CbxVolumen.Text);
-                    break;
-                case "RBtnSga":
-                    TablaSga tabla = new TablaSga();
-                    tabla.GeneraReporte();
-                    break;
+                main.MateriasSgaPane = new RadPane();
+                main.CatalogMateriasSga = new MantoClasifSga();
+
+                main.MateriasSgaPane.Header = "Materias SGA";
+                main.MateriasSgaPane.Content = main.CatalogMateriasSga;
+                main.MateriasSgaPane.CanFloat = false;
+                main.MainPanel.Items.Add(main.MateriasSgaPane);
+            }
+            else if (main.MateriasSgaPane.IsVisible == false)
+            {
+                main.MateriasSgaPane.IsHidden = false;
             }
         }
-        
-        #region CargaPermisos
-    
+
+        public void MateriasEnPdf()
+        {
+            main.CatalogMateriasSga.ImprimeEstructuraPdf();
+        }
+
+        public void MateriasEnWord()
+        {
+            main.CatalogMateriasSga.ImprimeEstructuraWord();
+        }
+
+        public void ReasignaConsecutivo()
+        {
+            main.CatalogMateriasSga.ReasignarConsecutivo();
+        }
+
+        #endregion
+
+
+        #region Herramientas Administrativas
+
+
+        public void RefreshPermission(PermisosController permContr)
+        {
+            AccesoUsuarioModel.Permisos = new PermisosSeccionModel().GetSeccionesByUsuario(AccesoUsuarioModel.Llave);
+            AccesoUsuarioModel.VolumenesPermitidos = new VolumenesViewModel().GetVolumenesPorUser(AccesoUsuarioModel.Llave);
+            permContr.LoadPermission();
+            
+        }
+
+        public void AuthSeccion()
+        {
+            if (main.PermisosSecciones == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosSecciones.AuthSeccion();
+        }
+
+        public void DenySeccion()
+        {
+            if (main.PermisosSecciones == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosSecciones.DenegarPermiso();
+        }
+
+        public void ModificarPermisosSeccion()
+        {
+            if (main.PermisosSecciones == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosSecciones.ModificaPermisosDeSeccion();
+        }
+
+        public void AutorizarVolumen()
+        {
+            if (main.PermisosVolumenes == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosVolumenes.AutorizarVolumen();
+        }
+
+        public void DenegarVolumen()
+        {
+            if (main.PermisosVolumenes == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosVolumenes.DenegarVolumen();
+        }
+
+        public void AutorizarEpoca()
+        {
+            if (main.PermisosVolumenes == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosVolumenes.AutorizarEpoca();
+        }
+
+        public void DenegarEpoca()
+        {
+            if (main.PermisosVolumenes == null)
+            {
+                MessageBox.Show("Primer debes mostrar el listado y seleccionar un usuario");
+                return;
+            }
+            main.PermisosVolumenes.DenegarEpoca();
+        }
+
         #endregion
     }
 }

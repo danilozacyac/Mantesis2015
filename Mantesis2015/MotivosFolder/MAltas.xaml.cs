@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Model;
-using MantesisVerIusCommonObjects.Utilities;
+using ScjnUtilities;
 
 namespace Mantesis2015.MotivosFolder
 {
@@ -37,7 +37,7 @@ namespace Mantesis2015.MotivosFolder
             this.Title = "Motivos Alta del Registro: " + MantesisVerIusCommonObjects.Utilities.ValuesMant.IusActualLstTesis;
 
             MantesisVerIusCommonObjects.Utilities.ValuesMant.SelectedMotiv = false;
-            binaryMotivos = MiscFunct.ToBinaryInvert(lMotivoModif);
+            binaryMotivos = NumericUtilities.ToBinaryInvert(lMotivoModif);
             binaryArray = binaryMotivos.ToCharArray();
 
             MotivosModel motivosModifModel = new MotivosModel();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Mantesis2015.Controllers;
-using Mantesis2015.Model;
 using MantesisVerIusCommonObjects.Dto;
 using Microsoft.Windows.Controls.Ribbon;
 using UtilsMantesis;
@@ -17,9 +16,6 @@ namespace Mantesis2015
     {
 
         private UnaTesisController controller;
-
-        private UnaTesisModel unaTesisModel; 
-
 
         private long ius;
         private readonly byte accion;

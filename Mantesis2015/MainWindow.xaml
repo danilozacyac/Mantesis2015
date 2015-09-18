@@ -2,10 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
-        xmlns:igDP="http://infragistics.com/DataPresenter"
-        xmlns:igEditors="http://infragistics.com/Editors"
-        xmlns:igOutlookBar="http://infragistics.com/OutlookBar"
-        xmlns:igRibbon="http://infragistics.com/Ribbon"
+        xmlns:UserControls="clr-namespace:Mantesis2015.UserControls"
         xmlns:local="clr-namespace:Mantesis2015.Classes"
         xmlns:search="clr-namespace:UIControls;assembly=UIControls"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
@@ -14,443 +11,312 @@
         Height="900"
         Loaded="Window_Loaded"
         WindowState="Maximized">
-    <Window.Resources>
-        <local:ConverterBrush x:Key="ValueToBrushConverter" />
-        <Style x:Key="MyConvert" TargetType="{x:Type igEditors:XamNumericEditor}">
-            <Setter Property="Background" Value="{Binding Value, Converter={StaticResource ValueToBrushConverter}, RelativeSource={RelativeSource Self}}" />
-        </Style>
-        <Style x:Key="changeForeground" TargetType="{x:Type igDP:CellValuePresenter}">
-            <Setter Property="Foreground" Value="blue" />
-        </Style>
-
-
-        <local:ConverterRows x:Key="genderToColorConverter" />
-
-        <Style x:Key="MyConvertRow" TargetType="{x:Type igDP:DataRecordPresenter}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Opacity="0.3" Color="{Binding Cells[Tatj].Value, Converter={StaticResource genderToColorConverter}}" />
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
 
-        <igRibbon:XamRibbon Theme="Office2k7Black">
-            <igRibbon:XamRibbon.ApplicationMenu>
-                <igRibbon:ApplicationMenu Caption="File">
+        <telerik:RadRibbonView ApplicationName="Coordinación de Compilación y Sistematización de Tesis">
+            <telerik:RadRibbonTab Header="Mantenimiento">
+                <telerik:RadRibbonGroup Header="General" Uid="5">
+                    <telerik:RadRibbonButton x:Name="BtnNuevaTesis"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/addTesis_128.png"
+                                             Size="Large"
+                                             Tag="NewTesis">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Nueva" />
+                            <TextBlock HorizontalAlignment="Center" Text="Tesis" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnVisualizaTesis"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/viewTesis_128.png"
+                                             Size="Large"
+                                             Tag="ViewTesis">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Visualizar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Tesis" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnActualizaTesis"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/editTesis_128.png"
+                                             Size="Large"
+                                             Tag="EditTesis">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Actualizar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Tesis" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnEliminaTesis"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/delTesis_128.png"
+                                             Size="Large"
+                                             Tag="DelTesis">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Eliminar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Tesis" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Exportar" IsEnabled="False">
+                    <telerik:RadRibbonButton x:Name="RBtnPdf"
+                                             Click="ExportarGroupClick"
+                                             Content="PDF"
+                                             LargeImage="Resources/pdf_128.png"
+                                             Size="Large"
+                                             Tag="PDF" />
+                    <telerik:RadRibbonButton x:Name="RBtnWord"
+                                             Click="ExportarGroupClick"
+                                             Content="Word"
+                                             LargeImage="Resources/word_128.png"
+                                             Size="Large"
+                                             Tag="Word" />
+                    <telerik:RadRibbonButton x:Name="RBtnSga"
+                                             Click="ExportarGroupClick"
+                                             LargeImage="Resources/table_128.png"
+                                             Size="Large"
+                                             Tag="MatSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Reporte Mensual" />
+                            <TextBlock HorizontalAlignment="Center" Text="Materias SGA" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Mant. Materias SGA" IsEnabled="True">
+                    <telerik:RadRibbonButton x:Name="BtnStructMateriasSga"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/tree2_128.png"
+                                             Size="Large"
+                                             Tag="StructSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Mostrar" />
+                            <TextBlock HorizontalAlignment="Center" Text="estructura" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnEditStructSga"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/tree2_128_edit.png"
+                                             Size="Large"
+                                             Tag="EditStructSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Actualizar" />
+                            <TextBlock HorizontalAlignment="Center" Text="estructura" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnPrintSgaPdf"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/tree2_128_pdf.png"
+                                             Size="Large"
+                                             Tag="PdfStructSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Generar" />
+                            <TextBlock HorizontalAlignment="Center" Text="PDF" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnPrintSgaWord"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/tree2_128_word.png"
+                                             Size="Large"
+                                             Tag="WordStructSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Generar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Word" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="BtnReasignaOrden"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/number_128.png"
+                                             Size="Large"
+                                             Tag="WordStructSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Reasignar" />
+                            <TextBlock HorizontalAlignment="Center" Text="consecutivo" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
+            <telerik:RadRibbonTab x:Name="InformeTab"
+                                  Header="Informe de las Salas"
+                                  IsEnabled="True"
+                                  Uid="9">
+                <telerik:RadRibbonGroup Header="Clasificación">
+                    <telerik:RadRibbonButton x:Name="BtnMostrarProy"
+                                             Click="InformesButtonTools"
+                                             Content="Mostrar Proyectos"
+                                             LargeImage="Resources/show_128.png"
+                                             Size="Large"
+                                             Tag="MostrarProyecto" />
+                    <telerik:RadRibbonButton x:Name="BtnEliminarClasif"
+                                             Click="InformesButtonTools"
+                                             Content="Eliminar Clasificación"
+                                             LargeImage="Resources/delTesis_128.png"
+                                             Size="Large"
+                                             Tag="EliminaClasif" />
+                    <telerik:RadRibbonButton x:Name="BtnActualizaVarias"
+                                             Click="InformesButtonTools"
+                                             Content="Imprimir Listado"
+                                             LargeImage="Resources/checklist_128.png"
+                                             Size="Large"
+                                             Tag="ImprimirListado" />
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
+            <telerik:RadRibbonTab Header="Herramientas administrativas">
+                <telerik:RadRibbonGroup Header="Usuarios">
+                    <telerik:RadRibbonButton x:Name="RBtnListaUsuarios"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/1425495848_group.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Listado de" />
+                            <TextBlock HorizontalAlignment="Center" Text="usuarios" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <StackPanel Orientation="Vertical">
+                        <telerik:RadRibbonButton x:Name="RBtnAddUsuarios"
+                                                 Click="ButtonTool_Click"
+                                                 Content="Agregar"
+                                                 LargeImage="Resources/1425495825_add-user.png"
+                                                 Size="Medium" />
+                        <telerik:RadRibbonButton x:Name="RBtnEditUsuarios"
+                                                 Click="ButtonTool_Click"
+                                                 Content="Modificar"
+                                                 LargeImage="Resources/1425495839_edit-user.png"
+                                                 Size="Medium" />
+                        <telerik:RadRibbonButton x:Name="RBtnDelUsuarios"
+                                                 Click="ButtonTool_Click"
+                                                 Content="Inhabilitar"
+                                                 LargeImage="Resources/1425495857_delete-user.png"
+                                                 Size="Medium" />
+                    </StackPanel>
+                    <telerik:RadRibbonButton x:Name="RBtnRefreshPermisos"
+                                             Click="ButtonTool_Click"
+                                             Content="Recargar Permisos"
+                                             LargeImage="Resources/reload.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup x:Name="GroupPermisosSecciones" Header="Permisos secciones">
+                    <telerik:RadRibbonButton x:Name="RBtnPermisos"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/keys_128.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Permisos" />
+                            <TextBlock HorizontalAlignment="Center" Text="otorgados" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnAuthSeccion"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/unlock_128.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Autorizar " />
+                            <TextBlock HorizontalAlignment="Center" Text="sección " />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnDenySeccion"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/lock_128.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Denegar " />
+                            <TextBlock HorizontalAlignment="Center" Text="permiso " />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnEditAuthSec"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/editLock.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Modificar permisos " />
+                            <TextBlock HorizontalAlignment="Center" Text="de sección " />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup x:Name="GroupPermisosVolumen" Header="Permisos volumenes">
+                    <telerik:RadRibbonButton x:Name="RBtnVolumenes"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/locklist.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Volumenes" />
+                            <TextBlock HorizontalAlignment="Center" Text="Autorizados" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnAuthVolumen"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/flatCheck_128.png"
+                                             Size="Large">
 
-                    <igRibbon:ButtonTool x:Name="RBtnPermisos"
-                                         Caption="Permisos Secciones"
-                                         Click="ButtonTool_Click"
-                                         IsEnabled="False"
-                                         SmallImage="Resources/key.png" />
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Autorizar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Volumen" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnDenyVolumen"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/flatCross_128.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Denegar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Volumen" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnAuthEpocas"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/epocasAdd.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Autorizar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Épocas" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnDenyEpocas"
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/epocasRemove.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Denegar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Épocas" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
 
-                    <igRibbon:ButtonTool x:Name="RBtnVolumenes"
-                                         Caption="Permisos Volumenes"
-                                         Click="ButtonTool_Click"
-                                         IsEnabled="False"
-                                         SmallImage="Resources/lockVol.png" />
-
-                    <igRibbon:SeparatorTool />
-
-                    <igRibbon:ButtonTool x:Name="RBtnSalir"
-                                         Caption="Salir"
-                                         Click="ButtonTool_Click"
-                                         SmallImage="Resources/exit_128.png" />
-
-                </igRibbon:ApplicationMenu>
-            </igRibbon:XamRibbon.ApplicationMenu>
-            <igRibbon:RibbonTabItem Header="Mantenimiento">
-                <igRibbon:RibbonGroup Caption="General" Uid="5">
-                    <igRibbon:ButtonTool x:Name="BtnNuevaTesis"
-                                         Caption="Tesis Nueva"
-                                         Click="ButtonTool_Click"
-                                         Id="NewTesis"
-                                         IsEnabled="False"
-                                         LargeImage="Resources/addTesis_128.png"
-                                         SmallImage="Resources/addTesis_64.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool x:Name="BtnVisualizaTesis"
-                                         Caption="_Visualizar Tesis"
-                                         Click="ButtonTool_Click"
-                                         Id="ViewTesis"
-                                         IsEnabled="False"
-                                         LargeImage="Resources/viewTesis_128.png"
-                                         SmallImage="Resources/viewTesis_64.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool x:Name="BtnActualizaTesis"
-                                         Caption="Actualizar Tesis"
-                                         Click="ButtonTool_Click"
-                                         Id="EditTesis"
-                                         IsEnabled="False"
-                                         LargeImage="Resources/editTesis_128.png"
-                                         SmallImage="Resources/editTesis_64.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool x:Name="BtnEliminaTesis"
-                                         Caption="Eliminar Tesis"
-                                         Click="ButtonTool_Click"
-                                         Id="DelTesis"
-                                         IsEnabled="False"
-                                         LargeImage="Resources/delTesis_128.png"
-                                         SmallImage="Resources/delTesis_64.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                </igRibbon:RibbonGroup>
-                <igRibbon:RibbonGroup x:Name="GrExport"
-                                      Caption="Exportar"
-                                      IsEnabled="False">
-                    <igRibbon:ButtonTool x:Name="RBtnPdf"
-                                         Caption="PDF"
-                                         Click="ExportarGroupClick"
-                                         Id="PDF"
-                                         LargeImage="Resources/pdf_256.png"
-                                         SmallImage="Resources/pdf_128.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool x:Name="RBtnWord"
-                                         Caption="Word"
-                                         Click="ExportarGroupClick"
-                                         Id="Word"
-                                         LargeImage="Resources/word_256.png"
-                                         SmallImage="Resources/word_128.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                    <igRibbon:ButtonTool x:Name="RBtnSga"
-                                         Caption="Materias SGA"
-                                         Click="ExportarGroupClick"
-                                         Id="MatSga"
-                                         LargeImage="Resources/info_256.png"
-                                         SmallImage="Resources/info_128.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-
-                </igRibbon:RibbonGroup>
-
-
-            </igRibbon:RibbonTabItem>
-            <igRibbon:RibbonTabItem Header="Informe de las Salas" IsEnabled="False" >
-                <igRibbon:RibbonGroup Caption="Clasificación">
-                    <igRibbon:ButtonTool x:Name="BtnMostrarProy"
-                                         Caption="Mostrar Proyectos"
-                                         Id="MostrarProyecto"
-                                         IsEnabled="False"
-                                         LargeImage="Resources/delTesis_128.png"
-                                         SmallImage="Resources/delTesis_64.png"
-                                         igRibbon:RibbonGroup.MaximumSize="ImageAndTextLarge" />
-                </igRibbon:RibbonGroup>
-            </igRibbon:RibbonTabItem>
-            <igRibbon:RibbonTabItem Header="Herramientas administrativas" />
-        </igRibbon:XamRibbon>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <GroupBox x:Name="VerIus"
-                          Height="150"
-                          Margin="35,30,20,0"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Top"
-                          Header="Ver IUS"
-                          IsEnabled="False"
-                          Uid="3">
-                    <Grid>
-                        <Label Width="150"
-                               Height="20"
-                               Margin="10,16,10,22"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               Content="Núm. de registro:" />
-                        <TextBox x:Name="TxtVerIus"
-                                 Height="25"
-                                 Margin="10,23,10,22"
-                                 KeyDown="TxtVerIus_KeyDown"
-                                 PreviewTextInput="TxtIus_PreviewTextInput" />
-                        <Button x:Name="BtnVerIus"
-                                Width="80"
-                                Height="20"
-                                Margin="128,82,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Click="BtnVerIus_Click"
-                                Content="Buscar" />
-                    </Grid>
-                </GroupBox>
-                <GroupBox x:Name="EpocaVolumen"
-                          Height="200"
-                          Margin="35,220,20,0"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Top"
-                          Header="Selección"
-                          IsEnabled="False"
-                          Uid="2">
-                    <Grid>
-                        <ComboBox x:Name="CbEpoca"
-                                  Width="220"
-                                  Margin="10,47,0,0"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Top"
-                                  DisplayMemberPath="Descripcion"
-                                  FontSize="13"
-                                  ItemsSource="{Binding}"
-                                  SelectedValuePath="IdDato"
-                                  SelectionChanged="CbEpoca_SelectionChanged" />
-                        <Label Margin="10,101,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               Content="Tomo / Volumen / Libro / Número " />
-                        <ComboBox x:Name="CbxVolumen"
-                                  Width="220"
-                                  Margin="10,127,0,0"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Top"
-                                  FontSize="13"
-                                  SelectionChanged="CbxVolumen_SelectionChanged" />
-
-                        <!--
-                            <RadioButton x:Name="rbtAp17"
-                            Height="16"
-                            Margin="15,235,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="RadioApendiceChecked"
-                            Content="Apéndice 1917 a 1995"
-                            FontSize="14"
-                            Foreground="Black"
-                            IsEnabled="False"
-                            Tag="1995" />
-                            <RadioButton x:Name="rbtAp54"
-                            Height="16"
-                            Margin="15,255,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="RadioApendiceChecked"
-                            Content="Apéndice 1954 a 1988"
-                            FontSize="14"
-                            Foreground="Black"
-                            IsEnabled="False"
-                            Tag="1988" />
-                            <RadioButton x:Name="rbtAp2000"
-                            Height="16"
-                            Margin="15,275,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="RadioApendiceChecked"
-                            Content="Apéndice 2000"
-                            FontSize="14"
-                            Foreground="Black"
-                            IsEnabled="False"
-                            Tag="2000" />
-                            <RadioButton x:Name="rbtAp2001"
-                            Height="16"
-                            Margin="15,295,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="RadioApendiceChecked"
-                            Content="Apéndice 2001"
-                            FontSize="14"
-                            Foreground="Black"
-                            IsEnabled="False"
-                            Tag="2001" />
-                            <RadioButton x:Name="rbtAp2002"
-                            Margin="15,315,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="RadioApendiceChecked"
-                            Content="Apéndice 2002"
-                            FontSize="14"
-                            Foreground="Black"
-                            IsEnabled="False"
-                            Tag="2002" />
-                            <RadioButton x:Name="rbtAp2011"
-                            Height="16"
-                            Margin="15,335,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Checked="RadioApendiceChecked"
-                            Content="Apéndice 2011"
-                            FontSize="14"
-                            Foreground="Black"
-                            IsEnabled="False"
-                            Tag="2011" />
-                        -->
-
-
-                        <telerik:RadRadioButton x:Name="RRadEpocas"
-                                                Width="70"
-                                                Height="23"
-                                                Margin="10,10,0,0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                Checked="RRadEpocas_Checked"
-                                                Content="Épocas" />
-                        <telerik:RadRadioButton x:Name="RRadApendices"
-                                                Width="70"
-                                                Height="23"
-                                                Margin="85,10,0,0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                Checked="RRadApendices_Checked"
-                                                Content="Apéndices" />
-                        <telerik:RadRadioButton x:Name="RRadInformes"
-                                                Width="70"
-                                                Height="23"
-                                                Margin="160,10,0,0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                Checked="RRadInformes_Checked"
-                                                Content="Informes" />
-                    </Grid>
-                </GroupBox>
-                <Label x:Name="TxtRegs"
-                       Margin="35,612,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Content=""
-                       FontSize="14"
-                       FontWeight="Bold" />
-
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
+            </telerik:RadRibbonTab>
+        </telerik:RadRibbonView>
 
 
-                <igDP:XamDataGrid x:Name="XamDataGridTesis"
-                                  Grid.Row="1"
-                                  Height="Auto"
-                                  Margin="0,0,0,0"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch"
-                                  GroupByAreaLocation="None"
-                                  Loaded="XamDataGridTesis_Loaded"
-                                  MouseDoubleClick="XamDataGridTesis_MouseDoubleClick"
-                                  PreviewMouseDoubleClick="XamDataGridTesis_PreviewMouseDoubleClick"
-                                  RecordActivated="XamDataGridTesis_RecordActivated"
-                                  Sorting="XamDataGridTesis_Sorting">
 
-                    <igDP:XamDataGrid.Resources>
-                        <Style TargetType="{x:Type igDP:DataRecordCellArea}">
-                            <Setter Property="BackgroundSelected" Value="#FF757D9D" />
-                            <Setter Property="BackgroundActive" Value="#FFC5CED8" />
-                        </Style>
-
-                    </igDP:XamDataGrid.Resources>
-
-                    <igDP:XamDataGrid.FieldSettings>
-                        <igDP:FieldSettings AllowEdit="False" CellClickAction="SelectRecord" />
-                    </igDP:XamDataGrid.FieldSettings>
-
-                    <igDP:XamDataGrid.FieldLayouts>
-                        <igDP:FieldLayout>
-
-                            <igDP:Field Name="ID"
-                                        Width="60"
-                                        Label=" ID " />
-                            <igDP:Field Name="Ius4"
-                                        Width="70"
-                                        Label="IUS" />
-                            <igDP:Field Name="Tesis"
-                                        Width="90"
-                                        Label="Tesis" />
-                            <igDP:Field Name="Rubro"
-                                        Width="*"
-                                        Label="Rubro">
-
-                                <igDP:Field.Settings>
-                                    <igDP:FieldSettings>
-                                        <igDP:FieldSettings.CellValuePresenterStyle>
-                                            <Style TargetType="{x:Type igDP:CellValuePresenter}">
-
-                                                <Setter Property="ToolTip" Value="{Binding Value, RelativeSource={RelativeSource Self}}" />
-
-                                            </Style>
-                                        </igDP:FieldSettings.CellValuePresenterStyle>
-
-                                    </igDP:FieldSettings>
-                                </igDP:Field.Settings>
-
-                            </igDP:Field>
-
-                            <igDP:Field Name="Pagina"
-                                        Width="70"
-                                        Label="Pagina" />
-                            <igDP:Field Name="Estado" Label="Estado" />
-                            <igDP:Field Name="Tatj" Visibility="Collapsed">
-                                <igDP:Field.Settings>
-                                    <igDP:FieldSettings EditorStyle="{StaticResource MyConvert}" />
-                                </igDP:Field.Settings>
-                            </igDP:Field>
-                            <igDP:Field Name="PaginaNum"
-                                        Label="Pagina"
-                                        Visibility="Collapsed" />
-                            <igDP:Field Name="Volumen"
-                                        Label="Volumen"
-                                        Visibility="Collapsed" />
-
-                        </igDP:FieldLayout>
-                    </igDP:XamDataGrid.FieldLayouts>
-                </igDP:XamDataGrid>
-                <Label Margin="20,19,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Content="IUS:" />
-                <TextBox x:Name="TxtIus"
-                         Width="120"
-                         Height="23"
-                         Margin="57,12,0,0"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         KeyDown="TxtIus_KeyDown"
-                         PreviewTextInput="TxtIus_PreviewTextInput"
-                         TextWrapping="Wrap" />
-                <Button x:Name="BtnIusLista"
-                        Grid.Row="0"
-                        Width="45"
-                        Height="23"
-                        Margin="182,11,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Click="BtnIusLista_Click"
-                        Content="Buscar"
-                        FontWeight="Bold" />
-                <Label x:Name="LblMaterias"
-                       Margin="564,19,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Content="Materia" />
-                <ComboBox x:Name="CbxMaterias"
-                          Width="216"
-                          Margin="619,13,0,0"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          SelectionChanged="CbxMaterias_SelectionChanged" />
-
-                <!--
-                    <search:SearchTextBox x:Name="SbxRubroClave"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Width="200"
-                    Height="21"
-                    Margin="300,13,0,0"
-                    LabelText="Buscar por rubro o clave de tesis"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Search="SearchTextBox_Search" />
-                -->
-
-            </Grid>
-        </Grid>
+        <Grid Grid.Row="1" />
+        <telerik:RadDocking x:Name="CentralPanel"
+                            Grid.Row="1"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+            <telerik:RadDocking.DocumentHost>
+                <telerik:RadSplitContainer>
+                    <telerik:RadPaneGroup x:Name="MainPanel">
+                        <telerik:RadPane CanFloat="False"
+                                         CanUserClose="False"
+                                         Header="Mantesis">
+                            <UserControls:ListaDeTesis x:Name="MantesisPane" />
+                        </telerik:RadPane>
+                    </telerik:RadPaneGroup>
+                </telerik:RadSplitContainer>
+            </telerik:RadDocking.DocumentHost>
+        </telerik:RadDocking>
 
     </Grid>
 </Window>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mantesis2015", "Mantesis2015\Mantesis2015.csproj", "{1240EE2A-2B69-4D8D-9551-2EE268198422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MantesisVerIusCommonObjects", "..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\MantesisVerIusCommonObjects.csproj", "{55774867-D0C0-432C-B803-F5A2F9BC267E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MantesisVerIusCommonObjects", "..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\MantesisVerIusCommonObjects.csproj", "{55774867-D0C0-432C-B803-F5A2F9BC267E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsMantesis", "..\..\..\Visual Studio 2010\Projects\MantesisWpf\UtilsMantesis\UtilsMantesis.csproj", "{C709CB57-E5DC-4C0E-A72E-7A85972B2E04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsMantesis", "..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\UtilsMantesis\UtilsMantesis.csproj", "{C709CB57-E5DC-4C0E-A72E-7A85972B2E04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

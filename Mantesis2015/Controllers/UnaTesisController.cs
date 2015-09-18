@@ -4,7 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Mantesis2015.MateriasSga;
+using CatalogoSga;
+using CatalogoSga.Model;
 using Mantesis2015.Model;
 using Mantesis2015.MotivosFolder;
 using Mantesis2015.Reportes;
@@ -481,14 +482,15 @@ namespace Mantesis2015.Controllers
 
         public void LaunchSga()
         {
-            MateriasSgaWin sga = new MateriasSgaWin(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
+            //MateriasSgaWin sga = new MateriasSgaWin(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
+            RelacionaMateriaSga sga = new RelacionaMateriaSga(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
             sga.Tag = unaTesis.RBtnSga.Tag;
             sga.ShowDialog();
 
             if (sga.DialogResult == true)
             {
                 tesisMostrada.MotivoModificar += 33554432;
-                tesisMostrada.MateriasSga = MateriasViewModel.GetMateriasRelacionadas(tesisMostrada.Ius);
+                tesisMostrada.MateriasSga = new ClasificacionSgaModel().GetMateriasRelacionadas(tesisMostrada.Ius);
             }
             
 

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\obj\Debug\
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\obj\Debug\
 Mantesis2015
 none
 false
 DEBUG;TRACE
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\Mantesis2015\Mantesis2015\App.xaml
-13-317499295
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\App.xaml
+12-2057893795
 
-4246255424
-441484684200
-BitacoraWin.xaml;MateriasSga\MateriasSgaWin.xaml;MainWindow.xaml;MotivosFolder\MAltas.xaml;MotivosFolder\MBaja.xaml;MotivosFolder\MModificacion.xaml;Prueba.xaml;Themes\Botones.xaml;Themes\ShinyBlue.xaml;Themes\ShinyRed.xaml;UnaTesis.xaml;UserControls\ListaDeTesis.xaml;UserControls\TextControlView.xaml;
+391195853585
+44-330675609
+BitacoraWin.xaml;MainWindow.xaml;MotivosFolder\MAltas.xaml;MotivosFolder\MBaja.xaml;MotivosFolder\MModificacion.xaml;Prueba.xaml;Themes\Botones.xaml;Themes\ShinyBlue.xaml;Themes\ShinyRed.xaml;UnaTesis.xaml;UserControls\ListaDeTesis.xaml;UserControls\TextControlView.xaml;
 
-True
+False
 

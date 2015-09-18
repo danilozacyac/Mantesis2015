@@ -76,8 +76,9 @@
     <Reference Include="AuthManager">
       <HintPath>..\..\MantAuthManager\AuthManager\bin\Debug\AuthManager.dll</HintPath>
     </Reference>
-    <Reference Include="CatalogoSga">
-      <HintPath>..\..\..\..\Visual Studio 2010\Projects\MateriasSGACatalog\CatalogoSga\bin\Debug\CatalogoSga.dll</HintPath>
+    <Reference Include="CatalogoSga, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MateriasSGACatalog\CatalogoSga\bin\Debug\CatalogoSga.dll</HintPath>
     </Reference>
     <Reference Include="ClasifInformeSalas15">
       <HintPath>..\..\ClasifInformeSalas\ClasifInformeSalas\bin\Debug\ClasifInformeSalas15.dll</HintPath>
@@ -98,6 +99,9 @@
     </Reference>
     <Reference Include="MantesisAdminUtil">
       <HintPath>..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisWpf\bin\Debug\MantesisAdminUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="MantesisVerIusCommonObjects">
+      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\bin\Debug\MantesisVerIusCommonObjects.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -136,6 +140,9 @@
     <Reference Include="UIAutomationTypes" />
     <Reference Include="UIControls">
       <HintPath>..\..\ModuloIntercomunicacion\ModuloIntercomunicacion\bin\Debug\UIControls.dll</HintPath>
+    </Reference>
+    <Reference Include="UtilsMantesis">
+      <HintPath>..\..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\bin\Debug\UtilsMantesis.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -366,16 +373,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\info_256.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisVerIusCommonObjects\MantesisVerIusCommonObjects.csproj">
-      <Project>{55774867-d0c0-432c-b803-f5a2f9bc267e}</Project>
-      <Name>MantesisVerIusCommonObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\UtilsMantesis\UtilsMantesis.csproj">
-      <Project>{c709cb57-e5dc-4c0e-a72e-7a85972b2e04}</Project>
-      <Name>UtilsMantesis</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\addTesis_64.png" />

@@ -70,6 +70,8 @@ namespace Mantesis2015
         {
             controller.LoadTesisWindow(this.ius);
             this.Title = (IsTesisUpdatable) ? "Actualizar Tesis" : "Visualizar Tesis";
+
+            
         }
 
         private void RibbonButton_Click(object sender, RoutedEventArgs e)
@@ -122,6 +124,11 @@ namespace Mantesis2015
         private void BtnTesisElim_Click(object sender, RoutedEventArgs e)
         {
             controller.TesisEliminar(this.ius);
+        }
+
+        private void TextBoxCh(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            //controller.CambioCuadroTexto(sender, e);
         }
 
         

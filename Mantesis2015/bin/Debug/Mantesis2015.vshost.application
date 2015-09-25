@@ -14,14 +14,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Mantesis2015.exe.manifest" size="22844">
+    <dependentAssembly dependencyType="install" codebase="Mantesis2015.exe.manifest" size="23494">
       <assemblyIdentity name="Mantesis2015.exe" version="1.0.0.10" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WwMtEEM0YF+9ivaSm8fcOn01BNn3UIiOTLz0Lo2bCMY=</dsig:DigestValue>
+        <dsig:DigestValue>uL1H6AXp2A61lmoGl14RwelDWPUXKWe+Xfa/haoCMn0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

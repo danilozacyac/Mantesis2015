@@ -123,6 +123,16 @@ namespace Mantesis2015.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap analyze {
+            get {
+                object obj = ResourceManager.GetObject("analyze", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap back {
             get {
                 object obj = ResourceManager.GetObject("back", resourceCulture);
@@ -186,6 +196,16 @@ namespace Mantesis2015.Properties {
         internal static System.Drawing.Bitmap colorBooks_128 {
             get {
                 object obj = ResourceManager.GetObject("colorBooks_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap compare_128 {
+            get {
+                object obj = ResourceManager.GetObject("compare_128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

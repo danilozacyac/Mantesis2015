@@ -80,6 +80,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\MateriasSGACatalog\CatalogoSga\bin\Debug\CatalogoSga.dll</HintPath>
     </Reference>
+    <Reference Include="CheckPrecedentes">
+      <HintPath>..\..\ChecaPrecedentes\CheckPrecedentes\bin\Debug\CheckPrecedentes.dll</HintPath>
+    </Reference>
     <Reference Include="ClasifInformeSalas15">
       <HintPath>..\..\ClasifInformeSalas\ClasifInformeSalas\bin\Debug\ClasifInformeSalas15.dll</HintPath>
     </Reference>
@@ -165,12 +168,7 @@
     <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\UnaTesisController.cs" />
     <Compile Include="Dto\Estructura.cs" />
-    <Compile Include="MateriasSga\MateriasSgaWin.xaml.cs">
-      <DependentUpon>MateriasSgaWin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dto\TesisReferencia.cs" />
-    <Compile Include="MateriasSga\MateriasModel.cs" />
-    <Compile Include="MateriasSga\MateriasViewModel.cs" />
     <Compile Include="Model\AccesoModel.cs" />
     <Compile Include="Model\EstructuraModel.cs" />
     <Compile Include="Model\ListaTesisModel.cs" />
@@ -205,10 +203,6 @@
       <DependentUpon>TextControlView.xaml</DependentUpon>
     </Compile>
     <Page Include="BitacoraWin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MateriasSga\MateriasSgaWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -527,6 +521,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\tree2_128_word.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\compare_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\analyze.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

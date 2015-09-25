@@ -90,6 +90,10 @@ namespace Mantesis2015.Controllers
                         main.BtnPrintSgaPdf.IsEnabled = (permisosSeccion.Contains(16)) ? true : false;
                         main.BtnPrintSgaWord.IsEnabled = (permisosSeccion.Contains(16)) ? true : false;
                     }
+                    else if (seccion.IdSeccion == 26)
+                    {
+                        main.GroupVerificadores.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                    }
                 }
             }
             else

@@ -422,7 +422,7 @@
                                      Text="{Binding Rubro,
                                                     Mode=TwoWay}"
                                      TextAlignment="Justify"
-                                     TextWrapping="Wrap" />
+                                     TextWrapping="Wrap" TextChanged="TextBoxCh" />
                             <Label Grid.Row="1"
                                    Margin="10,10,0,0"
                                    HorizontalAlignment="Left"
@@ -441,7 +441,7 @@
                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                                      Text="{Binding Texto,
                                                     Mode=TwoWay}"
-                                     TextWrapping="Wrap" />
+                                     TextWrapping="Wrap" TextChanged="TextBoxCh" />
                             <Label Grid.Row="2"
                                    Margin="10,10,0,0"
                                    HorizontalAlignment="Left"
@@ -460,6 +460,7 @@
                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                                      Text="{Binding Precedentes,
                                                     Mode=TwoWay}"
+                                     TextChanged="TextBoxCh"
                                      TextWrapping="Wrap" />
                         </Grid>
                     </igWindows:TabItemEx>

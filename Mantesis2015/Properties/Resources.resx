@@ -325,4 +325,10 @@
   <data name="tree2_128_word" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tree2_128_word.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="compare_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\compare_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="analyze" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\analyze.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

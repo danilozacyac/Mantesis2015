@@ -4,6 +4,7 @@ using System.Windows;
 using AuthManager.PermisosSecciones;
 using AuthManager.PermisosVolumen;
 using CatalogoSga;
+using CheckPrecedentes;
 using ClasifInformeSalas15;
 using Mantesis2015.Controllers;
 using Mantesis2015.Model;
@@ -27,6 +28,9 @@ namespace Mantesis2015
 
         public RadPane MateriasSgaPane;
         public MantoClasifSga CatalogMateriasSga;
+
+        public RadPane ChecaPrecPane;
+        public ChecaPrecedentes PanelPrecede;
 
         /**
          * Controles de usuario
@@ -117,6 +121,12 @@ namespace Mantesis2015
                 case "RBtnAuthEpocas": controller.AutorizarEpoca();
                     break;
                 case "RBtnDenyEpocas": controller.DenegarEpoca();
+                    break;
+
+                    //Verificadores
+                case "RBtnComparaBases": controller.LaunchVerificadorBases();
+                    break;
+                case "RBtnTesisTotales": controller.LaunchTesisTotales();
                     break;
             }
 

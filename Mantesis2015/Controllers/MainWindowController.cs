@@ -6,6 +6,7 @@ using AuthManager.Models;
 using AuthManager.PermisosSecciones;
 using AuthManager.PermisosVolumen;
 using CatalogoSga;
+using CheckPrecedentes;
 using ClasifInformeSalas15;
 using MantesisVerIusCommonObjects.Dto;
 using Telerik.Windows.Controls;
@@ -77,6 +78,31 @@ namespace Mantesis2015.Controllers
             {
                 main.VolumenesPane.IsHidden = false;
             }
+        }
+
+        public void LaunchVerificadorBases()
+        {
+            if (main.ChecaPrecPane == null)
+            {
+                main.ChecaPrecPane = new RadPane();
+                main.PanelPrecede = new ChecaPrecedentes();
+
+                main.ChecaPrecPane.Header = "Verificar integridad";
+                main.ChecaPrecPane.Content = main.PanelPrecede;
+                main.ChecaPrecPane.CanFloat = false;
+                main.MainPanel.Items.Add(main.ChecaPrecPane);
+            }
+            else if (main.ChecaPrecPane.IsVisible == false)
+            {
+                main.ChecaPrecPane.IsHidden = false;
+            }
+        }
+
+        public void LaunchTesisTotales()
+        {
+            RevisaTotales total = new RevisaTotales();
+            total.Owner = main;
+            total.ShowDialog();
         }
 
         public void DeleteClasifTesis()

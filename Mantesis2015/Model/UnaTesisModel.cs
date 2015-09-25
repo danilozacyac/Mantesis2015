@@ -6,8 +6,8 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
+using CatalogoSga.Model;
 using Mantesis2015.Dto;
-using Mantesis2015.MateriasSga;
 using MantesisVerIusCommonObjects.DataAccess;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Utilities;
@@ -159,7 +159,7 @@ namespace Mantesis2015.Model
                     tesis.NotasGaceta = reader["NotaGaceta"].ToString();
                     tesis.NotaPublica = reader["NotaPublica"].ToString();
                     tesis.IsNotasModif = Convert.ToBoolean((reader["ModificadoNotas"].Equals(DBNull.Value)) ? 0 : Convert.ToInt16(reader["ModificadoNotas"]));
-                    tesis.MateriasSga = MateriasViewModel.GetMateriasRelacionadas(tesis.Ius);
+                    tesis.MateriasSga = new ClasificacionSgaModel().GetMateriasRelacionadas(tesis.Ius);
                 }
             }
             catch (SqlException ex)

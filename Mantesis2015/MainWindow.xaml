@@ -294,6 +294,27 @@
                         </StackPanel>
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup x:Name="GroupVerificadores" Header="Verificadores" IsEnabled="False">
+                    <telerik:RadRibbonButton x:Name="RBtnComparaBases"
+                                                  Click="ButtonTool_Click"
+                                                  LargeImage="Resources/compare_128.png"
+                                                  Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Comparar bases" />
+                            <TextBlock HorizontalAlignment="Center" Text="de datos" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnTesisTotales"
+                                                  Click="ButtonTool_Click"
+                                                  LargeImage="Resources/analyze.png"
+                                                  Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Comprobar" />
+                            <TextBlock HorizontalAlignment="Center" Text="totales" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+
+                </telerik:RadRibbonGroup>
 
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
@@ -311,7 +332,7 @@
                         <telerik:RadPane CanFloat="False"
                                          CanUserClose="False"
                                          Header="Mantesis">
-                            <UserControls:ListaDeTesis x:Name="MantesisPane" />
+                              <UserControls:ListaDeTesis x:Name="MantesisPane" />  
                         </telerik:RadPane>
                     </telerik:RadPaneGroup>
                 </telerik:RadSplitContainer>

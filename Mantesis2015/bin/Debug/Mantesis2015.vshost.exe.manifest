@@ -67,6 +67,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CheckPrecedentes.dll" size="39936">
+      <assemblyIdentity name="CheckPrecedentes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>tBJVjtP17fRWXtNTMw0CTdDc2IYTNOiGKZae6WOiQJU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasifInformeSalas15.dll" size="137216">
       <assemblyIdentity name="ClasifInformeSalas15" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -127,14 +139,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1890304">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1929728">
       <assemblyIdentity name="Mantesis2015" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>v+USjGTSRVTBPHP1zxkPCcdC9fhD/HGITzOHickF8Zw=</dsig:DigestValue>
+        <dsig:DigestValue>/UHdhwViQCpk6P0k0GskmeRKAU0HJ2D8ZT/Oo1H8dT4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -158,7 +170,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>8m4xFZa6bSYRaGLd8vI+ErRbEUP9qBw7/CAE2jLTkis=</dsig:DigestValue>
+        <dsig:DigestValue>XhdoxtQolu97oD44++FhJ/4VSmVGZLAXgeJ1swPjQ9w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

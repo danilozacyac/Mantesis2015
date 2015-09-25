@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using CatalogoSga;
 using CatalogoSga.Model;
@@ -38,7 +39,7 @@ namespace Mantesis2015.Controllers
         private bool isModifNotasGaceta = false;
         private bool isModifNotaPublica = false;
 
-
+        private string binaryMotivos;
 
 
         public UnaTesisController(UnaTesis unaTesis)
@@ -61,6 +62,9 @@ namespace Mantesis2015.Controllers
             LoadTesis(ius);
             LoadNoBindingValues();
             permisosCon.SetPermisosUnaTesis();
+
+            //tesisMostrada.PropertyChanged += TesisDto_PropertyChanged;
+            
         }
 
         /// <summary>
@@ -94,7 +98,7 @@ namespace Mantesis2015.Controllers
                 unaTesis.Navega.IsEnabled = false;
             }
 
-            tesisMostrada.PropertyChanged += TesisDto_PropertyChanged;
+            
             
         }
 
@@ -108,6 +112,8 @@ namespace Mantesis2015.Controllers
             unaTesis.CbxMat3.ItemsSource = Utils.GetMateriasForComboBox();
             unaTesis.CbxMat4.ItemsSource = Utils.GetMateriasForComboBox();
             unaTesis.CbxMat5.ItemsSource = Utils.GetMateriasForComboBox();
+
+
         }
 
         public void LoadNoBindingValues()
@@ -134,11 +140,14 @@ namespace Mantesis2015.Controllers
                 unaTesis.RbtJurisp.IsChecked = true;
                 unaTesis.RbtJurisp.FontWeight = System.Windows.FontWeights.Bold;
             }
+
+            binaryMotivos = NumericUtilities.ToBinaryInvert(tesisMostrada.MotivoModificar);
+            binaryArray = binaryMotivos.ToCharArray();
         }
 
         private char[] binaryArray;
         private string sCamposModif = "";
-        private void TesisDto_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void TesisDto_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -168,6 +177,7 @@ namespace Mantesis2015.Controllers
                     else
                     {
                         tesisMostrada.MotivoModificar += 256;
+                        
                     }
                     break;
                 case "Precedentes":
@@ -260,6 +270,8 @@ namespace Mantesis2015.Controllers
                     break;
             }
         }
+
+        
 
         public void GuardarCambios()
         {

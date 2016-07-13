@@ -6,6 +6,7 @@ using Mantesis2015.Controllers;
 using MantesisVerIusCommonObjects.Dto;
 using Microsoft.Windows.Controls.Ribbon;
 using UtilsMantesis;
+using Telerik.Windows.Controls;
 
 namespace Mantesis2015
 {
@@ -76,42 +77,44 @@ namespace Mantesis2015
 
         private void RibbonButton_Click(object sender, RoutedEventArgs e)
         {
-            RibbonButton ribbon = sender as RibbonButton;
+            RadRibbonButton ribbon = sender as RadRibbonButton;
 
             switch (ribbon.Name)
             {
-                case "RbtnInicio": controller.TesisStart();
+                case "RBtnInicio": controller.TesisStart();
                     break;
-                case "RbtnPrevious": controller.TesisPrevious();
+                case "RBtnAnterior": controller.TesisPrevious();
                     break;
-                case "RbtnNext": controller.TesisNext();
+                case "RBtnSiguiente": controller.TesisNext();
                     break;
-                case "RbtnFin": controller.TesisEnd();
+                case "RBtnFin": controller.TesisEnd();
                     break;
-                case "RbtnClipboard": controller.TesisToClipboard(1);
+                case "RBtnClipTesis": controller.TesisToClipboard(1);
                     break;
-                case "RbtnLigas": controller.LaunchLigasPreview();
+                case "RBtnLigas": controller.LaunchLigasPreview();
                     break;
-                case "RbtnBitacora": controller.LaunchBitacora();
+                case "RBtnBitacora": controller.LaunchBitacora();
                     break;
-                case "BtnCIus": controller.TesisToClipboard(2);
+                case "RBtnClipIus": controller.TesisToClipboard(2);
                     break;
-                case "BtnCRubro": controller.TesisToClipboard(3);
+                case "RBtnClipRubro": controller.TesisToClipboard(3);
                     break;
-                case "BtnCTexto": controller.TesisToClipboard(4);
+                case "RBtnClipTexto": controller.TesisToClipboard(4);
                     break;
-                case "BtnCPrec": controller.TesisToClipboard(5);
+                case "RBtnClipPrece": controller.TesisToClipboard(5);
                     break;
                 case "RBtnSalir": this.Close();
                     break;
-                case "RBtnSga": controller.LaunchSga();
+                case "RBtnMateriasSga": controller.LaunchSga();
                     break;
             }
         }
 
+        
+
         private void ExportarGroupClick(object sender, RoutedEventArgs e)
         {
-            RibbonButton action = sender as RibbonButton;
+            RadRibbonButton action = sender as RadRibbonButton;
             controller.ExportarOptions(action.Name);
 
         }
@@ -130,6 +133,8 @@ namespace Mantesis2015
         {
             //controller.CambioCuadroTexto(sender, e);
         }
+
+        
 
         
     }

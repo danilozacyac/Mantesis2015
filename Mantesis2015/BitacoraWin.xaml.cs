@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MantesisVerIusCommonObjects.Model;
+using System.Collections.Generic;
 using System.Windows;
-using Infragistics.Windows.Editors;
-using MantesisVerIusCommonObjects.Model;
 
 
 namespace Mantesis2015
@@ -9,7 +8,7 @@ namespace Mantesis2015
     /// <summary>
     /// Lógica de interacción para BitacoraWin.xaml
     /// </summary>
-    public partial class BitacoraWin : Window
+    public partial class BitacoraWin 
     {
         private long ius;
 
@@ -25,14 +24,10 @@ namespace Mantesis2015
 
             BitacoraModel bitacora = new BitacoraModel();
 
-            Style wrapstyle = new Style(typeof(XamTextEditor));
-            wrapstyle.Setters.Add(new Setter(XamTextEditor.TextWrappingProperty, TextWrapping.Wrap));
-            xamBitacora.FieldSettings.EditorStyle = wrapstyle;
+            GBitacora.DataContext = bitacora.GetBitacoraCambios(ius);
 
-            xamBitacora.DataSource = bitacora.GetBitacoraCambios(ius);
-
-            if(!permisos.Contains(16))
-                xamBitacora.Records.FieldLayout.Fields[4].Visibility = System.Windows.Visibility.Collapsed;
+            if (!permisos.Contains(16))
+                GBitacora.Columns[4].IsVisible = false;
 
         }
 

@@ -86,9 +86,11 @@ namespace Mantesis2015.Controllers
                     else if (seccion.IdSeccion == 25)
                     {
                         main.BtnStructMateriasSga.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                        main.BtnSgaTesisRelacionadas.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
                         main.BtnEditStructSga.IsEnabled = (permisosSeccion.Contains(2)) ? true : false;
                         main.BtnPrintSgaPdf.IsEnabled = (permisosSeccion.Contains(16)) ? true : false;
                         main.BtnPrintSgaWord.IsEnabled = (permisosSeccion.Contains(16)) ? true : false;
+                        main.RBtnSga.IsEnabled = (permisosSeccion.Contains(16)) ? true : false;
                     }
                     else if (seccion.IdSeccion == 26)
                     {
@@ -155,17 +157,17 @@ namespace Mantesis2015.Controllers
 
                     if (seccion.IdSeccion == 11)
                     {
-                        unaTesis.RbtnLigas.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                        unaTesis.RBtnLigas.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
                     }
                     if (seccion.IdSeccion == 12)
                     {
-                        unaTesis.RbtnBitacora.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
-                        unaTesis.RbtnBitacora.Tag = permisosSeccion;
+                        unaTesis.RBtnBitacora.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                        unaTesis.RBtnBitacora.Tag = permisosSeccion;
                     }
                     else if (seccion.IdSeccion == 13)
                     {
-                        unaTesis.RBtnSga.Tag = permisosSeccion;
-                        unaTesis.RBtnSga.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
+                        unaTesis.RBtnMateriasSga.Tag = permisosSeccion;
+                        unaTesis.RBtnMateriasSga.IsEnabled = (permisosSeccion.Contains(1)) ? true : false;
                     }
                     
                 }

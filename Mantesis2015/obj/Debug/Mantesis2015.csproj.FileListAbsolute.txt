@@ -120,13 +120,11 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Ma
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Mantesis2015.exe
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Mantesis2015.pdb
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\AuthManager.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CatalogoSga.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CheckPrecedentes.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\ClasifInformeSalas15.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.DataPresenter.v10.1.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.Editors.v10.1.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.v10.1.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\MantesisVerIusCommonObjects.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Microsoft.Windows.Shell.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\ribboncontrolslibrary.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\telerik.windows.controls.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\telerik.windows.controls.docking.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Telerik.Windows.Controls.Input.dll
@@ -136,6 +134,8 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Ma
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\UtilsMantesis.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Telerik.Windows.Controls.GridView.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\AuthManager.pdb
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CatalogoSga.pdb
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CheckPrecedentes.pdb
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\ClasifInformeSalas15.pdb
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.Editors.v10.1.xml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.v10.1.xml
@@ -170,7 +170,5 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Ma
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.application
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.exe
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\obj\Debug\Mantesis2015.pdb
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CatalogoSga.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CatalogoSga.pdb
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CheckPrecedentes.dll
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\CheckPrecedentes.pdb
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.v10.1.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\MantesisCompleteProject\Mantesis2015\Mantesis2015\bin\Debug\Infragistics3.Wpf.Editors.v10.1.dll

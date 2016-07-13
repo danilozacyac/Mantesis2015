@@ -16,7 +16,7 @@
             <RowDefinition Height="41*" />
         </Grid.RowDefinitions>
 
-        <igDP:XamDataGrid Name="xamDataGrid"
+        <!--<igDP:XamDataGrid Name="xamDataGrid"
                           Grid.Row="1"
                           Width="Auto"
                           Margin="0"
@@ -69,7 +69,6 @@
                    VerticalAlignment="Top"
                    FontSize="14"
                    Text="Antes de dar de alta un registro, verifique que la tesis:" />
-
-
+        -->
     </Grid>
 </Window>

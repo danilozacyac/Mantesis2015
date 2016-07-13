@@ -29,6 +29,9 @@ namespace Mantesis2015
         public RadPane MateriasSgaPane;
         public MantoClasifSga CatalogMateriasSga;
 
+        public RadPane MateriasSgaTesis;
+        public TesisRelacionadas TesisRelacionadasSga;
+
         public RadPane ChecaPrecPane;
         public ChecaPrecedentes PanelPrecede;
 
@@ -42,7 +45,9 @@ namespace Mantesis2015
 
         public MainWindow()
         {
+            StyleManager.ApplicationTheme = new Windows8Theme();
             InitializeComponent();
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -84,6 +89,8 @@ namespace Mantesis2015
                     break;
 
                 case "BtnEditStructSga": controller.LaunchMateriasSgaPane();
+                    break;
+                case "BtnSgaTesisRelacionadas": controller.LaunchTesisRelacionadasSga();
                     break;
                 case "BtnPrintSgaPdf": controller.MateriasEnPdf();
                     break;

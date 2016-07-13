@@ -16,34 +16,34 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="115" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
-        <my:Ribbon Grid.Row="0"
-                   ShowQuickAccessToolBarOnTop="False"
-                   WindowIconVisibility="Visible">
-            <my:Ribbon.ApplicationMenu>
-                <my:RibbonApplicationMenu Visibility="Collapsed" />
-            </my:Ribbon.ApplicationMenu>
-            <my:RibbonGroup Name="Navega" Header="Navegar">
-                <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Name="RbtnInicio"
-                                     Click="RibbonButton_Click"
-                                     Label="Inicio"
-                                     LargeImageSource="Resources/first.png" />
-                    <my:RibbonButton Name="RbtnPrevious"
-                                     Click="RibbonButton_Click"
-                                     Label="Anterior"
-                                     LargeImageSource="Resources/back.png" />
-                    <my:RibbonButton Name="RbtnNext"
-                                     Click="RibbonButton_Click"
-                                     Label="Siguiente"
-                                     LargeImageSource="Resources/next.png" />
-                    <my:RibbonButton Name="RbtnFin"
-                                     Click="RibbonButton_Click"
-                                     Label="Final"
-                                     LargeImageSource="Resources/last.png" />
+
+        <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" ApplicationName="">
+            <telerik:RadRibbonTab>
+                <telerik:RadRibbonGroup x:Name="Navega" Header="Navegar">
+                    <telerik:RadRibbonButton x:Name="RBtnInicio"
+                                             Click="RibbonButton_Click"
+                                             Content="Inicio"
+                                             LargeImage="Resources/first.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnAnterior"
+                                             Click="RibbonButton_Click"
+                                             Content="Anterior"
+                                             LargeImage="Resources/back.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnSiguiente"
+                                             Click="RibbonButton_Click"
+                                             Content="Siguiente"
+                                             LargeImage="Resources/next.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnFin"
+                                             Click="RibbonButton_Click"
+                                             Content="Final"
+                                             LargeImage="Resources/last.png"
+                                             Size="Large" />
                     <StackPanel Orientation="Vertical">
                         <Label Content="      Registro:   "
                                FontSize="14"
@@ -53,87 +53,82 @@
                                FontSize="14"
                                FontWeight="Bold" />
                     </StackPanel>
-                </StackPanel>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Portapapeles">
+                    <telerik:RadRibbonButton x:Name="RBtnClipTesis"
+                                             Click="RibbonButton_Click"
+                                             Content="Tesis completa"
+                                             LargeImage="Resources/tesis_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipIus"
+                                             Click="RibbonButton_Click"
+                                             Content="Reg. Digital"
+                                             LargeImage="Resources/number_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipRubro"
+                                             Click="RibbonButton_Click"
+                                             Content="Rubro"
+                                             LargeImage="Resources/r_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipTexto"
+                                             Click="RibbonButton_Click"
+                                             Content="Texto"
+                                             LargeImage="Resources/t_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipPrece"
+                                             Click="RibbonButton_Click"
+                                             Content="Precedentes"
+                                             LargeImage="Resources/p_128.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Herramientas">
+                    <telerik:RadRibbonButton x:Name="RBtnMateriasSga"
+                                             Click="RibbonButton_Click"
+                                             Content="Materias SGA"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/scjn.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnLigas"
+                                             Click="RibbonButton_Click"
+                                             Content="Ver ligas"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/link_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnBitacora"
+                                             Click="RibbonButton_Click"
+                                             Content="Bitácora"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/blog_128.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Eportar">
+                    <telerik:RadRibbonButton x:Name="RBtnPdf"
+                                             Click="ExportarGroupClick"
+                                             Content="PDF"
+                                             LargeImage="Resources/pdf_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnWord"
+                                             Click="ExportarGroupClick"
+                                             Content="Word"
+                                             LargeImage="Resources/word_128.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup>
+                    <telerik:RadRibbonButton x:Name="RBtnSalir"
+                                             Click="RibbonButton_Click"
+                                             Content="Salir"
+                                             LargeImage="Resources/exit_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnGuardar"
+                                             Click="RBtnGuardar_Click"
+                                             Content="Guardar"
+                                             LargeImage="Resources/save_128.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
 
-            </my:RibbonGroup>
-            <my:RibbonGroup Header="Portapapeles">
-                <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Name="RbtnClipboard"
-                                     Click="RibbonButton_Click"
-                                     Label="Tesis completa"
-                                     LargeImageSource="Resources/tesis_256.png"
-                                     SmallImageSource="Resources/tesis_128.png" />
-                    <my:RibbonButton Name="BtnCIus"
-                                     Click="RibbonButton_Click"
-                                     Label="Reg. IUS"
-                                     LargeImageSource="Resources/number_256.png"
-                                     SmallImageSource="Resources/number_128.png" />
-                    <my:RibbonButton Name="BtnCRubro"
-                                     Click="RibbonButton_Click"
-                                     Label="Rubro"
-                                     LargeImageSource="Resources/r_128.png" />
-                    <my:RibbonButton Name="BtnCTexto"
-                                     Click="RibbonButton_Click"
-                                     Label="Texto"
-                                     LargeImageSource="Resources/t_128.png" />
-                    <my:RibbonButton Name="BtnCPrec"
-                                     Click="RibbonButton_Click"
-                                     Label="Precedentes"
-                                     LargeImageSource="Resources/p_128.png" />
-                </StackPanel>
-            </my:RibbonGroup>
-            <my:RibbonGroup Header="Herramientas">
-                <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Name="RBtnSga"
-                                     Click="RibbonButton_Click"
-                                     IsEnabled="False"
-                                     Label="Materias SGA"
-                                     LargeImageSource="Resources/scjn.png" />
-                    <my:RibbonButton Name="RbtnLigas"
-                                     Click="RibbonButton_Click"
-                                     IsEnabled="False"
-                                     Label="Ver ligas"
-                                     LargeImageSource="Resources/link_256.png"
-                                     SmallImageSource="Resources/link_128.png" />
-                    <my:RibbonButton Name="RbtnBitacora"
-                                     Click="RibbonButton_Click"
-                                     IsEnabled="False"
-                                     Label="Bitácora"
-                                     LargeImageSource="Resources/blog_256.png"
-                                     SmallImageSource="Resources/blog_64.png" />
-                </StackPanel>
-            </my:RibbonGroup>
-            <my:RibbonGroup Header="Exportar">
-                <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Name="RBtnPdf"
-                                     Click="ExportarGroupClick"
-                                     Label="PDF"
-                                     LargeImageSource="Resources/pdf_256.png"
-                                     SmallImageSource="Resources/pdf_128.png" />
-                    <my:RibbonButton Name="RBtnWord"
-                                     Click="ExportarGroupClick"
-                                     Label="Word"
-                                     LargeImageSource="Resources/word_256.png"
-                                     SmallImageSource="Resources/word_128.png" />
-                </StackPanel>
-            </my:RibbonGroup>
-            <my:RibbonGroup Header=" ">
-                <StackPanel Orientation="Horizontal">
-                    <my:RibbonButton Name="RBtnSalir"
-                                     Click="RibbonButton_Click"
-                                     Label="Salir"
-                                     LargeImageSource="Resources/exit_256.png"
-                                     SmallImageSource="Resources/exit_128.png" />
-                    <my:RibbonButton Name="RBtnGuardar"
-                                     Click="RBtnGuardar_Click"
-                                     IsEnabled="{Binding IsEnable,
-                                                         Mode=TwoWay}"
-                                     Label="Guardar"
-                                     LargeImageSource="Resources/save_256.png"
-                                     SmallImageSource="Resources/save_128.png" />
-                </StackPanel>
-            </my:RibbonGroup>
-        </my:Ribbon>
+            </telerik:RadRibbonTab>
+        </telerik:RadRibbonView>
+
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -161,7 +156,7 @@
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    Content="Tesis" />
-                            <Label Margin="173,124,0,0"
+                            <Label Margin="163,124,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    Content="Página:" />
@@ -318,9 +313,9 @@
                                      Text="{Binding Tesis}"
                                      TextWrapping="Wrap" />
                             <TextBox x:Name="TxtPag"
-                                     Width="39"
+                                     Width="48"
                                      Height="23"
-                                     Margin="216,121,0,0"
+                                     Margin="207,121,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      Foreground="{Binding IsEliminated,
@@ -394,10 +389,10 @@
             <Grid Grid.Column="1">
 
 
-                <igWindows:XamTabControl Grid.Column="1"
-                                         HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Stretch">
-                    <igWindows:TabItemEx x:Name="tabItemEx10" Header="  Tesis  ">
+                <telerik:RadTabControl Grid.Column="1"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch">
+                    <telerik:RadTabItem x:Name="tabItemEx10" Header="  Tesis  ">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height=".4*" />
@@ -422,7 +417,8 @@
                                      Text="{Binding Rubro,
                                                     Mode=TwoWay}"
                                      TextAlignment="Justify"
-                                     TextWrapping="Wrap" TextChanged="TextBoxCh" />
+                                     TextChanged="TextBoxCh"
+                                     TextWrapping="Wrap" />
                             <Label Grid.Row="1"
                                    Margin="10,10,0,0"
                                    HorizontalAlignment="Left"
@@ -441,7 +437,8 @@
                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                                      Text="{Binding Texto,
                                                     Mode=TwoWay}"
-                                     TextWrapping="Wrap" TextChanged="TextBoxCh" />
+                                     TextChanged="TextBoxCh"
+                                     TextWrapping="Wrap" />
                             <Label Grid.Row="2"
                                    Margin="10,10,0,0"
                                    HorizontalAlignment="Left"
@@ -463,8 +460,8 @@
                                      TextChanged="TextBoxCh"
                                      TextWrapping="Wrap" />
                         </Grid>
-                    </igWindows:TabItemEx>
-                    <igWindows:TabItemEx x:Name="tabItemEx11" Header="  Notas  ">
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem x:Name="tabItemEx11" Header="  Notas  ">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height=".3*" />
@@ -576,8 +573,8 @@
                                 </Grid>
                             </GroupBox>
                         </Grid>
-                    </igWindows:TabItemEx>
-                    <igWindows:TabItemEx x:Name="TabTesisReferencia" Header="Tesis de referencia">
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem x:Name="TabTesisReferencia" Header="Tesis de referencia">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="43*" />
@@ -585,6 +582,25 @@
                                 <RowDefinition Height="344*" />
                                 <RowDefinition Height="62*" />
                             </Grid.RowDefinitions>
+                            <Button Name="BtnTesisElim"
+                                    Width="116"
+                                    Height="28"
+                                    Margin="24,6,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="BtnTesisElim_Click"
+                                    Content="Tesis Eliminada" />
+                            <TextBox Name="txtRefLocAbr"
+                                     Grid.Row="1"
+                                     Width="840"
+                                     Height="28"
+                                     Margin="18,0,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     FontSize="14"
+                                     Foreground="Black"
+                                     Text=""
+                                     VerticalScrollBarVisibility="Auto" />
                             <TextBox Name="txtReferencia"
                                      Grid.Row="2"
                                      AcceptsReturn="True"
@@ -594,14 +610,6 @@
                                                          Mode=TwoWay}"
                                      TextWrapping="WrapWithOverflow"
                                      VerticalScrollBarVisibility="Auto" />
-                            <Button Name="BtnTesisElim"
-                                    Width="116"
-                                    Height="28"
-                                    Margin="24,6,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    Click="BtnTesisElim_Click"
-                                    Content="Tesis Eliminada" />
                             <TextBox Name="txtRefMotivo"
                                      Grid.Row="3"
                                      Width="840"
@@ -619,24 +627,13 @@
                                        FontSize="14"
                                        Foreground="Black"
                                        Text="Registro IUS :" />
-                            <TextBox Name="txtRefLocAbr"
-                                     Grid.Row="1"
-                                     Width="840"
-                                     Height="28"
-                                     Margin="18,0,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Top"
-                                     FontSize="14"
-                                     Foreground="Black"
-                                     Text=""
-                                     VerticalScrollBarVisibility="Auto" />
                         </Grid>
-                    </igWindows:TabItemEx>
+                    </telerik:RadTabItem>
 
 
 
 
-                </igWindows:XamTabControl>
+                </telerik:RadTabControl>
 
             </Grid>
 

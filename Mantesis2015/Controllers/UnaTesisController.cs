@@ -488,7 +488,7 @@ namespace Mantesis2015.Controllers
         public void LaunchBitacora()
         {
             BitacoraWin bitacora = new BitacoraWin(tesisMostrada.Ius);
-            bitacora.Tag = unaTesis.RbtnBitacora.Tag;
+            bitacora.Tag = unaTesis.RBtnBitacora.Tag;
             bitacora.ShowDialog();
         }
 
@@ -496,7 +496,7 @@ namespace Mantesis2015.Controllers
         {
             //MateriasSgaWin sga = new MateriasSgaWin(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
             RelacionaMateriaSga sga = new RelacionaMateriaSga(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
-            sga.Tag = unaTesis.RBtnSga.Tag;
+            sga.Tag = unaTesis.RBtnMateriasSga.Tag;
             sga.ShowDialog();
 
             if (sga.DialogResult == true)

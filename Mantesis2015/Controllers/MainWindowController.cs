@@ -6,6 +6,7 @@ using AuthManager.Models;
 using AuthManager.PermisosSecciones;
 using AuthManager.PermisosVolumen;
 using CatalogoSga;
+using CatalogoSga.Reportes;
 using CheckPrecedentes;
 using ClasifInformeSalas15;
 using MantesisVerIusCommonObjects.Dto;
@@ -98,6 +99,24 @@ namespace Mantesis2015.Controllers
             }
         }
 
+        public void LaunchTesisRelacionadasSga()
+        {
+            if (main.MateriasSgaPane == null)
+            {
+                main.MateriasSgaPane = new RadPane();
+                main.TesisRelacionadasSga = new TesisRelacionadas();
+
+                main.MateriasSgaPane.Header = "Mat. Sga Tesis Relacionadas";
+                main.MateriasSgaPane.Content = main.TesisRelacionadasSga;
+                main.MateriasSgaPane.CanFloat = false;
+                main.MainPanel.Items.Add(main.MateriasSgaPane);
+            }
+            else if (main.MateriasSgaPane.IsVisible == false)
+            {
+                main.MateriasSgaPane.IsHidden = false;
+            }
+        }
+
         public void LaunchTesisTotales()
         {
             RevisaTotales total = new RevisaTotales();
@@ -164,12 +183,16 @@ namespace Mantesis2015.Controllers
 
         public void MateriasEnPdf()
         {
-            main.CatalogMateriasSga.ImprimeEstructuraPdf();
+            PdfTreeStructure pdf = new PdfTreeStructure();
+            pdf.GenerateTreeStructure();
+            //main.CatalogMateriasSga.ImprimeEstructuraPdf();
         }
 
         public void MateriasEnWord()
         {
-            main.CatalogMateriasSga.ImprimeEstructuraWord();
+            WordTreeStructure word = new WordTreeStructure();
+            word.CreateDocument();
+            //main.CatalogMateriasSga.ImprimeEstructuraWord();
         }
 
         public void ReasignaConsecutivo()

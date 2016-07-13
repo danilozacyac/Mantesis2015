@@ -15,16 +15,16 @@
       </applicationRequestMinimum>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
         <!--
-          Opciones del manifiesto de Control de cuentas de usuario
-          Si desea cambiar el nivel de Control de cuentas de usuario de Windows, reemplace el 
-          nodo requestedExecutionLevel por alguno de los siguientes.
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-         Si desea usar la virtualización de archivos y del Registro para la 
-         compatibilidad con versiones anteriores, elimine el nodo requestedExecutionLevel.
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
     -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
@@ -43,6 +43,11 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="PresentationUI" version="4.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AuthManager.dll" size="58368">
       <assemblyIdentity name="AuthManager" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -55,14 +60,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CatalogoSga.dll" size="43008">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CatalogoSga.dll" size="60928">
       <assemblyIdentity name="CatalogoSga" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OnmCnRaOnrsyF7XNDaHLhvGV04phdyN0ZzREuCnvJI4=</dsig:DigestValue>
+        <dsig:DigestValue>ByKB5VwZDL8JPYxq5jr2+eUyHgZAjefjWIKiT69lpks=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,14 +84,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasifInformeSalas15.dll" size="137216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasifInformeSalas15.dll" size="141312">
       <assemblyIdentity name="ClasifInformeSalas15" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>VZ15OtXJE5x7VL1qvB3dukaneXd5YY+hyTzBfWjDqRQ=</dsig:DigestValue>
+        <dsig:DigestValue>ovRQOM1yliLDptupW1M+FpdnAudOuMEYjELrJQW7reY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -139,14 +144,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1929728">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1936896">
       <assemblyIdentity name="Mantesis2015" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/UHdhwViQCpk6P0k0GskmeRKAU0HJ2D8ZT/Oo1H8dT4=</dsig:DigestValue>
+        <dsig:DigestValue>+BNmfcylvkWGQKMkxvz+nj8K723rKmYlLjipVjfaoU4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -170,7 +175,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XhdoxtQolu97oD44++FhJ/4VSmVGZLAXgeJ1swPjQ9w=</dsig:DigestValue>
+        <dsig:DigestValue>vtKKDz7QoR0fkXcNJIEA8gEiyytjo5wqplwSyzccx5w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -386,17 +391,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JlOEf06Tt9fzZfVcrdzpnNV22fiMb+RPrFjprrrpNeo=</dsig:DigestValue>
+        <dsig:DigestValue>k+kKBwTXKFvNqXNz3UMTQhnxyvTWOTYxcADHTIocnrM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Mantesis2015.exe.config" size="2485">
+  <file name="Mantesis2015.exe.config" size="2486">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LZi/Jrf0IeFZWxtqOaagpAxvGACJ2vt2r3a/PXKZe00=</dsig:DigestValue>
+      <dsig:DigestValue>JKoiECs0zLBZsG0OsAiFAUI0XjyzPhnVaq+ELtsQtGY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="tesis.ico" size="67646">

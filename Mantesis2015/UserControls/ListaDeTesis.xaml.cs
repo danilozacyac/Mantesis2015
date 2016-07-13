@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Infragistics.Windows.DataPresenter;
-using Mantesis2015.Controllers;
+﻿using Mantesis2015.Controllers;
 using Mantesis2015.UserControls.Controller;
 using MantesisVerIusCommonObjects.Dto;
 using MantesisVerIusCommonObjects.Utilities;
 using ScjnUtilities;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Telerik.Windows.Controls;
 
 namespace Mantesis2015.UserControls
@@ -80,41 +77,9 @@ namespace Mantesis2015.UserControls
                 controller.GetTesisPorEpocaVolumen(99, CbxVolumen.SelectedItem, selectedEpoca);
         }
 
-        private void XamDataGridTesis_Loaded(object sender, RoutedEventArgs e)
-        {
-            Style s = (Style)this.FindResource("MyConvertRow");
+        
 
-            FieldLayoutSettings field = new FieldLayoutSettings();
-            field.DataRecordPresenterStyle = s;
-            XamDataGridTesis.FieldLayoutSettings = field;
-        }
-
-        private void XamDataGridTesis_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            DependencyObject source = e.OriginalSource as DependencyObject;
-            if (source == null)
-                return;
-
-            DataRecordPresenter drp = Infragistics.Windows.Utilities.GetAncestorFromType(source,
-                typeof(DataRecordPresenter), true) as DataRecordPresenter;
-            if (drp == null)
-                return;
-
-            if (drp.Record != null)
-            {
-                //BtnVisualizar_Click(sender, null);
-            }
-        }
-
-        private void XamDataGridTesis_RecordActivated(object sender, Infragistics.Windows.DataPresenter.Events.RecordActivatedEventArgs e)
-        {
-            controller.GetDatosTesisSeleccionada(e);
-        }
-
-        private void XamDataGridTesis_Sorting(object sender, Infragistics.Windows.DataPresenter.Events.SortingEventArgs e)
-        {
-            e.Cancel = true;
-        }
+        
 
         private void CbxMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -174,5 +139,15 @@ namespace Mantesis2015.UserControls
         }
 
         #endregion
+
+        private void GTesis_SelectionChanged(object sender, SelectionChangeEventArgs e)
+        {
+            controller.TesisSeleccionada();
+        }
+
+        private void GTesis_Sorting(object sender, GridViewSortingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

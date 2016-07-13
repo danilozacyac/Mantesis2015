@@ -1,7 +1,6 @@
 ﻿<Window x:Class="Mantesis2015.MotivosFolder.MModificacion"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:igDP="http://infragistics.com/DataPresenter"
         Title="frmMotivosModif"
         Width="840"
         Height="669"
@@ -16,7 +15,7 @@
         </Grid.RowDefinitions>
 
 
-        <igDP:XamDataGrid Name="xamDataGrid"
+        <!--<igDP:XamDataGrid Name="xamDataGrid"
                           Grid.Row="1"
                           Width="Auto"
                           Margin="0"
@@ -42,7 +41,7 @@
 
                 </igDP:FieldLayout>
             </igDP:XamDataGrid.FieldLayouts>
-        </igDP:XamDataGrid>
+        </igDP:XamDataGrid>-->
 
         <TextBlock Name="textBlock1"
                    Height="23"

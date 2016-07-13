@@ -14,13 +14,13 @@ namespace Mantesis2015.Classes
                 int number = 0;
                 int.TryParse(value.ToString(), out number);
                 if (number == 0)
-                    return Colors.White;
+                    return new SolidColorBrush(Colors.White);
 
                 if (number > 0)
-                    return Colors.OrangeRed;
+                    return new SolidColorBrush(Colors.LightBlue);
             }
 
-            return "White";
+            return new SolidColorBrush(Colors.White);
 
         }
 

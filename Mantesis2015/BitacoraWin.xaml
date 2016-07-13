@@ -1,57 +1,37 @@
-﻿<Window x:Class="Mantesis2015.BitacoraWin"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:igDP="http://infragistics.com/DataPresenter"
-        Title="Bitácora"
-        Width="820"
-        Height="350"
-        Loaded="Window_Loaded"
-        WindowStartupLocation="CenterScreen">
+﻿<telerik:RadWindow x:Class="Mantesis2015.BitacoraWin"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="820"
+                   Height="350"
+                   Header="Bitácora"
+                   Loaded="Window_Loaded"
+                   WindowStartupLocation="CenterScreen">
     <Grid>
-        <igDP:XamDataGrid Name="xamBitacora"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          GroupByAreaLocation="None">
-            <igDP:XamDataGrid.FieldSettings>
-                <igDP:FieldSettings AllowEdit="False"
-                                    AllowResize="False"
-                                    CellClickAction="SelectRecord" />
-            </igDP:XamDataGrid.FieldSettings>
-            <igDP:XamDataGrid.Resources>
-                <Style TargetType="{x:Type igDP:DataRecordCellArea}">
-                    <Setter Property="BackgroundSelected" Value="#FF757D9D" />
-                    <Setter Property="BackgroundActive" Value="#FFC5CED8" />
-                    <Setter Property="BackgroundHover" Value="#FF757D9D" />
-                </Style>
-            </igDP:XamDataGrid.Resources>
-            <igDP:XamDataGrid.FieldLayouts>
-                <igDP:FieldLayout>
-                    <igDP:FieldLayout.Fields>
-                        <igDP:Field Name="Fecha"
-                                    Width="100"
-                                    Height="80"
-                                    Label=" Fecha " />
-                        <igDP:Field Name="TpoMov"
-                                    Width="80"
-                                    Height="80"
-                                    Label="Cambio" />
-                        <igDP:Field Name="Causa"
-                                    Width="*"
-                                    Height="80"
-                                    Label="Motivo" />
-
-                        <igDP:Field Name="Registro"
-                                    Width="80"
-                                    Height="80"
-                                    Label="Registro" />
-                        <igDP:Field Name="Usuario"
-                                    Width="150"
-                                    Height="150"
-                                    Label="Usuario" />
-                    </igDP:FieldLayout.Fields>
-                </igDP:FieldLayout>
-            </igDP:XamDataGrid.FieldLayouts>
-
-        </igDP:XamDataGrid>
+        <telerik:RadGridView x:Name="GBitacora"
+                             AutoGenerateColumns="False"
+                             IsFilteringAllowed="False"
+                             IsReadOnly="True"
+                             ItemsSource="{Binding}"
+                             ShowGroupPanel="False">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Width="Auto"
+                                            DataFormatString="{} {0:dd/MM/yyyy}"
+                                            DataMemberBinding="{Binding Fecha}"
+                                            Header="Fecha" />
+                <telerik:GridViewDataColumn Width="80"
+                                            DataMemberBinding="{Binding TpoMov}"
+                                            Header="Modificación" />
+                <telerik:GridViewDataColumn Width="*"
+                                            DataMemberBinding="{Binding Causa}"
+                                            Header="Causa" />
+                <telerik:GridViewDataColumn Width="80"
+                                            DataMemberBinding="{Binding Registro}"
+                                            Header="Registro" />
+                <telerik:GridViewDataColumn Width="150"
+                                            DataMemberBinding="{Binding Usuario}"
+                                            Header="Usuario" />
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
     </Grid>
-</Window>
+</telerik:RadWindow>

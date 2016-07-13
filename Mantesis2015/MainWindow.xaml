@@ -21,7 +21,7 @@
 
         <telerik:RadRibbonView ApplicationName="Coordinación de Compilación y Sistematización de Tesis">
             <telerik:RadRibbonTab Header="Mantenimiento">
-                <telerik:RadRibbonGroup Header="General" Uid="5">
+                <telerik:RadRibbonGroup Uid="5" Header="General">
                     <telerik:RadRibbonButton x:Name="BtnNuevaTesis"
                                              Click="ButtonTool_Click"
                                              IsEnabled="False"
@@ -80,18 +80,20 @@
                                              LargeImage="Resources/word_128.png"
                                              Size="Large"
                                              Tag="Word" />
-                    <telerik:RadRibbonButton x:Name="RBtnSga"
-                                             Click="ExportarGroupClick"
-                                             LargeImage="Resources/table_128.png"
-                                             Size="Large"
-                                             Tag="MatSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Reporte Mensual" />
-                            <TextBlock HorizontalAlignment="Center" Text="Materias SGA" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
+
                 </telerik:RadRibbonGroup>
                 <telerik:RadRibbonGroup Header="Mant. Materias SGA" IsEnabled="True">
+                    <telerik:RadRibbonButton x:Name="BtnSgaTesisRelacionadas"
+                                             Click="ButtonTool_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/relation.png"
+                                             Size="Large"
+                                             Tag="StructSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Tesis" />
+                            <TextBlock HorizontalAlignment="Center" Text="Relacionadas" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="BtnStructMateriasSga"
                                              Click="ButtonTool_Click"
                                              IsEnabled="False"
@@ -112,6 +114,16 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Actualizar" />
                             <TextBlock HorizontalAlignment="Center" Text="estructura" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnSga"
+                                             Click="ExportarGroupClick"
+                                             LargeImage="Resources/table_128.png"
+                                             Size="Large"
+                                             Tag="MatSga">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Reporte Mensual" />
+                            <TextBlock HorizontalAlignment="Center" Text="Materias SGA" />
                         </StackPanel>
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="BtnPrintSgaPdf"
@@ -149,10 +161,10 @@
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>
             </telerik:RadRibbonTab>
-            <telerik:RadRibbonTab x:Name="InformeTab"
+            <telerik:RadRibbonTab Uid="9"
+                                  x:Name="InformeTab"
                                   Header="Informe de las Salas"
-                                  IsEnabled="True"
-                                  Uid="9">
+                                  IsEnabled="True">
                 <telerik:RadRibbonGroup Header="Clasificación">
                     <telerik:RadRibbonButton x:Name="BtnMostrarProy"
                                              Click="InformesButtonTools"
@@ -294,20 +306,22 @@
                         </StackPanel>
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup x:Name="GroupVerificadores" Header="Verificadores" IsEnabled="False">
+                <telerik:RadRibbonGroup x:Name="GroupVerificadores"
+                                        Header="Verificadores"
+                                        IsEnabled="False">
                     <telerik:RadRibbonButton x:Name="RBtnComparaBases"
-                                                  Click="ButtonTool_Click"
-                                                  LargeImage="Resources/compare_128.png"
-                                                  Size="Large">
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/compare_128.png"
+                                             Size="Large">
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Comparar bases" />
                             <TextBlock HorizontalAlignment="Center" Text="de datos" />
                         </StackPanel>
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="RBtnTesisTotales"
-                                                  Click="ButtonTool_Click"
-                                                  LargeImage="Resources/analyze.png"
-                                                  Size="Large">
+                                             Click="ButtonTool_Click"
+                                             LargeImage="Resources/analyze.png"
+                                             Size="Large">
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Comprobar" />
                             <TextBlock HorizontalAlignment="Center" Text="totales" />
@@ -332,7 +346,7 @@
                         <telerik:RadPane CanFloat="False"
                                          CanUserClose="False"
                                          Header="Mantesis">
-                              <UserControls:ListaDeTesis x:Name="MantesisPane" />  
+                            <UserControls:ListaDeTesis x:Name="MantesisPane" />
                         </telerik:RadPane>
                     </telerik:RadPaneGroup>
                 </telerik:RadSplitContainer>

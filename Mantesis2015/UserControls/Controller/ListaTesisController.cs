@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Infragistics.Windows.DataPresenter;
 using Mantesis2015.Model;
 using Mantesis2015.Reportes;
 using MantesisVerIusCommonObjects.Dto;
@@ -18,6 +17,9 @@ namespace Mantesis2015.UserControls.Controller
     {
         readonly ListaDeTesis listaTesisWindow;
 
+        AddTesis selectedTesis;
+
+
         private DatosComp selectedEpoca;
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace Mantesis2015.UserControls.Controller
         /// <summary>
         /// Registro digital de la tesis seleccionada
         /// </summary>
-        private int selectedIus;
+        private long selectedIus;
 
         /// <summary>
         /// Número de fila de la tesis seleccionada
@@ -135,24 +137,37 @@ namespace Mantesis2015.UserControls.Controller
             if (permitido == 0)
             {
                 MessageBox.Show("No tiene permiso para revisar la información relacionada con este volumen", "  Aviso  ");
-                listaTesisWindow.XamDataGridTesis.DataSource = new List<AddTesis>();
+                //listaTesisWindow.XamDataGridTesis.DataSource = new List<AddTesis>();
+                listaTesisWindow.GTesis.DataContext = new List<AddTesis>();
                 return;
             }
 
             ListaTesisModel listaTesisModel = new ListaTesisModel();
             listaTesis = listaTesisModel.CargaTesisMantesisSql(qMateria);
 
-            listaTesisWindow.XamDataGridTesis.DataSource = listaTesis;
-            listaTesisWindow.XamDataGridTesis.Focus();
-            if (listaTesisWindow.XamDataGridTesis.Records.Count == 0)
-            {
-                MessageBox.Show("No existe el registro");
-            }
-            else
-            {
-                listaTesisWindow.XamDataGridTesis.ActiveRecord = listaTesisWindow.XamDataGridTesis.Records[0];
-                listaTesisWindow.TxtRegs.Content = RegLoc + listaTesis.Count;
-            }
+            //listaTesisWindow.XamDataGridTesis.DataSource = listaTesis;
+            //listaTesisWindow.XamDataGridTesis.Focus();
+            //if (listaTesisWindow.XamDataGridTesis.Records.Count == 0)
+            //{
+            //    MessageBox.Show("No existe el registro");
+            //}
+            //else
+            //{
+            //    listaTesisWindow.XamDataGridTesis.ActiveRecord = listaTesisWindow.XamDataGridTesis.Records[0];
+            //    listaTesisWindow.TxtRegs.Content = RegLoc + listaTesis.Count;
+            //}
+
+            listaTesisWindow.GTesis.DataContext = listaTesis;
+            listaTesisWindow.GTesis.Focus();
+            //if (listaTesisWindow.GTesis.Records.Count == 0)
+            //{
+            //    MessageBox.Show("No existe el registro");
+            //}
+            //else
+            //{
+            //    listaTesisWindow.XamDataGridTesis.ActiveRecord = listaTesisWindow.XamDataGridTesis.Records[0];
+            //    listaTesisWindow.TxtRegs.Content = RegLoc + listaTesis.Count;
+            //}
 
             this.SetFiltroPorMateriaTomo();
 
@@ -270,22 +285,12 @@ namespace Mantesis2015.UserControls.Controller
             listaTesisWindow.CbxMaterias.SelectedValuePath = "Volumenes";
         }
 
-        /// <summary>
-        /// Obtiene el número de registro digital y el número de fila de la tesis seleccionada
-        /// </summary>
-        /// <param name="e"></param>
-        public void GetDatosTesisSeleccionada(Infragistics.Windows.DataPresenter.Events.RecordActivatedEventArgs e)
-        {
-            if (e.Record is DataRecord)
-            {
-                // Cast the record passed in as a DataRecord
-                DataRecord myRecord = (DataRecord)e.Record;
-                // Display the selected Records values in the appropriate 
-                // editor
+        
 
-                this.selectedIus = Convert.ToInt32(myRecord.Cells[1].Value);
-                this.selectedRowIndex = myRecord.Index;
-            }
+        public void TesisSeleccionada()
+        {
+            selectedTesis = listaTesisWindow.GTesis.SelectedItem as AddTesis;
+            selectedIus = selectedTesis.Ius4;
         }
 
         /// <summary>
@@ -297,17 +302,17 @@ namespace Mantesis2015.UserControls.Controller
             ListaTesisModel listaTesisModel = new ListaTesisModel();
             listaTesis = listaTesisModel.CargaTesisMantesisSql(criterioFiltrado);
 
-            listaTesisWindow.XamDataGridTesis.DataSource = listaTesis;
-            listaTesisWindow.XamDataGridTesis.Focus();
-            if (listaTesisWindow.XamDataGridTesis.Records.Count == 0)
-            {
-                MessageBox.Show("No existen registros");
-            }
-            else
-            {
-                listaTesisWindow.XamDataGridTesis.ActiveRecord = listaTesisWindow.XamDataGridTesis.Records[0];
-                listaTesisWindow.TxtRegs.Content = RegLoc + listaTesis.Count;
-            }
+            listaTesisWindow.GTesis.DataContext = listaTesis;
+            listaTesisWindow.GTesis.Focus();
+            //if (listaTesisWindow.XamDataGridTesis.Records.Count == 0)
+            //{
+            //    MessageBox.Show("No existen registros");
+            //}
+            //else
+            //{
+            //    listaTesisWindow.XamDataGridTesis.ActiveRecord = listaTesisWindow.XamDataGridTesis.Records[0];
+            //    listaTesisWindow.TxtRegs.Content = RegLoc + listaTesis.Count;
+            //}
         }
 
         /// <summary>

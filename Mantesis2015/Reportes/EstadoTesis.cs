@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using MantesisVerIusCommonObjects.Dto;
+using MantesisCommonObjects.Dto;
 using ScjnUtilities;
 using iTextSharp.text;
 using iTextSharp.text.pdf;

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Mantesis2015.Controllers;
-using MantesisVerIusCommonObjects.Dto;
-using Microsoft.Windows.Controls.Ribbon;
-using UtilsMantesis;
+using MantesisCommonObjects.Dto;
 using Telerik.Windows.Controls;
 
 namespace Mantesis2015
@@ -81,14 +79,7 @@ namespace Mantesis2015
 
             switch (ribbon.Name)
             {
-                case "RBtnInicio": controller.TesisStart();
-                    break;
-                case "RBtnAnterior": controller.TesisPrevious();
-                    break;
-                case "RBtnSiguiente": controller.TesisNext();
-                    break;
-                case "RBtnFin": controller.TesisEnd();
-                    break;
+                
                 case "RBtnClipTesis": controller.TesisToClipboard(1);
                     break;
                 case "RBtnLigas": controller.LaunchLigasPreview();
@@ -121,7 +112,7 @@ namespace Mantesis2015
 
         private void RBtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            controller.GuardarCambios();
+            //controller.GuardarCambios();
         }
 
         private void BtnTesisElim_Click(object sender, RoutedEventArgs e)
@@ -132,6 +123,11 @@ namespace Mantesis2015
         private void TextBoxCh(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             //controller.CambioCuadroTexto(sender, e);
+        }
+
+        private void BtnImportar_Click(object sender, RoutedEventArgs e)
+        {
+            controller.ImportarCambios();
         }
 
         

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using MantesisVerIusCommonObjects.Dto;
-using MantesisVerIusCommonObjects.Model;
+using MantesisCommonObjects.Dto;
+using MantesisCommonObjects.MantUtilities;
+using MantesisCommonObjects.Model;
 using ScjnUtilities;
 
 namespace Mantesis2015.MotivosFolder
@@ -34,9 +35,9 @@ namespace Mantesis2015.MotivosFolder
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "Motivos Alta del Registro: " + MantesisVerIusCommonObjects.Utilities.ValuesMant.IusActualLstTesis;
+            this.Title = "Motivos Alta del Registro: " + ValuesMant.IusActualLstTesis;
 
-            MantesisVerIusCommonObjects.Utilities.ValuesMant.SelectedMotiv = false;
+            ValuesMant.SelectedMotiv = false;
             binaryMotivos = NumericUtilities.ToBinaryInvert(lMotivoModif);
             binaryArray = binaryMotivos.ToCharArray();
 
@@ -66,7 +67,7 @@ namespace Mantesis2015.MotivosFolder
 
             binaryArray = this.motivosViewModel.BinaryVal.ToCharArray();
             Array.Reverse(binaryArray);
-            MantesisVerIusCommonObjects.Utilities.ValuesMant.BinaryVal = new string(binaryArray);
+            ValuesMant.BinaryVal = new string(binaryArray);
 
             return isChecked;
         }
@@ -207,7 +208,7 @@ namespace Mantesis2015.MotivosFolder
         {
             if (SelectedRecords())
             {
-                MantesisVerIusCommonObjects.Utilities.ValuesMant.SelectedMotiv = true;
+                ValuesMant.SelectedMotiv = true;
                 Close();
             }
             else

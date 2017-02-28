@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Windows.Forms;
 using AuthManager.Models;
-using MantesisVerIusCommonObjects.DataAccess;
-using MantesisVerIusCommonObjects.Dto;
+using MantesisCommonObjects.DataAccess;
+using MantesisCommonObjects.Dto;
 using ScjnUtilities;
 
 namespace Mantesis2015.Model
@@ -25,8 +23,10 @@ namespace Mantesis2015.Model
             {
                 connectionMantesisSql.Open();
 
-                sSql = "SELECT * FROM Usuarios WHERE usuario = '" + sUsuario + "' AND Contraseña ='" + sPwd + "'";
+                sSql = "SELECT * FROM Usuarios WHERE usuario = @Usuario AND Contraseña = @Pwd";
                 cmd = new SqlCommand(sSql, connectionMantesisSql);
+                cmd.Parameters.AddWithValue("@Usuario", sUsuario);
+                cmd.Parameters.AddWithValue("@Pwd", sPwd);
                 reader = cmd.ExecuteReader();
 
                 if (reader.Read())
@@ -45,19 +45,15 @@ namespace Mantesis2015.Model
                     AccesoUsuarioModel.Llave = -1;
                 }
             }
-            catch (DbException ex)
+            catch (SqlException ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,AccesoModel", "MantesisQuinta");
             }
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,AccesoModel", "MantesisQuinta");
             }
             finally
             {
@@ -103,19 +99,15 @@ namespace Mantesis2015.Model
                     AccesoUsuarioModel.Llave = -1;
                 }
             }
-            catch (DbException ex)
+            catch (SqlException ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,AccesoModel", "MantesisQuinta");
             }
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,AccesoModel", "MantesisQuinta");
             }
             finally
             {

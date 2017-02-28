@@ -1,0 +1,733 @@
+﻿<telerik:RadWindow x:Class="Mantesis2015.UnaTesisQuinta"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:Converter="clr-namespace:Mantesis2015.Classes"
+                   xmlns:Convs="clr-namespace:Mantesis2015.Converters"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="1200"
+                   Height="900"
+                   Header="UnaTesisQuinta"
+                   Loaded="RadWindow_Loaded"
+                   WindowState="Maximized">
+    <telerik:RadWindow.Resources>
+        <Converter:ForegroundConverter x:Key="foreground" />
+        <Convs:AclaratoriaConverter x:Key="aclaraConv" />
+    </telerik:RadWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+
+        <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" ApplicationName="">
+            <telerik:RadRibbonTab>
+                <telerik:RadRibbonGroup x:Name="Navega" Header="Navegar">
+                    <telerik:RadRibbonButton x:Name="RBtnInicio"
+                                             Click="RibbonButton_Click"
+                                             Content="Inicio"
+                                             LargeImage="Resources/leftdarrow.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnAnterior"
+                                             Click="RibbonButton_Click"
+                                             Content="Anterior"
+                                             LargeImage="Resources/leftsArrow.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnSiguiente"
+                                             Click="RibbonButton_Click"
+                                             Content="Siguiente"
+                                             LargeImage="Resources/rightsArrow.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnFin"
+                                             Click="RibbonButton_Click"
+                                             Content="Final"
+                                             LargeImage="Resources/rightdArrow.png"
+                                             Size="Large" />
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="      Registro:   "
+                               FontSize="14"
+                               FontWeight="Bold" />
+                        <Label x:Name="LblContador"
+                               Content="      Registro:   "
+                               FontSize="14"
+                               FontWeight="Bold" />
+                    </StackPanel>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Soporte">
+                    <telerik:RadRibbonButton x:Name="RBtnAjuntarSop"
+                                             Click="RBtnAjuntarSop_Click"
+                                             Content="Adjuntar"
+                                             LargeImage="Resources/docUpload.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnVisualizar"
+                                             Click="RBtnVisualizar_Click"
+                                             Content="Visualizar/Ocultar"
+                                             LargeImage="Resources/docView.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Portapapeles">
+                    <telerik:RadRibbonButton x:Name="RBtnClipTesis"
+                                             Click="RibbonButton_Click"
+                                             Content="Tesis completa"
+                                             LargeImage="Resources/tesis_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipIus"
+                                             Click="RibbonButton_Click"
+                                             Content="Reg. Digital"
+                                             LargeImage="Resources/number_128_blue.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipRubro"
+                                             Click="RibbonButton_Click"
+                                             Content="Rubro"
+                                             LargeImage="Resources/r_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipTexto"
+                                             Click="RibbonButton_Click"
+                                             Content="Texto"
+                                             LargeImage="Resources/t_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnClipPrece"
+                                             Click="RibbonButton_Click"
+                                             Content="Precedentes"
+                                             LargeImage="Resources/p_128.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Eportar">
+                    <telerik:RadRibbonButton x:Name="RBtnPdf"
+                                             Click="ExportarGroupClick"
+                                             Content="PDF"
+                                             LargeImage="Resources/pdf_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnWord"
+                                             Click="ExportarGroupClick"
+                                             Content="Word"
+                                             LargeImage="Resources/word_128.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup>
+                    <telerik:RadRibbonButton x:Name="RBtnSalir"
+                                             Click="RibbonButton_Click"
+                                             Content="Salir"
+                                             LargeImage="Resources/exit_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnGuardar"
+                                             Click="RBtnGuardar_Click"
+                                             Content="Guardar"
+                                             LargeImage="Resources/save.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+
+            </telerik:RadRibbonTab>
+        </telerik:RadRibbonView>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <TabItem Header="Datos Generales">
+                        <Grid Background="#FFE5E5E5">
+                            <Label Margin="10,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Reg. Digital" />
+                            <Label Margin="10,46,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Epoca:" />
+                            <Label Margin="10,85,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Volumen:" />
+                            <Label Margin="10,124,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Tesis" />
+                            <Label Margin="163,124,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Página:" />
+                            <GroupBox Height="50"
+                                      Margin="35,163,35,0"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top"
+                                      Header="Tipo de Tesis"
+                                      IsEnabled="{Binding IsEnable,
+                                                          Mode=TwoWay}">
+                                <Grid>
+                                    <RadioButton x:Name="RbtJurisp"
+                                                 Width="100"
+                                                 Height="28"
+                                                 Margin="0,7,0,-7"
+                                                 HorizontalAlignment="Left"
+                                                 VerticalAlignment="Top"
+                                                 Content=" Jurisprudencia"
+                                                 IsEnabled="False" />
+                                    <RadioButton x:Name="RbtAislada"
+                                                 Width="80"
+                                                 Height="28"
+                                                 Margin="109,7,0,-7"
+                                                 HorizontalAlignment="Left"
+                                                 VerticalAlignment="Top"
+                                                 Content=" T. Aislada"
+                                                 IsEnabled="False" />
+                                </Grid>
+                            </GroupBox>
+                            <Label Margin="10,227,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Instancia:" />
+                            <telerik:RadComboBox x:Name="CbxInstancia"
+                                                 Width="245"
+                                                 Margin="10,249,0,0"
+                                                 HorizontalAlignment="Left"
+                                                 VerticalAlignment="Top"
+                                                 DisplayMemberPath="Descripcion"
+                                                 IsEnabled="False"
+                                                 SelectedValuePath="IdDato" />
+                            <Label Margin="10,284,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Fuente:" />
+                            <telerik:RadComboBox x:Name="CbxFuente"
+                                                 Width="245"
+                                                 Margin="10,303,0,0"
+                                                 HorizontalAlignment="Left"
+                                                 VerticalAlignment="Top"
+                                                 DisplayMemberPath="Descripcion"
+                                                 SelectedValuePath="IdDato" />
+                            <GroupBox Height="305"
+                                      Margin="10,349,35,0"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Top"
+                                      Header="Materias">
+                                <Grid>
+                                    <telerik:RadComboBox x:Name="CbxMat1"
+                                                         Width="200"
+                                                         Height="25"
+                                                         Margin="15,25,15,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Top"
+                                                         DisplayMemberPath="Descripcion"
+                                                         IsEnabled="{Binding IsEnable,
+                                                                             Mode=TwoWay}"
+                                                         SelectedValuePath="IdDato" />
+                                    <telerik:RadComboBox x:Name="CbxMat2"
+                                                         Width="200"
+                                                         Height="25"
+                                                         Margin="15,75,15,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Top"
+                                                         DisplayMemberPath="Descripcion"
+                                                         IsEnabled="{Binding IsEnable,
+                                                                             Mode=TwoWay}"
+                                                         SelectedValuePath="IdDato" />
+                                    <telerik:RadComboBox x:Name="CbxMat3"
+                                                         Width="200"
+                                                         Height="25"
+                                                         Margin="15,125,15,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Top"
+                                                         DisplayMemberPath="Descripcion"
+                                                         IsEnabled="{Binding IsEnable,
+                                                                             Mode=TwoWay}"
+                                                         SelectedValuePath="IdDato" />
+                                    <telerik:RadComboBox x:Name="CbxMat4"
+                                                         Width="200"
+                                                         Height="25"
+                                                         Margin="15,175,15,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Top"
+                                                         DisplayMemberPath="Descripcion"
+                                                         IsEnabled="{Binding IsEnable,
+                                                                             Mode=TwoWay}"
+                                                         SelectedValuePath="IdDato" />
+                                    <telerik:RadComboBox x:Name="CbxMat5"
+                                                         Width="200"
+                                                         Height="25"
+                                                         Margin="15,225,15,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Top"
+                                                         DisplayMemberPath="Descripcion"
+                                                         IsEnabled="{Binding IsEnable,
+                                                                             Mode=TwoWay}"
+                                                         SelectedValuePath="IdDato" />
+                                </Grid>
+                            </GroupBox>
+                            <TextBox x:Name="TxtIus"
+                                     Width="120"
+                                     Height="23"
+                                     Margin="80,7,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="True"
+                                     Text="{Binding Ius}"
+                                     TextWrapping="Wrap" />
+                            <TextBox x:Name="TxtEpoca"
+                                     Width="120"
+                                     Height="23"
+                                     Margin="80,43,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="True"
+                                     Text="{Binding Epoca}"
+                                     TextWrapping="Wrap" />
+                            <TextBox x:Name="TxtVolumen"
+                                     Width="175"
+                                     Height="23"
+                                     Margin="80,78,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="True"
+                                     Text="{Binding Volumen}"
+                                     TextWrapping="NoWrap" />
+                            <TextBox x:Name="TxtTesis"
+                                     Width="101"
+                                     Height="23"
+                                     Margin="53,121,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     Text="{Binding Tesis}"
+                                     TextWrapping="Wrap" />
+                            <TextBox x:Name="TxtPag"
+                                     Width="48"
+                                     Height="23"
+                                     Margin="207,121,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     Text="{Binding Pagina}"
+                                     TextWrapping="Wrap" />
+
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+
+                <telerik:RadTabControl Grid.Column="1"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch">
+                    <telerik:RadTabItem x:Name="tabItemEx10" Header="  Tesis  ">
+                        <Grid>
+
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".8*" />
+                                    <RowDefinition Height="1.5*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height=".6*" />
+                                </Grid.RowDefinitions>
+                                <Label Margin="10,10,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Rubro:" />
+                                <TextBox Name="TxtRubro"
+                                         Margin="10,31,10,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         FontSize="14"
+                                         FontWeight="Bold"
+                                         Foreground="{Binding IsEliminated,
+                                                              Converter={StaticResource foreground}}"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         Text="{Binding Rubro,
+                                                        Mode=TwoWay}"
+                                         TextAlignment="Justify"
+                                         TextChanged="TextBoxCh"
+                                         TextWrapping="Wrap" />
+
+                                <Label Grid.Row="1"
+                                       Margin="10,10,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Texto:" />
+                                <TextBox Name="TxtTexto"
+                                         Grid.Row="1"
+                                         Margin="10,31,10,0"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         FontSize="14"
+                                         Foreground="{Binding IsEliminated,
+                                                              Converter={StaticResource foreground}}"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         Text="{Binding Texto,
+                                                        Mode=TwoWay}"
+                                         TextChanged="TextBoxCh"
+                                         TextWrapping="Wrap" />
+
+                                <Label Grid.Row="2"
+                                       Margin="10,10,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Precedentes:" />
+                                <TextBox Name="TxtPrec"
+                                         Grid.Row="2"
+                                         Margin="10,31,10,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         FontSize="14"
+                                         Foreground="{Binding IsEliminated,
+                                                              Converter={StaticResource foreground}}"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         Text="{Binding Precedentes,
+                                                        Mode=TwoWay}"
+                                         TextChanged="TextBoxCh"
+                                         TextWrapping="Wrap" />
+                                <Label Grid.Row="3"
+                                       Margin="10,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Notas sugeridas:" />
+                                <TextBox x:Name="TxtPrec_Copy"
+                                         Grid.Row="3"
+                                         Margin="10,20,10,0"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         FontSize="14"
+                                         Foreground="{Binding IsEliminated,
+                                                              Converter={StaticResource foreground}}"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                         Text="{Binding NotasSugeridas,
+                                                        Mode=TwoWay}"
+                                         TextChanged="TextBoxCh"
+                                         TextWrapping="Wrap" />
+                            </Grid>
+
+
+                            <Grid x:Name="GTesisObs"
+                                  Grid.Column="1"
+                                  Width="250"
+                                  Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".4*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height=".8*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="1"
+                                       Height="23"
+                                       Margin="10"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Observaciones rubro:" />
+                                <TextBox x:Name="TxtObsRubro"
+                                         Grid.Column="1"
+                                         Margin="10,31,10,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         Text="{Binding ObsRubro,
+                                                        Mode=TwoWay}" />
+
+
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Height="23"
+                                       Margin="10"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Observaciones texto:" />
+                                <TextBox x:Name="TxtObsTexto"
+                                         Grid.Row="1"
+                                         Grid.Column="1"
+                                         Margin="10,31,10,0"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         Text="{Binding ObsTexto,
+                                                        Mode=TwoWay}" />
+
+
+                                <Label Grid.Row="2"
+                                       Grid.Column="1"
+                                       Height="23"
+                                       Margin="10"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Observaciones precedentes:" />
+                                <TextBox x:Name="TxtObsPrecedentes"
+                                         Grid.Row="2"
+                                         Grid.Column="1"
+                                         Margin="10,31,10,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         Text="{Binding ObsPrecedentes,
+                                                        Mode=TwoWay}" />
+                            </Grid>
+
+                            <Grid x:Name="GViewer"
+                                  Grid.Column="2"
+                                  Width="700"
+                                  Visibility="Collapsed">
+                                <telerik:RadPdfViewer x:Name="PdfViewer"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch" />
+                            </Grid>
+
+                        </Grid>
+                    </telerik:RadTabItem>
+                    <telerik:RadTabItem x:Name="tabItemEx11" Header="  Notas  ">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".3*" />
+                                <RowDefinition Height=".35*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Height="23"
+                                   Margin="10,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Leyenda de Publicación:" />
+                            <TextBox Name="TxtNotaPublica"
+                                     Margin="10,38,10,10"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
+                                     Text="{Binding NotaPublica,
+                                                    Mode=TwoWay}"
+                                     TextWrapping="Wrap" />
+                            <Label Grid.Row="1"
+                                   Height="23"
+                                   Margin="10,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Content="Nota Gaceta:" />
+                            <TextBox Name="TxtNotaGaceta"
+                                     Grid.Row="1"
+                                     Margin="10,38,10,10"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     FontSize="14"
+                                     Foreground="{Binding IsEliminated,
+                                                          Converter={StaticResource foreground}}"
+                                     IsReadOnly="{Binding IsReadOnly,
+                                                          Mode=TwoWay}"
+                                     Text="{Binding NotasGaceta,
+                                                    Mode=TwoWay}"
+                                     TextWrapping="Wrap" />
+
+                            <GroupBox Grid.Row="2"
+                                      Margin="10,20,10,20"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      Header="Notas al pie"
+                                      IsEnabled="{Binding IsEnable,
+                                                          Mode=TwoWay}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Margin="10,10,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Rubro:" />
+                                    <TextBox Name="TxtNotaR"
+                                             Margin="10,31,10,10"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             FontSize="14"
+                                             Foreground="{Binding IsEliminated,
+                                                                  Converter={StaticResource foreground}}"
+                                             IsReadOnly="{Binding IsReadOnly,
+                                                                  Mode=TwoWay}"
+                                             Text="{Binding NotasRubro,
+                                                            Mode=TwoWay}"
+                                             TextWrapping="Wrap" />
+                                    <Label Grid.Column="1"
+                                           Margin="10,10,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Texto:" />
+                                    <TextBox Name="TxtNotaT"
+                                             Grid.Column="1"
+                                             Margin="10,31,10,10"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             FontSize="14"
+                                             Foreground="{Binding IsEliminated,
+                                                                  Converter={StaticResource foreground}}"
+                                             IsReadOnly="{Binding IsReadOnly,
+                                                                  Mode=TwoWay}"
+                                             Text="{Binding NotasTexto,
+                                                            Mode=TwoWay}"
+                                             TextWrapping="Wrap" />
+                                    <Label Grid.Column="2"
+                                           Margin="10,10,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Precedentes:" />
+                                    <TextBox Name="TxtNotaP"
+                                             Grid.Column="2"
+                                             Margin="10,31,10,10"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             FontSize="14"
+                                             Foreground="{Binding IsEliminated,
+                                                                  Converter={StaticResource foreground}}"
+                                             IsReadOnly="{Binding IsReadOnly,
+                                                                  Mode=TwoWay}"
+                                             Text="{Binding NotasPrecedentes,
+                                                            Mode=TwoWay}"
+                                             TextWrapping="Wrap" />
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </telerik:RadTabItem>
+
+                    <telerik:RadTabItem x:Name="TabOtrosTextos" Header="Otros textos">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Margin="20,10,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Genealogía." />
+                                <TextBox x:Name="TxtGenealogia"
+                                         Margin="20,35,20,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         AcceptsReturn="True"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         Text="{Binding Genealogia,
+                                                        Mode=TwoWay}"
+                                         TextWrapping="WrapWithOverflow"
+                                         VerticalScrollBarVisibility="Auto" />
+                                <Label Grid.Row="1"
+                                       Margin="20,13,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Observaciones:" />
+                                <TextBox x:Name="TxtObservaciones"
+                                         Grid.Row="1"
+                                         Margin="20,35,20,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         AcceptsReturn="True"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         Text="{Binding Observaciones,
+                                                        Mode=TwoWay}"
+                                         TextWrapping="WrapWithOverflow"
+                                         VerticalScrollBarVisibility="Auto" />
+                                <Label Grid.Row="2"
+                                       Margin="20,10,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Content="Concordancia:" />
+                                <TextBox x:Name="TxtConcordancia"
+                                         Grid.Row="2"
+                                         Margin="20,35,20,10"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         AcceptsReturn="True"
+                                         IsReadOnly="{Binding IsReadOnly,
+                                                              Mode=TwoWay}"
+                                         Text="{Binding Concordancia,
+                                                        Mode=TwoWay}"
+                                         TextWrapping="WrapWithOverflow"
+                                         VerticalScrollBarVisibility="Auto" />
+
+
+                            </Grid>
+                            <Grid Grid.Column="1"
+                                  Width="300"
+                                  Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                            </Grid>
+
+                        </Grid>
+                    </telerik:RadTabItem>
+
+                    <telerik:RadTabItem x:Name="TabAclaratoria" Header="Nota Aclaratoria">
+                        <Grid>
+                            <Button x:Name="BtnAclaratoria"
+                                    Width="116"
+                                    Height="20"
+                                    Margin="27,22,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="BtnAclaratoria_Click"
+                                    Content="Seleccionar Nota" />
+                            <TextBox x:Name="TxtAclaratoria"
+                                     Margin="30,65,30,20"
+                                     AcceptsReturn="True"
+                                     AcceptsTab="True"
+                                     IsEnabled="False"
+                                     Text="{Binding NotaAclaratoria,Mode=TwoWay,
+                                                    Converter={StaticResource aclaraConv}}"
+                                     TextWrapping="Wrap" />
+
+                        </Grid>
+                    </telerik:RadTabItem>
+
+
+
+
+
+                </telerik:RadTabControl>
+
+            </Grid>
+
+
+
+        </Grid>
+        <StatusBar Grid.Row="2" />
+
+
+
+
+
+    </Grid>
+</telerik:RadWindow>

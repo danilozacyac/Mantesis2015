@@ -1,7 +1,6 @@
-﻿using MantesisVerIusCommonObjects.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
-
+using MantesisCommonObjects.Model;
 
 namespace Mantesis2015
 {

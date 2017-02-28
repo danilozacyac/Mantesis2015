@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using UtilsMantesis;
-using Microsoft.Office.Interop.Word;
-using System.Windows.Forms;
-using ScjnUtilities;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using Mantesis2015.Model;
-using MantesisVerIusCommonObjects.Dto;
-using MantesisVerIusCommonObjects.Utilities;
+using MantesisCommonObjects.Dto;
+using MantesisCommonObjects.MantUtilities;
+using Microsoft.Office.Interop.Word;
+using ScjnUtilities;
 
 namespace Mantesis2015.Reportes
 {
@@ -20,11 +19,11 @@ namespace Mantesis2015.Reportes
         int fila = 1;
 
         Microsoft.Office.Interop.Word.Application oWord;
-        Microsoft.Office.Interop.Word.Document oDoc;
+        Document oDoc;
         object oMissing = System.Reflection.Missing.Value;
         object oEndOfDoc = "\\endofdoc";
 
-        Microsoft.Office.Interop.Word.Table oTable;
+        Table oTable;
 
         public void GeneraWordListaTesis(List<AddTesis> listaTesis, string epoca, string volumen)
         {
@@ -42,11 +41,11 @@ namespace Mantesis2015.Reportes
             //oPara1.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
             //oPara1.Range.InsertParagraphAfter();
 
-            Microsoft.Office.Interop.Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
 
             oTable = oDoc.Tables.Add(wrdRng, (listaTesis.Count + 1), 5, ref oMissing, ref oMissing);
             oTable.Range.ParagraphFormat.SpaceAfter = 6;
-            oTable.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            oTable.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
             oTable.Range.Font.Size = 9;
             oTable.Range.Font.Bold = 0;
             oTable.Borders.Enable = 1;
@@ -81,7 +80,7 @@ namespace Mantesis2015.Reportes
                     oTable.Cell(fila, 2).Range.Text = tesis.Ius4.ToString();
                     oTable.Cell(fila, 3).Range.Text = tesis.Tesis;
                     oTable.Cell(fila, 4).Range.Text = tesis.Rubro;
-                    oTable.Cell(fila, 4).Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    oTable.Cell(fila, 4).Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphJustify;
                     oTable.Cell(fila, 5).Range.Text = tesis.Pagina;
 
                     fila++;
@@ -106,9 +105,7 @@ namespace Mantesis2015.Reportes
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisWord", "MantesisQuinta");
             }
             finally
             {
@@ -128,7 +125,7 @@ namespace Mantesis2015.Reportes
 
             try
             {
-                Microsoft.Office.Interop.Word.Paragraph par = oDoc.Content.Paragraphs.Add(ref oMissing);
+                Paragraph par = oDoc.Content.Paragraphs.Add(ref oMissing);
 
                 List<TesisReg> tesisImprime = new ReporteModel().GetTesisPorMateria(materia);
 
@@ -153,7 +150,7 @@ namespace Mantesis2015.Reportes
                     par.Range.Text = "Fuente: " + tesis.fuente;
                     par.Range.InsertParagraphAfter();
 
-                    par.Range.Text = tesis.Estado + ", " + new ReporteModel().GetTomo(tesis.SubTema);
+                    par.Range.Text = String.Format("{0}, {1}", tesis.Estado, new ReporteModel().GetTomo(tesis.SubTema));
                     par.Range.InsertParagraphAfter();
 
                     string materiaStr = "";
@@ -184,7 +181,7 @@ namespace Mantesis2015.Reportes
                     par.Range.InsertParagraphAfter();
 
                     par.Range.Font.Bold = 1;
-                    par.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                    par.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphJustify;
                     par.Range.Text = tesis.RUBRO;
                     par.Range.InsertParagraphAfter();
 
@@ -196,17 +193,19 @@ namespace Mantesis2015.Reportes
                     par.Range.Text = tesis.PRECEDENTES;
                     par.Range.InsertParagraphAfter();
 
-                    oDoc.Words.Last.InsertBreak(Microsoft.Office.Interop.Word.WdBreakType.wdPageBreak);
+                    oDoc.Words.Last.InsertBreak(WdBreakType.wdPageBreak);
                 }
 
                 //Agregando esto para guardar hasta el inicio del catch
-                SaveFileDialog cuadroDialogo = new SaveFileDialog();
-                cuadroDialogo.DefaultExt = "docx";
-                cuadroDialogo.Filter = "docx file(*.docx)|*.docx";
-                cuadroDialogo.AddExtension = true;
-                cuadroDialogo.RestoreDirectory = true;
-                cuadroDialogo.Title = "Guardar";
-                cuadroDialogo.InitialDirectory = @"D:\RESPALDO\SEMANARI\";
+                SaveFileDialog cuadroDialogo = new SaveFileDialog()
+                {
+                    DefaultExt = "docx",
+                    Filter = "docx file(*.docx)|*.docx",
+                    AddExtension = true,
+                    RestoreDirectory = true,
+                    Title = "Guardar",
+                    InitialDirectory = @"D:\RESPALDO\SEMANARI\"
+                };
                 if (cuadroDialogo.ShowDialog() == DialogResult.OK)
                 {
                     oWord.ActiveDocument.SaveAs(cuadroDialogo.FileName);
@@ -218,9 +217,7 @@ namespace Mantesis2015.Reportes
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisWord", "MantesisQuinta");
             }
             finally
             {
@@ -235,7 +232,7 @@ namespace Mantesis2015.Reportes
 
             try
             {
-                Microsoft.Office.Interop.Word.Paragraph par = oDoc.Content.Paragraphs.Add(ref oMissing);
+                Paragraph par = oDoc.Content.Paragraphs.Add(ref oMissing);
 
                 par.Range.Font.Bold = 0;
                 par.Range.Font.Size = 10;
@@ -247,13 +244,13 @@ namespace Mantesis2015.Reportes
                 par.Range.Text = "Registro: " + tesis.Ius;
                 par.Range.InsertParagraphAfter();
 
-                par.Range.Text = "Instancia: " + Utils.GetInfoDatosCompartidos(2,tesis.Sala);
+                par.Range.Text = "Instancia: " + MantUtils.GetInfoDatosCompartidos(2, tesis.Sala);
                 par.Range.InsertParagraphAfter();
 
                 par.Range.Text = tesis.TaTj == 1 ? "Jurisprudencia" : "Tesis Aislada";
                 par.Range.InsertParagraphAfter();
 
-                par.Range.Text = "Fuente: " + Utils.GetInfoDatosCompartidos(3,tesis.Fuente);
+                par.Range.Text = "Fuente: " + MantUtils.GetInfoDatosCompartidos(3, tesis.Fuente);
                 par.Range.InsertParagraphAfter();
 
                 //par.Range.Text = tesis.Estado + ", " + new ReporteModel().GetTomo(tesis.SubTema);
@@ -263,15 +260,15 @@ namespace Mantesis2015.Reportes
 
                 if (!tesis.Materia1.Equals(""))
                 {
-                    materiaStr += Utils.GetInfoDatosCompartidos(4,tesis.Materia1);
+                    materiaStr += MantUtils.GetInfoDatosCompartidos(4, tesis.Materia1);
 
                     if (!tesis.Materia2.Equals("<sin materia>"))
                     {
-                        materiaStr += ", " + Utils.GetInfoDatosCompartidos(4, tesis.Materia2);
+                        materiaStr += ", " + MantUtils.GetInfoDatosCompartidos(4, tesis.Materia2);
 
                         if (!tesis.Materia3.Equals("<sin materia>"))
                         {
-                            materiaStr += ", " + Utils.GetInfoDatosCompartidos(4,tesis.Materia3);
+                            materiaStr += ", " + MantUtils.GetInfoDatosCompartidos(4, tesis.Materia3);
                         }
                     }
                 }
@@ -287,7 +284,7 @@ namespace Mantesis2015.Reportes
                 par.Range.InsertParagraphAfter();
 
                 par.Range.Font.Bold = 1;
-                par.Range.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                par.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphJustify;
                 par.Range.Text = tesis.Rubro;
                 par.Range.InsertParagraphAfter();
 
@@ -295,19 +292,21 @@ namespace Mantesis2015.Reportes
                 par.Range.Text = tesis.Texto;
                 par.Range.InsertParagraphAfter();
                 par.Range.InsertParagraphAfter();
-                
+
                 par.Range.Text = tesis.Precedentes;
                 par.Range.InsertParagraphAfter();
 
 
                 //Agregando esto para guardar hasta el inicio del catch
-                SaveFileDialog cuadroDialogo = new SaveFileDialog();
-                cuadroDialogo.DefaultExt = "docx";
-                cuadroDialogo.Filter = "docx file(*.docx)|*.docx";
-                cuadroDialogo.AddExtension = true;
-                cuadroDialogo.RestoreDirectory = true;
-                cuadroDialogo.Title = "Guardar";
-                cuadroDialogo.InitialDirectory = @"D:\RESPALDO\SEMANARI\";
+                SaveFileDialog cuadroDialogo = new SaveFileDialog()
+                {
+                    DefaultExt = "docx",
+                    Filter = "docx file(*.docx)|*.docx",
+                    AddExtension = true,
+                    RestoreDirectory = true,
+                    Title = "Guardar",
+                    InitialDirectory = @"D:\RESPALDO\SEMANARI\"
+                };
                 if (cuadroDialogo.ShowDialog() == DialogResult.OK)
                 {
                     oWord.ActiveDocument.SaveAs(cuadroDialogo.FileName);
@@ -319,9 +318,7 @@ namespace Mantesis2015.Reportes
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisWord", "MantesisQuinta");
             }
             finally
             {

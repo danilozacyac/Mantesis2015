@@ -9,7 +9,6 @@
         Title="MainWindow"
         Width="1200"
         Height="900"
-        Loaded="Window_Loaded"
         WindowState="Maximized">
 
     <Grid>
@@ -24,7 +23,6 @@
                 <telerik:RadRibbonGroup Uid="5" Header="General">
                     <telerik:RadRibbonButton x:Name="BtnNuevaTesis"
                                              Click="ButtonTool_Click"
-                                             IsEnabled="False"
                                              LargeImage="Resources/addTesis_128.png"
                                              Size="Large"
                                              Tag="NewTesis">
@@ -35,7 +33,6 @@
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="BtnVisualizaTesis"
                                              Click="ButtonTool_Click"
-                                             IsEnabled="False"
                                              LargeImage="Resources/viewTesis_128.png"
                                              Size="Large"
                                              Tag="ViewTesis">
@@ -46,7 +43,6 @@
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="BtnActualizaTesis"
                                              Click="ButtonTool_Click"
-                                             IsEnabled="False"
                                              LargeImage="Resources/editTesis_128.png"
                                              Size="Large"
                                              Tag="EditTesis">
@@ -57,7 +53,6 @@
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="BtnEliminaTesis"
                                              Click="ButtonTool_Click"
-                                             IsEnabled="False"
                                              LargeImage="Resources/delTesis_128.png"
                                              Size="Large"
                                              Tag="DelTesis">
@@ -82,254 +77,6 @@
                                              Tag="Word" />
 
                 </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup Header="Mant. Materias SGA" IsEnabled="True">
-                    <telerik:RadRibbonButton x:Name="BtnSgaTesisRelacionadas"
-                                             Click="ButtonTool_Click"
-                                             IsEnabled="False"
-                                             LargeImage="Resources/relation.png"
-                                             Size="Large"
-                                             Tag="StructSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Tesis" />
-                            <TextBlock HorizontalAlignment="Center" Text="Relacionadas" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="BtnStructMateriasSga"
-                                             Click="ButtonTool_Click"
-                                             IsEnabled="False"
-                                             LargeImage="Resources/tree2_128.png"
-                                             Size="Large"
-                                             Tag="StructSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Mostrar" />
-                            <TextBlock HorizontalAlignment="Center" Text="estructura" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="BtnEditStructSga"
-                                             Click="ButtonTool_Click"
-                                             IsEnabled="False"
-                                             LargeImage="Resources/tree2_128_edit.png"
-                                             Size="Large"
-                                             Tag="EditStructSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Actualizar" />
-                            <TextBlock HorizontalAlignment="Center" Text="estructura" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnSga"
-                                             Click="ExportarGroupClick"
-                                             LargeImage="Resources/table_128.png"
-                                             Size="Large"
-                                             Tag="MatSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Reporte Mensual" />
-                            <TextBlock HorizontalAlignment="Center" Text="Materias SGA" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="BtnPrintSgaPdf"
-                                             Click="ButtonTool_Click"
-                                             IsEnabled="False"
-                                             LargeImage="Resources/tree2_128_pdf.png"
-                                             Size="Large"
-                                             Tag="PdfStructSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Generar" />
-                            <TextBlock HorizontalAlignment="Center" Text="PDF" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="BtnPrintSgaWord"
-                                             Click="ButtonTool_Click"
-                                             IsEnabled="False"
-                                             LargeImage="Resources/tree2_128_word.png"
-                                             Size="Large"
-                                             Tag="WordStructSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Generar" />
-                            <TextBlock HorizontalAlignment="Center" Text="Word" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="BtnReasignaOrden"
-                                             Click="ButtonTool_Click"
-                                             IsEnabled="False"
-                                             LargeImage="Resources/number_128.png"
-                                             Size="Large"
-                                             Tag="WordStructSga">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Reasignar" />
-                            <TextBlock HorizontalAlignment="Center" Text="consecutivo" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                </telerik:RadRibbonGroup>
-            </telerik:RadRibbonTab>
-            <telerik:RadRibbonTab Uid="9"
-                                  x:Name="InformeTab"
-                                  Header="Informe de las Salas"
-                                  IsEnabled="True">
-                <telerik:RadRibbonGroup Header="Clasificación">
-                    <telerik:RadRibbonButton x:Name="BtnMostrarProy"
-                                             Click="InformesButtonTools"
-                                             Content="Mostrar Proyectos"
-                                             LargeImage="Resources/show_128.png"
-                                             Size="Large"
-                                             Tag="MostrarProyecto" />
-                    <telerik:RadRibbonButton x:Name="BtnEliminarClasif"
-                                             Click="InformesButtonTools"
-                                             Content="Eliminar Clasificación"
-                                             LargeImage="Resources/delTesis_128.png"
-                                             Size="Large"
-                                             Tag="EliminaClasif" />
-                    <telerik:RadRibbonButton x:Name="BtnActualizaVarias"
-                                             Click="InformesButtonTools"
-                                             Content="Imprimir Listado"
-                                             LargeImage="Resources/checklist_128.png"
-                                             Size="Large"
-                                             Tag="ImprimirListado" />
-                </telerik:RadRibbonGroup>
-            </telerik:RadRibbonTab>
-            <telerik:RadRibbonTab Header="Herramientas administrativas">
-                <telerik:RadRibbonGroup Header="Usuarios">
-                    <telerik:RadRibbonButton x:Name="RBtnListaUsuarios"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/1425495848_group.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Listado de" />
-                            <TextBlock HorizontalAlignment="Center" Text="usuarios" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <StackPanel Orientation="Vertical">
-                        <telerik:RadRibbonButton x:Name="RBtnAddUsuarios"
-                                                 Click="ButtonTool_Click"
-                                                 Content="Agregar"
-                                                 LargeImage="Resources/1425495825_add-user.png"
-                                                 Size="Medium" />
-                        <telerik:RadRibbonButton x:Name="RBtnEditUsuarios"
-                                                 Click="ButtonTool_Click"
-                                                 Content="Modificar"
-                                                 LargeImage="Resources/1425495839_edit-user.png"
-                                                 Size="Medium" />
-                        <telerik:RadRibbonButton x:Name="RBtnDelUsuarios"
-                                                 Click="ButtonTool_Click"
-                                                 Content="Inhabilitar"
-                                                 LargeImage="Resources/1425495857_delete-user.png"
-                                                 Size="Medium" />
-                    </StackPanel>
-                    <telerik:RadRibbonButton x:Name="RBtnRefreshPermisos"
-                                             Click="ButtonTool_Click"
-                                             Content="Recargar Permisos"
-                                             LargeImage="Resources/reload.png"
-                                             Size="Large" />
-                </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup x:Name="GroupPermisosSecciones" Header="Permisos secciones">
-                    <telerik:RadRibbonButton x:Name="RBtnPermisos"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/keys_128.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Permisos" />
-                            <TextBlock HorizontalAlignment="Center" Text="otorgados" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnAuthSeccion"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/unlock_128.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Autorizar " />
-                            <TextBlock HorizontalAlignment="Center" Text="sección " />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnDenySeccion"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/lock_128.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Denegar " />
-                            <TextBlock HorizontalAlignment="Center" Text="permiso " />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnEditAuthSec"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/editLock.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Modificar permisos " />
-                            <TextBlock HorizontalAlignment="Center" Text="de sección " />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup x:Name="GroupPermisosVolumen" Header="Permisos volumenes">
-                    <telerik:RadRibbonButton x:Name="RBtnVolumenes"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/locklist.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Volumenes" />
-                            <TextBlock HorizontalAlignment="Center" Text="Autorizados" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnAuthVolumen"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/flatCheck_128.png"
-                                             Size="Large">
-
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Autorizar" />
-                            <TextBlock HorizontalAlignment="Center" Text="Volumen" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnDenyVolumen"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/flatCross_128.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Denegar" />
-                            <TextBlock HorizontalAlignment="Center" Text="Volumen" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnAuthEpocas"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/epocasAdd.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Autorizar" />
-                            <TextBlock HorizontalAlignment="Center" Text="Épocas" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnDenyEpocas"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/epocasRemove.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Denegar" />
-                            <TextBlock HorizontalAlignment="Center" Text="Épocas" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup x:Name="GroupVerificadores"
-                                        Header="Verificadores"
-                                        IsEnabled="False">
-                    <telerik:RadRibbonButton x:Name="RBtnComparaBases"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/compare_128.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Comparar bases" />
-                            <TextBlock HorizontalAlignment="Center" Text="de datos" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-                    <telerik:RadRibbonButton x:Name="RBtnTesisTotales"
-                                             Click="ButtonTool_Click"
-                                             LargeImage="Resources/analyze.png"
-                                             Size="Large">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Comprobar" />
-                            <TextBlock HorizontalAlignment="Center" Text="totales" />
-                        </StackPanel>
-                    </telerik:RadRibbonButton>
-
-                </telerik:RadRibbonGroup>
-
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
 

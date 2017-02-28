@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="Mantesis2015.exe" version="1.0.0.10" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="Mantesis2015.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="tesis.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -55,7 +55,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hnz+H7fq9ZyJLzPda6NFfw/GHqBmzMgVkmozltkWJMg=</dsig:DigestValue>
+        <dsig:DigestValue>WD+7D/Id61Fr8fmcWaXA2qnJIwcmm+7fZehPHDMWr3c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -144,14 +144,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="1936896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Mantesis2015.exe" size="2226176">
       <assemblyIdentity name="Mantesis2015" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+BNmfcylvkWGQKMkxvz+nj8K723rKmYlLjipVjfaoU4=</dsig:DigestValue>
+        <dsig:DigestValue>LZ4RV0Lz6zKIpp09BHXfg8JSgWpMRalnUutsX/z+HZc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -168,6 +168,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MantesisCommonObjects.dll" size="69632">
+      <assemblyIdentity name="MantesisCommonObjects" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>lYNKWPB3Zg0m3wntp/VF5QvRS/t43FSXAlx5rkN2Q3w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MantesisVerIusCommonObjects.dll" size="64512">
       <assemblyIdentity name="MantesisVerIusCommonObjects" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -175,7 +187,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vtKKDz7QoR0fkXcNJIEA8gEiyytjo5wqplwSyzccx5w=</dsig:DigestValue>
+        <dsig:DigestValue>8RaiKFHthDYbERN87fUgOEXvLAgpujMif9QFwQPMTZU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -204,14 +216,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScjnUtilities.dll" size="21504">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScjnUtilities.dll" size="25600">
       <assemblyIdentity name="ScjnUtilities" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>b8s55uMgnkckHrf/je3dfI5RzZdYF89SYoBCoHEhE28=</dsig:DigestValue>
+        <dsig:DigestValue>DGMSsySP9KlBn+UVYoqnhXdqn/VhmTr2J6gm51fr14s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -236,6 +248,18 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>uhoZbdY3hkAtdc02FVTIMTu8hUEeW1iWGti6Fcc03u0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.Windows.Controls.FixedDocumentViewers.dll" size="311808">
+      <assemblyIdentity name="Telerik.Windows.Controls.FixedDocumentViewers" version="2014.2.729.45" publicKeyToken="5803CFA389C90CE7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4t9wVOjP6GQvD9tSPWwKYg6Lj1dLRw0WVowQKxj8eCQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -372,6 +396,42 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.Windows.Documents.Core.dll" size="308736">
+      <assemblyIdentity name="Telerik.Windows.Documents.Core" version="2014.2.729.45" publicKeyToken="5803CFA389C90CE7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>6oZVptAwIMyrBcKgOMOGqIVjoPN+MEDuceFhZjXKJbc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.Windows.Documents.Fixed.dll" size="1792512">
+      <assemblyIdentity name="Telerik.Windows.Documents.Fixed" version="2014.2.729.45" publicKeyToken="5803CFA389C90CE7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>0Di/a49jApv/WO+abzHKJZhxoejol4Jn0PDClx7SBNo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Telerik.Windows.Zip.dll" size="143360">
+      <assemblyIdentity name="Telerik.Windows.Zip" version="2014.2.729.45" publicKeyToken="5803CFA389C90CE7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>E4to5b4MVnJp8t/vTg4Jnrjx8Ig/xTFJLTSlNMIEFvM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="UIControls.dll" size="19968">
       <assemblyIdentity name="UIControls" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -395,13 +455,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Mantesis2015.exe.config" size="2486">
+  <file name="Mantesis2015.exe.config" size="2786">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>JKoiECs0zLBZsG0OsAiFAUI0XjyzPhnVaq+ELtsQtGY=</dsig:DigestValue>
+      <dsig:DigestValue>dbv7ZYzCq4lXZNSmGGGYndzWfM9wQgYnrDkk3PU7wUk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="tesis.ico" size="67646">

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
+using System.Configuration;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Windows.Forms;
-using MantesisVerIusCommonObjects.DataAccess;
-using MantesisVerIusCommonObjects.Dto;
-using MantesisVerIusCommonObjects.Utilities;
+using MantesisCommonObjects.DataAccess;
+using MantesisCommonObjects.Dto;
+using MantesisCommonObjects.MantUtilities;
 using ScjnUtilities;
-using UtilsMantesis;
 
 namespace Mantesis2015.Model
 {
@@ -35,7 +34,7 @@ namespace Mantesis2015.Model
 
             try
             {
-                if (ValuesMant.Epoca == ConstMant.Apendice)
+                if (ValuesMant.Epoca == ConstMantesis.Apendice)
                 {
                     if (filtro == 99 || filtro == -1)
                     {
@@ -100,16 +99,12 @@ namespace Mantesis2015.Model
             catch (SqlException ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisModel", "MantesisQuinta");
             }
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisModel", "MantesisQuinta");
             }
             finally
             {
@@ -120,290 +115,69 @@ namespace Mantesis2015.Model
             return listaTesis;
         }
 
-        ///// <summary>
-        ///// Elimina las tesis en las bases de datos de Access
-        ///// </summary>
-        ///// <param name="ius">Número de registro ius de la tesis a eliminar</param>
-        ///// <returns></returns>
-        //public int BajaRegistroIus(long ius)
-        //{
-        //    DbConnection connEpocas;
-        //    DataTableReader readerReg;
-        //    string sSql = "";
-        //    int nEstado = 0;
 
-        //    if (MantesisVerIusCommonObjects.Utilities.ValuesMant.Epoca == ConstMant.Apendice)
-        //    {
-        //        connEpocas = DbConnDac.GetConnectEpocas(MantesisVerIusCommonObjects.Utilities.ValuesMant.Epoca, MantesisVerIusCommonObjects.Utilities.ValuesMant.ApendicNom, 1);
-        //    }
-        //    else
-        //    {
-        //        connEpocas = DbConnDac.GetConnectEpocas(MantesisVerIusCommonObjects.Utilities.ValuesMant.Epoca, 0, 1);
-        //    }
-        //    connEpocas.Open();
 
-        //    sSql = "SELECT ius4,estado FROM Tesis WHERE IUS4 =" + ius;
-        //    readerReg = this.GetDatosRegistro(sSql, connEpocas);
-
-        //    UnaTesisModel unaTesis = new UnaTesisModel();
-
-        //    if (readerReg.Read())
-        //    {
-        //        nEstado = Convert.ToInt16(readerReg["Estado"].ToString());
-
-        //        string idAbs = Guid.NewGuid().ToString();
-
-        //        if (nEstado >= 4)
-        //        {
-        //            unaTesis.SalvarBitacora(ius, MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja, 4, idAbs);
-        //            readerReg.Close();
-        //            connEpocas.Close();
-        //            return nEstado;
-        //        }
-
-        //        if (nEstado < 4)
-        //        {
-        //            sSql = "UPDATE Tesis SET Estado = 6 WHERE ius4 =" + ius;
-        //            DbCommand command = connEpocas.CreateCommand();
-        //            command.CommandText = sSql;
-        //            command.ExecuteNonQuery();
-
-        //            unaTesis.SalvarBitacora(ius, MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja, 4, idAbs);
-
-        //            SalvarTemporal(ius, MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja, MantesisVerIusCommonObjects.Utilities.ValuesMant.RegIusporBaja);
-        //        }
-        //    }
-
-        //    readerReg.Close();
-        //    connEpocas.Close();
-
-        //    return nEstado;
-        //}
-
-        ///// <summary>
-        ///// Elimina las tesis en las bases de datos de Access
-        ///// </summary>
-        ///// <param name="ius">Número de registro ius de la tesis a eliminar</param>
-        ///// <returns></returns>
-        //public int BajaRegistroIusMantesisSql(long ius)
-        //{
-        //    SqlConnection connectionMantesisSql = DbConnDac.GetConnectionMantesisSql();
-
-        //    SqlDataReader reader = null;
-        //    string sSql = "";
-        //    int nEstado = 0;
-
-        //    try
-        //    {
-        //        TesisDto tesisEliminar = new UnaTesisModel().CargaDatosTesisMantesisSql(ius);
-        //        connectionMantesisSql.Open();
-
-        //        sSql = "SELECT * FROM Tesis WHERE IUS4 =" + ius;
-        //        //reader = this.GetDatosRegistro(sSql, connectionMantesisSql);
-
-        //        UnaTesisModel unaTesis = new UnaTesisModel();
-
-        //        if (reader.Read())
-        //        {
-        //            nEstado = Convert.ToInt16(reader["Estado"].ToString());
-
-        //            string idAbs = Guid.NewGuid().ToString();
-
-        //            if (nEstado >= 4)
-        //            {
-        //                unaTesis.SalvarBitacora(ius, MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja, 4, idAbs);
-        //                reader.Close();
-        //                connectionMantesisSql.Close();
-        //                return nEstado;
-        //            }
-
-        //            if (nEstado < 4)
-        //            {
-        //                sSql = "UPDATE Tesis SET Estado = 6 WHERE ius4 =" + ius;
-        //                DbCommand command = connectionMantesisSql.CreateCommand();
-        //                command.CommandText = sSql;
-        //                command.ExecuteNonQuery();
-
-        //                unaTesis.SalvarBitacora(ius, MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja, 4, idAbs);
-
-        //                SalvarTemporal(ius, MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja, MantesisVerIusCommonObjects.Utilities.ValuesMant.RegIusporBaja);
-        //            }
-        //        }
-
-        //        reader.Close();
-        //        connectionMantesisSql.Close();
-        //    }
-        //    catch (SqlException sql)
-        //    {
-        //        MessageBox.Show("Error ({0}) : {1}" + sql.Source + sql.Message, "Error Interno");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, "Error Interno");
-        //    }
-        //    finally
-        //    {
-        //        reader.Close();
-        //        connectionMantesisSql.Close();
-        //    }
-
-        //    return nEstado;
-        //}
-
-        ///// <summary>
-        ///// Verifica el estado de la tesis en las bases de datos de Access
-        ///// </summary>
-        ///// <param name="nIus">Número de registro IUS de la tesis a eliminar</param>
-        ///// <returns>Si regresa un 4 es que la tesis ya fue eliminada </returns>
-        //public int BajaRegistroCheck(long nIus)
-        //{
-        //    DbConnection connEpocas;
-        //    DataTableReader readerReg;
-        //    string sSql = "";
-        //    int nEstado = 0;
-
-        //    if (MantesisVerIusCommonObjects.Utilities.ValuesMant.Epoca == ConstMant.Apendice)
-        //    {
-        //        connEpocas = DbConnDac.GetConnectEpocas(MantesisVerIusCommonObjects.Utilities.ValuesMant.Epoca, MantesisVerIusCommonObjects.Utilities.ValuesMant.ApendicNom, 1);
-        //    }
-        //    else
-        //    {
-        //        connEpocas = DbConnDac.GetConnectEpocas(MantesisVerIusCommonObjects.Utilities.ValuesMant.Epoca, 0, 1);
-        //    }
-        //    connEpocas.Open();
-
-        //    sSql = "SELECT ius4,estado FROM Tesis WHERE IUS4 =" + nIus;
-        //    readerReg = this.GetDatosRegistro(sSql, connEpocas);
-
-        //    if (readerReg.Read())
-        //    {
-        //        nEstado = Convert.ToInt16(readerReg["Estado"].ToString());
-
-        //        if (nEstado >= 4)
-        //        {
-        //            readerReg.Close();
-        //            connEpocas.Close();
-        //            return nEstado;
-        //        }
-        //    }
-
-        //    readerReg.Close();
-        //    connEpocas.Close();
-
-        //    return nEstado;
-        //}
-
-        ///// <summary>
-        ///// Verifica el estado de la tesis en la base de datos de Mantesis SQL
-        ///// </summary>
-        ///// <param name="nIus">Número de registro IUS de la tesis a eliminar</param>
-        ///// <returns>Si regresa un 4 es que la tesis ya fue eliminada </returns>
-        //public int BajaRegistroCheckMantesisSql(long nIus)
-        //{
-        //    SqlConnection connectionMantesisSql = DbConnDac.GetConnectionMantesisSql();
-        //    SqlCommand cmd;
-        //    SqlDataReader reader = null;
-
-        //    string sSql = "";
-        //    int nEstado = 0;
-
-        //    try
-        //    {
-
-        //        connectionMantesisSql.Open();
-
-        //        sSql = "SELECT IUS,estado FROM Tesis WHERE IUS = " + nIus;
-        //        cmd = new SqlCommand(sSql, connectionMantesisSql);
-        //        reader = cmd.ExecuteReader();
-
-        //        if (reader.HasRows)
-        //        {
-
-        //            if (reader.Read())
-        //            {
-        //                nEstado = Convert.ToInt16(reader["Estado"].ToString());
-
-        //                if (nEstado >= 4)
-        //                {
-        //                    reader.Close();
-        //                    connectionMantesisSql.Close();
-        //                    return nEstado;
-        //                }
-        //            }
-        //            reader.Close();
-
-        //        }
-        //        else
-        //        {
-        //            sSql = "SELECT IUS FROM Tmp_TesisSup WHERE IUS = " + nIus;
-        //            cmd = new SqlCommand(sSql, connectionMantesisSql);
-        //            reader = cmd.ExecuteReader();
-
-        //            if (reader.HasRows)
-        //            {
-        //                nEstado = 4;
-        //                reader.Close();
-        //                connectionMantesisSql.Close();
-        //                return nEstado;
-
-        //            }
-        //        }
-
-        //    }
-        //    catch (SqlException sql)
-        //    {
-        //        MessageBox.Show("Error ({0}) : {1}" + sql.Source + sql.Message, "Error Interno");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, "Error Interno");
-        //    }
-        //    finally
-        //    {
-        //        reader.Close();
-        //        connectionMantesisSql.Close();
-        //    }
-
-        //    return nEstado;
-        //}
-
-        private void SalvarTemporal(long ius, int motivoModif, long nRegistro)
+        public List<AddTesis> CargaTesisImportadas(int filtro)
         {
-            DbConnection connTemp;
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Base"].ConnectionString);
+            OleDbCommand cmd;
+           OleDbDataReader reader = null;
 
-            connTemp = DbConnDac.GetConnectTemp();
+            listaTesis = new List<AddTesis>();
+            long nId = 1;
+
+            string sqlCadena = "";
 
             try
             {
-                connTemp.Open();
 
-                string sqlCadena = "INSERT INTO TesisModificadas(IUS4,TipoMotivo,Motivo,Fecha,Usuario,Hora,Registro)" +
-                                   " VALUES(" + ius + ",4," + motivoModif + ",'" + DateTime.Now.ToString("yyyyMMdd") +
-                                   "'," + AccesoUsuarioModel.Llave + ",'" + DateTime.Now.ToString("hh:mm:ss") + "'," + nRegistro + ")";
+                sqlCadena = "SELECT ius,tesis,rubro,pagina,estado,ta_tj,volumen,epoca FROM Tesis ORDER BY ConsecIndx";
 
-                DbCommand command = connTemp.CreateCommand();
-                command.CommandText = sqlCadena;
-                command.ExecuteNonQuery();
+
+                connection.Open();
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    listaTesis.Add(new AddTesis(
+                        nId,
+                        Convert.ToInt32(reader["ius"]),
+                        reader["tesis"].ToString(),
+                        reader["rubro"].ToString(),
+                        reader["pagina"].ToString(),
+                        MiscFunct.GetEstadoTesis(Convert.ToInt16(reader["estado"].ToString())),
+                        Convert.ToInt16(reader["ta_tj"]),
+                        Convert.ToInt32(reader["pagina"]),
+                        Convert.ToInt32(reader["volumen"])));
+                    nId++;
+                }
+
+                connection.Close();
+
             }
-            catch (DbException ex)
+            catch (SqlException ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisModel", "MantesisQuinta");
             }
             catch (Exception ex)
             {
                 string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName + " Exception,ListaTesisModel", "MantesisQuinta");
             }
             finally
             {
-                connTemp.Close();
+                reader.Close();
+                connection.Close();
             }
+
+            return listaTesis;
         }
+
+
+
 
         //private void SalvarBitacora(long pIus, int motivoModif, int nTipo)
         //{
@@ -448,17 +222,15 @@ namespace Mantesis2015.Model
         /// <returns></returns>
         public int VerificaIus(long ius)
         {
-            SqlConnection connIus;
+            SqlConnection connIus= DbConnDac.GetConnectionIus();
             SqlDataReader readerReg;
             int nParte;
             int nEsValido = 1;
-            string sqlCadena;
 
-            connIus = DbConnDac.GetConnectionIus();
             connIus.Open();
 
-            sqlCadena = "SELECT ius,parte FROM Tesis Where ius =" + ius;
-            SqlCommand cmd = new SqlCommand(sqlCadena, connIus);
+            SqlCommand cmd = new SqlCommand("SELECT ius,parte FROM Tesis Where ius = @Ius", connIus);
+            cmd.Parameters.AddWithValue("@Ius", ius);
             readerReg = cmd.ExecuteReader();
 
             if (readerReg.Read())

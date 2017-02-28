@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using Mantesis2015.Model;
-using MantesisVerIusCommonObjects.Utilities;
+using MantesisCommonObjects.MantUtilities;
 
 namespace Mantesis2015.MotivosFolder
 {

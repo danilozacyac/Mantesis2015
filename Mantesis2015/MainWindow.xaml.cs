@@ -3,12 +3,8 @@ using System.Linq;
 using System.Windows;
 using AuthManager.PermisosSecciones;
 using AuthManager.PermisosVolumen;
-using CatalogoSga;
-using CheckPrecedentes;
-using ClasifInformeSalas15;
-using Mantesis2015.Controllers;
 using Mantesis2015.Model;
-using MantesisVerIusCommonObjects.Dto;
+using MantesisCommonObjects.Dto;
 using Telerik.Windows.Controls;
 
 namespace Mantesis2015
@@ -20,20 +16,10 @@ namespace Mantesis2015
     {
         public DatosComp EpocaSelec;
         private object volumeSelect;
-        private MainWindowController controller;
-        private PermisosController permisosCon;
         
-        public RadPane InformesPane;
-        public VistaTesisPorClasif ClasifTesisInf;
 
-        public RadPane MateriasSgaPane;
-        public MantoClasifSga CatalogMateriasSga;
 
-        public RadPane MateriasSgaTesis;
-        public TesisRelacionadas TesisRelacionadasSga;
 
-        public RadPane ChecaPrecPane;
-        public ChecaPrecedentes PanelPrecede;
 
         /**
          * Controles de usuario
@@ -61,10 +47,9 @@ namespace Mantesis2015
                 return;
             }
 
-            controller = new MainWindowController(this);
-            permisosCon = new PermisosController(this);
+            //permisosCon = new PermisosController(this);
             
-            permisosCon.LoadPermission();
+            //permisosCon.LoadPermission();
 
         }
 
@@ -84,57 +69,15 @@ namespace Mantesis2015
                 case "BtnEliminaTesis":
                     break;
                 
-                //Materias SGA
-                case "BtnStructMateriasSga": 
-                    break;
-
-                case "BtnEditStructSga": controller.LaunchMateriasSgaPane();
-                    break;
-                case "BtnSgaTesisRelacionadas": controller.LaunchTesisRelacionadasSga();
-                    break;
-                case "BtnPrintSgaPdf": controller.MateriasEnPdf();
-                    break;
-                case "BtnPrintSgaWord": controller.MateriasEnWord();
-                    break;
-                case "BtnReasignaOrden":
+               
+                
 
                 
                 case "RbtnSalir": Application.Current.Shutdown();
                     break;
 
 
-                    //Usuarios
-                case "RBtnRefreshPermisos": controller.RefreshPermission(permisosCon);
-                    break;
-
-                    //Secciones
-                case "RBtnPermisos": controller.LaunchSeccionesPane();
-                    break;
-
-                case "RBtnAuthSeccion": controller.AuthSeccion();
-                    break;
-                case "RBtnDenySeccion": controller.DenySeccion();
-                    break;
-                case "RBtnEditAuthSec": controller.ModificarPermisosSeccion();
-                    break;
-
-                    //Volumenes
-                case "RBtnVolumenes": controller.LaunchVolumenesPane();
-                    break;
-                case "RBtnAuthVolumen": controller.AutorizarVolumen();
-                    break;
-                case "RBtnDenyVolumen": controller.DenegarVolumen();
-                    break;
-                case "RBtnAuthEpocas": controller.AutorizarEpoca();
-                    break;
-                case "RBtnDenyEpocas": controller.DenegarEpoca();
-                    break;
-
-                    //Verificadores
-                case "RBtnComparaBases": controller.LaunchVerificadorBases();
-                    break;
-                case "RBtnTesisTotales": controller.LaunchTesisTotales();
-                    break;
+                   
             }
 
         }
@@ -147,30 +90,8 @@ namespace Mantesis2015
 
         }
 
-        /// <summary>
-        /// Maneja los eventos generados por lo botones del RibbonView pertenecientes a la parte de Informe 
-        /// de las Salas
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InformesButtonTools(object sender, RoutedEventArgs e)
-        {
-
-            RadRibbonButton boton = sender as RadRibbonButton;
-
-            switch (boton.Name)
-            {
-                case "BtnMostrarProy": controller.LaunchInformesPane();
-                    break;
-                case "BtnEliminarClasif": controller.DeleteClasifTesis();
-                    break;
-                case "BtnActualizaVarias": controller.ActualizaVarias();
-                    break;
-
-            }
-
-            controller.LaunchInformesPane();
-        }
+       
+        
 
         
 

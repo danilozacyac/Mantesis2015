@@ -1,20 +1,14 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Forms;
-using CatalogoSga;
-using CatalogoSga.Model;
 using Mantesis2015.Model;
-using Mantesis2015.MotivosFolder;
 using Mantesis2015.Reportes;
-using MantesisVerIusCommonObjects.Dto;
-using MantesisVerIusCommonObjects.Singletons;
-using MantesisVerIusCommonObjects.Utilities;
+using MantesisCommonObjects.Dto;
+using MantesisCommonObjects.MantUtilities;
+using MantesisCommonObjects.Singleton;
 using ScjnUtilities;
-using UtilsMantesis;
 
 namespace Mantesis2015.Controllers
 {
@@ -23,21 +17,10 @@ namespace Mantesis2015.Controllers
         private readonly UnaTesis unaTesis;
 
         private UnaTesisModel unaTesisModel;
-        private PermisosController permisosCon;
 
         private TesisDto tesisMostrada = null;
-        private TesisDto tesisEdoAnterior = null;
 
-        private bool isModifRubro = false;
-        private bool isModifTexto = false;
-        private bool isModifPrec = false;
-        private bool isModifNotas = false;
-
-        private bool isModifNotaRubro = false;
-        private bool isModifNotaTexto = false;
-        private bool isModifNotaPrec = false;
-        private bool isModifNotasGaceta = false;
-        private bool isModifNotaPublica = false;
+        
 
         private string binaryMotivos;
 
@@ -45,14 +28,13 @@ namespace Mantesis2015.Controllers
         public UnaTesisController(UnaTesis unaTesis)
         {
             this.unaTesis = unaTesis;
-            permisosCon = new PermisosController(unaTesis);
         }
 
         public UnaTesisController(UnaTesis unaTesis, TesisDto tesisMostrada)
         {
             this.unaTesis = unaTesis;
             this.tesisMostrada = tesisMostrada;
-            permisosCon = new PermisosController(unaTesis);
+            //permisosCon = new PermisosController(unaTesis);
         }
 
         public void LoadTesisWindow(long ius)
@@ -61,7 +43,7 @@ namespace Mantesis2015.Controllers
             LoadComboBoxes();
             LoadTesis(ius);
             LoadNoBindingValues();
-            permisosCon.SetPermisosUnaTesis();
+            //permisosCon.SetPermisosUnaTesis();
 
             //tesisMostrada.PropertyChanged += TesisDto_PropertyChanged;
             
@@ -77,12 +59,10 @@ namespace Mantesis2015.Controllers
             if (tesisMostrada == null)
             {
                 tesisMostrada = unaTesisModel.CargaDatosTesisMantesisSql(ius);
-                tesisEdoAnterior = unaTesisModel.CargaDatosTesisMantesisSql(ius);
             }
             else
             {
                 ius = tesisMostrada.Ius;
-                tesisEdoAnterior = unaTesisModel.CargaDatosTesisMantesisSql(tesisMostrada.Ius);
             }
 
             tesisMostrada.IsEnable = unaTesis.IsTesisUpdatable;
@@ -90,13 +70,7 @@ namespace Mantesis2015.Controllers
 
             unaTesis.DataContext = tesisMostrada;
 
-            if (unaTesis.ListaTesis != null && unaTesis.ListaTesis.Count > 1)
-                unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count;
-            else
-            {
-                unaTesis.LblContador.Content = "    1 / 1";
-                unaTesis.Navega.IsEnabled = false;
-            }
+           
 
             
             
@@ -107,11 +81,11 @@ namespace Mantesis2015.Controllers
             unaTesis.CbxInstancia.ItemsSource = DatosCompartidosSingleton.Instancias;
             unaTesis.CbxFuente.ItemsSource = DatosCompartidosSingleton.Fuentes;
 
-            unaTesis.CbxMat1.ItemsSource = Utils.GetMateriasForComboBox();
-            unaTesis.CbxMat2.ItemsSource = Utils.GetMateriasForComboBox();
-            unaTesis.CbxMat3.ItemsSource = Utils.GetMateriasForComboBox();
-            unaTesis.CbxMat4.ItemsSource = Utils.GetMateriasForComboBox();
-            unaTesis.CbxMat5.ItemsSource = Utils.GetMateriasForComboBox();
+            unaTesis.CbxMat1.ItemsSource = MantUtils.GetMateriasForComboBox();
+            unaTesis.CbxMat2.ItemsSource = MantUtils.GetMateriasForComboBox();
+            unaTesis.CbxMat3.ItemsSource = MantUtils.GetMateriasForComboBox();
+            unaTesis.CbxMat4.ItemsSource = MantUtils.GetMateriasForComboBox();
+            unaTesis.CbxMat5.ItemsSource = MantUtils.GetMateriasForComboBox();
 
 
         }
@@ -146,142 +120,12 @@ namespace Mantesis2015.Controllers
         }
 
         private char[] binaryArray;
-        private string sCamposModif = "";
-        public void TesisDto_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Rubro":
-                    //txtRubro.Text = tesisMostrada.Rubro;
-                    sCamposModif += "R";
-                    isModifRubro = true;
-                    if (binaryArray.Length >= 2)
-                    {
-                        if (binaryArray[2 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 2;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 2;
-                    }
-                    break;
-                case "Texto":
-                    //txtTexto.Text = tesisMostrada.Texto;
-                    sCamposModif += "T";
-                    isModifTexto = true;
-                    if (binaryArray.Length >= 9)
-                    {
-                        if (binaryArray[9 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 256;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 256;
-                        
-                    }
-                    break;
-                case "Precedentes":
-                    //txtPrec.Text = tesisMostrada.Precedentes;
-                    sCamposModif += "P";
-                    isModifPrec = true;
-                    if (binaryArray.Length >= 7)
-                    {
-                        if (binaryArray[7 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 64;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 64;
-                    }
-                    break;
-                case "NotasRubro":
-                   // TxtNotaR.Text = tesisMostrada.NotasRubro;
-                    sCamposModif += "nRub";
-                    isModifNotaRubro = true;
-                    if (binaryArray.Length >= 26)
-                    {
-                        if (binaryArray[26 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 268435456;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 268435456;
-                    }
-                    break;
-                case "NotasTexto":
-                   // TxtNotaT.Text = tesisMostrada.NotasTexto;
-                    sCamposModif += "nTex";
-                    isModifNotaTexto = true;
-                    if (binaryArray.Length >= 27)
-                    {
-                        if (binaryArray[27 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 134217728;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 134217728;
-                    }
-                    break;
-                case "NotasPrecedente":
-                    //TxtNotaP.Text = tesisMostrada.NotasPrecedentes;
-                    sCamposModif += "nPrec";
-                    isModifNotaPrec = true;
-                    if (binaryArray.Length >= 28)
-                    {
-                        if (binaryArray[28 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 134217728;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 134217728;
-                    }
-                    break;
-                case "NotasGaceta":
-                    //TxtNotaGaceta.Text = tesisMostrada.NotasGaceta;
-                    sCamposModif += "nGac";
-                    isModifNotasGaceta = true;
-                    if (binaryArray.Length >= 29)
-                    {
-                        if (binaryArray[29 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 536870912;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 536870912;
-                    }
-
-                    tesisMostrada.IsNotasModif = true;
-                    break;
-                case "NotasPublica":
-                    //TxtNotaPublica.Text = tesisMostrada.NotaPublica;
-                    sCamposModif += "nPub";
-                    isModifNotaPublica = true;
-                    if (binaryArray.Length >= 30)
-                    {
-                        if (binaryArray[30 - 1] == '0')
-                            tesisMostrada.MotivoModificar += 1073741824;
-                    }
-                    else
-                    {
-                        tesisMostrada.MotivoModificar += 1073741824;
-                    }
-
-                    tesisMostrada.IsNotasModif = true;
-                    break;
-            }
-        }
 
         
 
-        public void GuardarCambios()
+        public void ImportarCambios()
         {
             
-
-            MModificacion modif = new MModificacion(this.tesisMostrada.MotivoModificar);
-            bool? dResult = modif.ShowDialog();
-
-            if (dResult == true)
-            {
                 this.tesisMostrada.Sala = Convert.ToInt16(unaTesis.CbxInstancia.SelectedValue);
                 this.tesisMostrada.Fuente = Convert.ToInt16(unaTesis.CbxFuente.SelectedValue);
                 this.tesisMostrada.RubroStr = StringUtilities.ConvMay(StringUtilities.QuitaCarCad(unaTesis.TxtRubro.Text));
@@ -294,43 +138,20 @@ namespace Mantesis2015.Controllers
                 this.tesisMostrada.Materia4 = Convert.ToInt16(unaTesis.CbxMat4.SelectedValue);
                 this.tesisMostrada.Materia5 = Convert.ToInt16(unaTesis.CbxMat5.SelectedValue);
 
-                this.tesisMostrada.Estado = 2;
-                this.tesisMostrada.MotivoModificar = NumericUtilities.BinaryToDecimal(ValuesMant.BinaryVal);
-                this.tesisMostrada.CamposModif = sCamposModif;
-
-                string idAbs = Guid.NewGuid().ToString();
-
-                unaTesisModel.DbConnectionOpen();
-
-                bool guardadoExitoso = false;
-                guardadoExitoso = unaTesisModel.SalvarRegistroMantesisSql(this.tesisMostrada, idAbs); // Salva los cambios en Mantesis SQL
-                guardadoExitoso = unaTesisModel.SalvarRegistro(this.tesisMostrada);                   // Salva los cambios en las bases de Access
-
-                if (tesisMostrada != tesisEdoAnterior)
-                {
-                    tesisEdoAnterior.IdAbs = tesisMostrada.IdAbs;
-                    unaTesisModel.InsertaHistoricoTesis(tesisEdoAnterior, idAbs);
-                }
-                unaTesisModel.DbConnectionClose();
-
-                ///Verifica que el número de registro de la tesis que se esta actualizando
-                ///ya exista dentro de la base de datos IUS del servidor CT9BD3
-                if (unaTesisModel.DoesRegIusExist(tesisMostrada.Ius))
-                    unaTesisModel.ActualizaRegistroDSql(tesisMostrada);
+                bool guardadoExitoso = unaTesisModel.ImportarRegistro(this.tesisMostrada);                   // Salva los cambios en las bases de Access
 
                 if (guardadoExitoso)
+                    unaTesis.Close();
+                else
                 {
-                    EstadoTesis certifica = new EstadoTesis(tesisEdoAnterior, tesisMostrada);
-                    certifica.GeneraPdf();
+                    MessageBox.Show("No se pudo importar la tesis, favor de volver a intentar");
                 }
-                
-                unaTesis.Close();
-            }
+            
         }
 
         public void TesisEliminar(long ius)
         {
-            MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja = 0;
+            ValuesMant.MotivoBaja = 0;
 
             DataTableReader reader = unaTesisModel.RevisaTesisReferencia(ius);
 
@@ -346,7 +167,7 @@ namespace Mantesis2015.Controllers
 
                     unaTesis.txtRefLocAbr.Text = reader["LocAbr"].ToString();
 
-                    switch (MantesisVerIusCommonObjects.Utilities.ValuesMant.MotivoBaja)
+                    switch (ValuesMant.MotivoBaja)
                     {
                         case 1:
                             unaTesis.txtRefMotivo.Text = "La tesis aislada ha integrado jurisprudencia.";
@@ -380,57 +201,6 @@ namespace Mantesis2015.Controllers
 
         #region RibbonButtons
 
-        public void TesisStart()
-        {
-            tesisMostrada = null;
-            unaTesis.PosActual = 0;
-            AddTesis tesis = unaTesis.ListaTesis[unaTesis.PosActual];
-            this.LoadTesisWindow(tesis.Ius4);
-
-            unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
-        }
-
-        public void TesisPrevious()
-        {
-            tesisMostrada = null;
-            if (unaTesis.PosActual > 0)
-            {
-                unaTesis.PosActual--;
-                AddTesis tesis = unaTesis.ListaTesis[unaTesis.PosActual];
-                this.LoadTesisWindow(tesis.Ius4);
-
-                unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
-            }
-        }
-
-        public void TesisNext()
-        {
-            tesisMostrada = null;
-            if (unaTesis.PosActual < unaTesis.ListaTesis.Count - 1)
-            {
-                unaTesis.PosActual++;
-                AddTesis tesis = unaTesis.ListaTesis[unaTesis.PosActual];
-
-                //unaTesisModel.DbConnectionOpen();
-                this.LoadTesisWindow(tesis.Ius4);
-                //unaTesisModel.DbConnectionClose();
-
-                unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
-            }
-        }
-
-        public void TesisEnd()
-        {
-            tesisMostrada = null;
-
-            unaTesis.PosActual = unaTesis.ListaTesis.Count - 1;
-            AddTesis tesis = unaTesis.ListaTesis[unaTesis.PosActual];
-
-            //unaTesisModel.DbConnectionOpen();
-            this.LoadTesisWindow(tesis.Ius4);
-            //unaTesisModel.DbConnectionClose();
-            unaTesis.LblContador.Content = "     " + (unaTesis.PosActual + 1) + " / " + unaTesis.ListaTesis.Count; 
-        }
 
         public void TesisToClipboard(int queMando)
         {
@@ -488,22 +258,20 @@ namespace Mantesis2015.Controllers
         public void LaunchBitacora()
         {
             BitacoraWin bitacora = new BitacoraWin(tesisMostrada.Ius);
-            bitacora.Tag = unaTesis.RBtnBitacora.Tag;
             bitacora.ShowDialog();
         }
 
         public void LaunchSga()
         {
             //MateriasSgaWin sga = new MateriasSgaWin(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
-            RelacionaMateriaSga sga = new RelacionaMateriaSga(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
-            sga.Tag = unaTesis.RBtnMateriasSga.Tag;
-            sga.ShowDialog();
+            //RelacionaMateriaSga sga = new RelacionaMateriaSga(tesisMostrada.Ius, tesisMostrada.VolumenInt, unaTesis.IsTesisUpdatable);
+            //sga.ShowDialog();
 
-            if (sga.DialogResult == true)
-            {
-                tesisMostrada.MotivoModificar += 33554432;
-                tesisMostrada.MateriasSga = new ClasificacionSgaModel().GetMateriasRelacionadas(tesisMostrada.Ius);
-            }
+            //if (sga.DialogResult == true)
+            //{
+            //    tesisMostrada.MotivoModificar += 33554432;
+            //    tesisMostrada.MateriasSga = new ClasificacionSgaModel().GetMateriasRelacionadas(tesisMostrada.Ius);
+            //}
             
 
         }

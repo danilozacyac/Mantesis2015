@@ -24,18 +24,18 @@
             <GroupBox Uid="3"
                       x:Name="VerIus"
                       Height="150"
-                      Margin="35,250,20,0"
+                      Margin="25,45,30,0"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Top"
-                      Header="Busqueda global por Reg. Digital"
-                      IsEnabled="False">
+                      Header="Buscar tesis para importar"
+                      IsEnabled="True">
                 <Grid>
                     <Label Width="150"
                            Height="20"
                            Margin="10,16,10,22"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           Content="Núm. de registro:"
+                           Content="Núm. de registro digital:"
                            Foreground="Black" />
                     <TextBox x:Name="TxtVerIus"
                              Height="25"
@@ -50,64 +50,6 @@
                             VerticalAlignment="Top"
                             Click="BtnVerIus_Click"
                             Content="Buscar" />
-                </Grid>
-            </GroupBox>
-            <GroupBox Uid="2"
-                      x:Name="EpocaVolumen"
-                      Height="200"
-                      Margin="35,30,20,0"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Top"
-                      Header="Selección"
-                      IsEnabled="False">
-                <Grid>
-                    <ComboBox x:Name="CbEpoca"
-                              Width="220"
-                              Margin="10,47,0,0"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Top"
-                              DisplayMemberPath="Descripcion"
-                              FontSize="13"
-                              ItemsSource="{Binding}"
-                              SelectedValuePath="IdDato"
-                              SelectionChanged="CbEpoca_SelectionChanged" />
-                    <Label Margin="10,101,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Content="Tomo / Volumen / Libro / Número "
-                           Foreground="Black" />
-                    <ComboBox x:Name="CbxVolumen"
-                              Width="220"
-                              Margin="10,127,0,0"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Top"
-                              FontSize="13"
-                              SelectionChanged="CbxVolumen_SelectionChanged" />
-
-                    <telerik:RadRadioButton x:Name="RRadEpocas"
-                                            Width="70"
-                                            Height="23"
-                                            Margin="10,10,0,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Top"
-                                            Checked="RRadEpocas_Checked"
-                                            Content="Épocas" />
-                    <telerik:RadRadioButton x:Name="RRadApendices"
-                                            Width="70"
-                                            Height="23"
-                                            Margin="85,10,0,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Top"
-                                            Checked="RRadApendices_Checked"
-                                            Content="Apéndices" />
-                    <telerik:RadRadioButton x:Name="RRadInformes"
-                                            Width="70"
-                                            Height="23"
-                                            Margin="160,10,0,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Top"
-                                            Checked="RRadInformes_Checked"
-                                            Content="Informes" />
                 </Grid>
             </GroupBox>
             <Label x:Name="TxtRegs"
@@ -146,12 +88,12 @@
                    VerticalAlignment="Top"
                    Content="Materia"
                    Foreground="Black" />
-            <ComboBox x:Name="CbxMaterias"
-                      Width="216"
-                      Margin="619,13,0,0"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      SelectionChanged="CbxMaterias_SelectionChanged" />
+            <telerik:RadComboBox x:Name="CbxMaterias"
+                                 Width="216"
+                                 Margin="619,13,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 SelectionChanged="CbxMaterias_SelectionChanged" />
             <Button x:Name="BtnIusLista"
                     Grid.Row="0"
                     Width="45"

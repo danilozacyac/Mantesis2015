@@ -1,11 +1,10 @@
-﻿using Mantesis2015.Controllers;
-using Mantesis2015.UserControls.Controller;
-using MantesisVerIusCommonObjects.Dto;
-using MantesisVerIusCommonObjects.Utilities;
-using ScjnUtilities;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Mantesis2015.UserControls.Controller;
+using MantesisCommonObjects.Dto;
+using MantesisCommonObjects.MantUtilities;
+using ScjnUtilities;
 using Telerik.Windows.Controls;
 
 namespace Mantesis2015.UserControls
@@ -16,7 +15,6 @@ namespace Mantesis2015.UserControls
     public partial class ListaDeTesis : UserControl
     {
         ListaTesisController controller;
-        private PermisosController permisosCon;
         
 
         /// <summary>
@@ -43,43 +41,14 @@ namespace Mantesis2015.UserControls
 
             controller = new ListaTesisController(this);
 
-            permisosCon = new PermisosController(this);
-            permisosCon.LoadListaTesisControlAuth();
+            controller.GetTesisImportadas();
+            //permisosCon = new PermisosController(this);
+            //permisosCon.LoadListaTesisControlAuth();
 
-            RRadEpocas.IsChecked = true;
 
         }
 
-        private void RRadEpocas_Checked(object sender, RoutedEventArgs e)
-        {
-            controller.SetEpocasComboValues(5);
-        }
-
-        private void RRadApendices_Checked(object sender, RoutedEventArgs e)
-        {
-            controller.SetEpocasComboValues(7);
-        }
-
-        private void RRadInformes_Checked(object sender, RoutedEventArgs e)
-        {
-            controller.SetEpocasComboValues(6);
-        }
-
-        private void CbEpoca_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedEpoca = CbEpoca.SelectedItem as DatosComp;
-            controller.SeleccionaEpoca(selectedEpoca);
-        }
-
-        private void CbxVolumen_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CbxVolumen.SelectedItem != null)
-                controller.GetTesisPorEpocaVolumen(99, CbxVolumen.SelectedItem, selectedEpoca);
-        }
-
-        
-
-        
+       
 
         private void CbxMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
